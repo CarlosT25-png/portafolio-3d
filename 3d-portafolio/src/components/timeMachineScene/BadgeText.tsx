@@ -1,12 +1,14 @@
 import { Text } from "@react-three/drei";
 
 const BadgeText = () => {
+
+  // chivo-mono-v5-latin-regular
   return (
     <Text
-          font="/fonts/chivo-mono-v5-latin-regular.woff"
-          fontSize={2}
+          font="/fonts/patua-one-v16-latin-regular.woff"
+          fontSize={2.3}
           scale={0.028}
-          color={'#eeeeee'}
+          color={'#dee1dc'}
           // maxWidth={20}
           position={[ 0.02, 2.16, -0.91]}
           rotation={[-1.40, -0.13, -0.66]}

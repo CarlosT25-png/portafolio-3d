@@ -1,19 +1,17 @@
+import { useRef } from "react";
+import * as THREE from "three";
 import {
   Center,
   OrbitControls,
-  Text,
   useGLTF,
   useTexture,
-  useFont,
-  PivotControls,
-  TransformControls
 } from "@react-three/drei";
-import { useControls } from "leva";
 import { Perf } from "r3f-perf";
-import * as THREE from "three";
 import BadgeText from "./timeMachineScene/BadgeText";
-import { useRef } from "react";
-import PlaceDisplay from "./timeMachineScene/PlaceDisplay";
+import PlaceDisplay from "./timeMachineScene/displays/PlaceDisplay";
+import TargetDateDisplay from "./timeMachineScene/displays/TargetDateDisplay";
+import CurrentDateDisplay from "./timeMachineScene/displays/CurrentDateDisplay";
+import DateControlHandler from "./timeMachineScene/controls/dateControls/DateControlHandler";
 
 interface timeMachineInterface {
   nodes: {
@@ -39,19 +37,6 @@ const Experience = () => {
 
   const bakedTexture = useTexture("/baked.jpg");
   bakedTexture.flipY = false;
-
-  const { rotationObj, positionObj } = useControls("text", {
-    rotationObj: {
-      value: [-1.46, -0.09, -0.66],
-      step: 0.001,
-      joystick: "invertY",
-    },
-    positionObj: {
-      value: [-0.41, 2.045, -0.46],
-      step: 0.001,
-      joystick: "invertY",
-    },
-  });
 
   console.log(nodes);
 
@@ -94,7 +79,13 @@ const Experience = () => {
         {/* Old Time Machine Text */}
         <BadgeText />
 
+        {/* Displays */}
         <PlaceDisplay />
+        <TargetDateDisplay />
+        <CurrentDateDisplay />
+
+        {/* Date Controls */}
+        <DateControlHandler />
 
       </Center>
     </>
