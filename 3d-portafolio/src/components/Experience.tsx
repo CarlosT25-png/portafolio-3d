@@ -1,11 +1,13 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import {
   Center,
   OrbitControls,
+  useCamera,
   useGLTF,
   useTexture,
 } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import BadgeText from "./timeMachineScene/BadgeText";
 import PlaceDisplay from "./timeMachineScene/displays/PlaceDisplay";
@@ -30,7 +32,7 @@ interface timeMachineInterface {
 }
 
 const Experience = () => {
-  const testRef = useRef<any>();
+  const ref = useRef<THREE.Group>(null);
   const { nodes } = useGLTF(
     "/timeMachine.glb"
   ) as unknown as timeMachineInterface;
@@ -38,17 +40,25 @@ const Experience = () => {
   const bakedTexture = useTexture("/baked.jpg");
   bakedTexture.flipY = false;
 
-  console.log(nodes);
+  const { camera } = useThree();
+
+  useEffect(() => {
+    if (ref.current) {
+      console.log(ref.current?.position)
+      camera.lookAt(ref.current?.position);
+      camera.rotation.set(0,Math.PI*1.25,0)
+    }
+  }, []);
 
   return (
     <>
       <Perf position="top-left" />
       <color args={["#241a1a"]} attach="background" />
 
-      <OrbitControls makeDefault />
+      {/* <OrbitControls makeDefault enabled={!isDragging} /> */}
 
       <Center position-y={-1}>
-        <group rotation-y={-2.24}>
+        <group rotation-y={-2.24} ref={ref}>
           <mesh geometry={nodes.baked.geometry}>
             <meshBasicMaterial map={bakedTexture} />
           </mesh>
@@ -86,7 +96,6 @@ const Experience = () => {
 
         {/* Date Controls */}
         <DateControlHandler />
-
       </Center>
     </>
   );

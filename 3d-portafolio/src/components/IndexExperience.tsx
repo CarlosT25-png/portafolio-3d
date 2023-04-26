@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience";
 import { useEffect, useState } from "react";
+import { useControls } from "leva";
 
 const IndexExperience = () => {
 
@@ -18,7 +19,7 @@ const IndexExperience = () => {
         fov: 45,
         near: 0.1,
         far: 2000,
-        position: [-3, 1.5, 4],
+        position: [-3, 2, 2],
       }}
       style={{ width: width, height: height }}
     >

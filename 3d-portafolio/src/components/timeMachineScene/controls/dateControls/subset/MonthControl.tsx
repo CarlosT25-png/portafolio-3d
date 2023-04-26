@@ -1,36 +1,32 @@
-import { ThreeEvent } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { useDrag } from 'react-use-gesture';
-import * as THREE from 'three';
+import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useGesture } from "@use-gesture/react";
+import * as THREE from "three";
+import { useSpring, a } from "@react-spring/three";
 
-type MeshProps = JSX.IntrinsicElements['mesh'];
+type MeshProps = JSX.IntrinsicElements["mesh"];
+
 
 const MonthControl = () => {
+  const { size, viewport } = useThree()
+  const aspect = size.width / viewport.width
 
-  const dragHandler = ( ev: ThreeEvent<PointerEvent>) => {
-    console.log(ev)
-  }
-
-  const bind = useDrag(
-    ({ offset: [x, y] }) => {
-      console.log('offset')
-      console.log(x, y)
-      // const [, , z] = position;
-      // setPosition([x / aspect, -y / aspect, z]);
-
+  const [spring, set] = useSpring(() => ({ scale: [1, 1, 1], position: [0, 0, 0], config: { friction: 10 } }))
+  const bind = useGesture({
+    onDrag: ({ offset: [x, y] }) => {
+      console.log(y)
+      return set({ position: [-y/aspect ,-y / aspect, y/aspect] })
     },
-    { pointerEvents: true }
-  )
-
-  console.log(bind)
-
+    onHover: ({ hovering }) => set({ scale: hovering ? [1.2, 1.2, 1.2] : [1, 1, 1] })
+  })
 
   return (
-    <group position={[ -1.25, 1.915, 0 ]} scale={0.08} >
-      <mesh rotation-y={0.9} rotation-z={0.15} {...bind()}>
+    <group position={[-1.25, 1.915, 0]} scale={0.08} >
+      {/* @ts-ignore */}
+      <a.mesh rotation-y={0.9} rotation-z={0.15} {...bind()} {...spring}>
         <boxGeometry args={[0.2, 0.1]} />
         <meshBasicMaterial color="red" />
-      </mesh>
+      </a.mesh>
     </group>
   );
 };
