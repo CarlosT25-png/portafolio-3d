@@ -2,14 +2,21 @@ import { useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useSpring, a } from "@react-spring/three";
 import { useDispatch } from "react-redux";
-import { dateActions } from '@/store'
+import { AppDispatch, dateActions } from '@/store'
+import { PayloadAction } from "@reduxjs/toolkit";
 
 type MeshProps = JSX.IntrinsicElements["mesh"];
 
-const MONTH_DURATION = 12;
+interface Props {
+  timeDuration: number,
+  dispatchFn: Function, 
+  position: THREE.Vector3
+}
+
 const OFFSET_RANGE = 1;
 
-const MonthControl = () => {
+const UniversalDateControl = ({ timeDuration, dispatchFn, position }: Props) => {
+
   const { size, viewport } = useThree()
   const aspect = size.width / viewport.width;
   const dispatch = useDispatch();
@@ -22,17 +29,17 @@ const MonthControl = () => {
       // Clamp offset value to within the range of -1 to 0
       offset = Math.max(-OFFSET_RANGE, Math.min(0, offset));
     
-      let month = offset * MONTH_DURATION * -1;
-      month = Math.round(month) + 1
-      month = Math.min(month, 12)
-      dispatch(dateActions.setMonth(month))
+      let numberValue = offset * timeDuration * -1;
+      numberValue = Math.round(numberValue) + 1
+      numberValue = Math.min(numberValue, timeDuration)
+      dispatch(dispatchFn(numberValue))
       return set({ position: [-offset ,-offset, offset] })
     },
     onHover: ({ hovering }) => set({ scale: hovering ? [1.2, 1.2, 1.2] : [1, 1, 1] })
   })
 
   return (
-    <group position={[-1.25, 1.915, 0]} scale={0.08} >
+    <group position={position} scale={0.08} >
       {/* @ts-ignore */}
       <a.mesh rotation-y={0.9} rotation-z={0.15} {...bind()} {...spring}>
         <boxGeometry args={[0.2, 0.1]} />
@@ -40,6 +47,6 @@ const MonthControl = () => {
       </a.mesh>
     </group>
   );
-};
+}
 
-export default MonthControl;
+export default UniversalDateControl;

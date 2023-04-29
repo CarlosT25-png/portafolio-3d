@@ -43,11 +43,7 @@ const Experience = () => {
   const { camera } = useThree();
 
   useEffect(() => {
-    if (ref.current) {
-      console.log(ref.current?.position)
-      camera.lookAt(ref.current?.position);
-      camera.rotation.set(0,Math.PI*1.25,0)
-    }
+
   }, []);
 
   return (
@@ -55,7 +51,8 @@ const Experience = () => {
       <Perf position="top-left" />
       <color args={["#241a1a"]} attach="background" />
 
-      {/* <OrbitControls makeDefault enabled={!isDragging} /> */}
+      <OrbitControls makeDefault  enabled={false} />
+
 
       <Center position-y={-1}>
         <group rotation-y={-2.24} ref={ref}>

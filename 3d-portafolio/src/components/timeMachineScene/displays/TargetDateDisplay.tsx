@@ -1,8 +1,12 @@
 import { Text } from "@react-three/drei";
 import { useControls } from "leva";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const TargetDateDisplay = () => {
+  const month = useSelector<RootState>( state => state.date.month) as number;
+
   // const { rotationObj, positionObj } = useControls("targetDate", {
   //   rotationObj: {
   //     value: [-1.46, -0.09, -0.66],
@@ -18,7 +22,7 @@ const TargetDateDisplay = () => {
 
   // Typing effect
   const [text, setText] = useState("");
-  const [fullText, setFullText] = useState("25/07/2002 09:11");
+  const [fullText, setFullText] = useState(`${month}/25/2002 09:11`);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -29,6 +33,11 @@ const TargetDateDisplay = () => {
       }, 160);
     }
   }, [index]);
+
+  // Check if there is any update in the date slice
+  useEffect(() => {
+    setText(`${month}/25/2002 09:11`) 
+  }, [month])
 
   return (
     <group position={[-0.69, 1.975, -0.11]} rotation={[-1.46, -0.09, -0.66]}>

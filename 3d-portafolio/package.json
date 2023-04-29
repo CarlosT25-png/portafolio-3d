@@ -12,6 +12,7 @@
     "@react-spring/three": "^9.7.2",
     "@react-three/drei": "^9.65.5",
     "@react-three/fiber": "^8.12.2",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "18.15.13",
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
@@ -22,6 +23,7 @@
     "r3f-perf": "^7.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "three": "^0.151.3",
     "typescript": "5.0.4"
   }

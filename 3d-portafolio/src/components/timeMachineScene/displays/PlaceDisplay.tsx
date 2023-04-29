@@ -3,18 +3,6 @@ import { useControls } from "leva";
 import { useEffect, useState } from "react";
 
 const PlaceDisplay = () => {
-  // const { rotationObj, positionObj } = useControls("text", {
-  //   rotationObj: {
-  //     value: [-1.46, -0.09, -0.66],
-  //     step: 0.001,
-  //     joystick: "invertY",
-  //   },
-  //   positionObj: {
-  //     value: [-0.41, 2.045, -0.46],
-  //     step: 0.001,
-  //     joystick: "invertY",
-  //   },
-  // });
 
   // Typing effect
   const [text, setText] = useState("");
