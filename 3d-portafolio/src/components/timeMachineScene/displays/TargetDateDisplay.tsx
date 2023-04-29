@@ -7,6 +7,7 @@ import { RootState } from "@/store";
 const TargetDateDisplay = () => {
   const month = useSelector<RootState>( state => state.date.month) as number;
   const day = useSelector<RootState>( state => state.date.day) as number;
+  const year = useSelector<RootState>( state => state.date.year) as number;
 
   // const { rotationObj, positionObj } = useControls("targetDate", {
   //   rotationObj: {
@@ -23,7 +24,7 @@ const TargetDateDisplay = () => {
 
   // Typing effect
   const [text, setText] = useState("");
-  const [fullText, setFullText] = useState(`${month}/${day}/2002 09:11`);
+  const [fullText, setFullText] = useState(`${month}/${day}/${year+2005} 09:11`);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -37,8 +38,8 @@ const TargetDateDisplay = () => {
 
   // Check if there is any update in the date slice
   useEffect(() => {
-    setText(`${month}/${day}/2002 09:11`) 
-  }, [month, day])
+    setText(`${month}/${day}/${year+2005} 09:11`) 
+  }, [month, day, year])
 
   return (
     <group position={[-0.69, 1.975, -0.11]} rotation={[-1.46, -0.09, -0.66]}>

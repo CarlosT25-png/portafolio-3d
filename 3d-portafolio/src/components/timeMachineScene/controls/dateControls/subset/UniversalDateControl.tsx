@@ -4,6 +4,7 @@ import { useSpring, a } from "@react-spring/three";
 import { useDispatch } from "react-redux";
 import { AppDispatch, dateActions } from '@/store'
 import { PayloadAction } from "@reduxjs/toolkit";
+import * as THREE from 'three' 
 
 type MeshProps = JSX.IntrinsicElements["mesh"];
 
