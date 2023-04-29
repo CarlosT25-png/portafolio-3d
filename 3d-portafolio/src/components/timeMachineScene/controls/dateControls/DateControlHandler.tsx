@@ -17,7 +17,7 @@ const DateControlHandler = () => {
       <UniversalDateControl
         dispatchFn={dateActions.setDay}
         timeDuration={30}
-        position={new THREE.Vector3(-1.04, 1.915, 0.165  )}
+        position={new THREE.Vector3(-1.04, 1.915, 0.168  )}
       />
     </>
   );

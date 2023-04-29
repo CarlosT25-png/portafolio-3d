@@ -12,7 +12,7 @@ const dateSlice = createSlice({
   initialState: initialDateState,
   reducers: {
     setDay(state, action) {
-      state.day = action.payload
+      state.day = validateNumber(action.payload)
     },
     setMonth(state, action) {
       state.month = validateNumber(action.payload)

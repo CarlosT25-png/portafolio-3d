@@ -51,7 +51,7 @@ const Experience = () => {
       <Perf position="top-left" />
       <color args={["#241a1a"]} attach="background" />
 
-      <OrbitControls makeDefault  />
+      <OrbitControls makeDefault enabled={false} />
 
 
       <Center position-y={-1}>
