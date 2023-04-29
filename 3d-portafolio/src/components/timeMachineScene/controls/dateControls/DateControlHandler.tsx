@@ -13,6 +13,12 @@ const DateControlHandler = () => {
         timeDuration={12}
         position={new THREE.Vector3(-1.25, 1.915, 0)}
       />
+      {/* Day Control */}
+      <UniversalDateControl
+        dispatchFn={dateActions.setDay}
+        timeDuration={30}
+        position={new THREE.Vector3(-1.04, 1.915, 0.165  )}
+      />
     </>
   );
 };
