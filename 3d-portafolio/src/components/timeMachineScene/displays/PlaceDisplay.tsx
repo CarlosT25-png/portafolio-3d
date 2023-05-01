@@ -37,6 +37,14 @@ const PlaceDisplay = () => {
       >
         {text}
       </Text>
+      
+      <Text
+        font="/fonts/patua-one-v16-latin-regular.woff"
+        scale={0.06}
+        position-y={0.18}
+      >
+        Destination
+      </Text>
     </group>
   );
 };

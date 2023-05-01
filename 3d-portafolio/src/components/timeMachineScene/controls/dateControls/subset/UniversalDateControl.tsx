@@ -1,9 +1,8 @@
 import { useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useSpring, a } from "@react-spring/three";
-import { useDispatch } from "react-redux";
-import { AppDispatch, dateActions } from '@/store'
-import { PayloadAction } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
 import * as THREE from 'three' 
 
 type MeshProps = JSX.IntrinsicElements["mesh"];
@@ -11,7 +10,7 @@ type MeshProps = JSX.IntrinsicElements["mesh"];
 interface Props {
   timeDuration: number,
   dispatchFn: Function, 
-  position: THREE.Vector3
+  position: THREE.Vector3,
 }
 
 const OFFSET_RANGE = 1;

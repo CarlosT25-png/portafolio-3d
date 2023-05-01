@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialDateState = { day: '01', month:'01', year: '2002', hour: '0', minute: '0' };
+const initialDateState = { day: '01', month:'01', year: '1', hour: '01', minute: '01', availableDays: 31 };
 
 const validateNumber = ( x: number | string ) => {
   const val = typeof x === 'string' ? parseInt(x) : x
@@ -25,6 +25,9 @@ const dateSlice = createSlice({
     },
     setMinute(state, action) {
       state.minute = action.payload
+    },
+    setAvailableDays(state, action) {
+      state.availableDays = action.payload
     },
   }
 });

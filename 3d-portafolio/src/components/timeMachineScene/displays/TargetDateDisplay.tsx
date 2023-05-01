@@ -1,30 +1,25 @@
 import { Text } from "@react-three/drei";
 import { useControls } from "leva";
 import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { dateActions } from "@/store";
+
+function getDaysInMonth(month: number, year: number) {
+  return new Date(year, month, 0).getDate();
+}
 
 const TargetDateDisplay = () => {
-  const month = useSelector<RootState>( state => state.date.month) as number;
+  const dispatch = useDispatch()
+  const month = useSelector<RootState>( state => state.date.month) as string;
   const day = useSelector<RootState>( state => state.date.day) as number;
   const year = useSelector<RootState>( state => state.date.year) as number;
-
-  // const { rotationObj, positionObj } = useControls("targetDate", {
-  //   rotationObj: {
-  //     value: [-1.46, -0.09, -0.66],
-  //     step: 0.001,
-  //     joystick: "invertY",
-  //   },
-  //   positionObj: {
-  //     value: [-0.69, 1.97, -0.11],
-  //     step: 0.001,
-  //     joystick: "invertY",
-  //   },
-  // });
+  const hour = useSelector<RootState>( state => state.date.hour) as number;
+  const minute = useSelector<RootState>( state => state.date.minute) as number;
 
   // Typing effect
   const [text, setText] = useState("");
-  const [fullText, setFullText] = useState(`${month}/${day}/${year+2005} 09:11`);
+  const [fullText, setFullText] = useState(`${month}/${day}/${(+year)+2005} ${hour}:${minute}`);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -38,8 +33,14 @@ const TargetDateDisplay = () => {
 
   // Check if there is any update in the date slice
   useEffect(() => {
-    setText(`${month}/${day}/${year+2005} 09:11`) 
-  }, [month, day, year])
+    setText(`${month}/${day}/${(+year)+2005} ${hour - 1}:${minute - 1}`) 
+  }, [month, day, year, hour, minute])
+  
+  useEffect(() => {
+    let newMonth = (parseInt(month) - 1)
+    dispatch(dateActions.setAvailableDays(getDaysInMonth(newMonth, (+year) + 2005 )))
+    // setDaysDuration(getDaysInMonth(newMonth, 2005))
+  }, [month])
 
   return (
     <group position={[-0.69, 1.975, -0.11]} rotation={[-1.46, -0.09, -0.66]}>
