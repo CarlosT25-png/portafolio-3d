@@ -42,6 +42,9 @@ const PlaceDisplay = () => {
         font="/fonts/patua-one-v16-latin-regular.woff"
         scale={0.06}
         position-y={0.18}
+        position-x={-0.25}
+        fillOpacity={0.7}
+        color={'#070705'}
       >
         Destination
       </Text>

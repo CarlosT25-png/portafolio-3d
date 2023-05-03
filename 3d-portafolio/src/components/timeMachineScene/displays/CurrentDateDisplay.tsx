@@ -56,6 +56,17 @@ const CurrentDateDisplay = () => {
       >
         {text}
       </Text>
+
+      <Text
+        font="/fonts/patua-one-v16-latin-regular.woff"
+        scale={0.05}
+        position-y={-0.15}
+        // position-x={-0.25}
+        fillOpacity={0.7}
+        color={'#070705'}
+      >
+        Current Date
+      </Text>
     </group>
   );
 };

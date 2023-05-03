@@ -14,6 +14,7 @@ import PlaceDisplay from "./timeMachineScene/displays/PlaceDisplay";
 import TargetDateDisplay from "./timeMachineScene/displays/TargetDateDisplay";
 import CurrentDateDisplay from "./timeMachineScene/displays/CurrentDateDisplay";
 import DateControlHandler from "./timeMachineScene/controls/dateControls/DateControlHandler";
+import TextMachine from "./timeMachineScene/displays/TextMachine";
 
 interface timeMachineInterface {
   nodes: {
@@ -51,7 +52,7 @@ const Experience = () => {
       <Perf position="top-left" />
       <color args={["#241a1a"]} attach="background" />
 
-      <OrbitControls makeDefault enabled={false} />
+      <OrbitControls makeDefault enabled={true} />
 
 
       <Center position-y={-1}>
@@ -90,6 +91,9 @@ const Experience = () => {
         <PlaceDisplay />
         <TargetDateDisplay />
         <CurrentDateDisplay />
+        
+        {/* Text from the machine */}
+        <TextMachine />
 
         {/* Date Controls */}
         <DateControlHandler />
