@@ -4,6 +4,7 @@ const initialDateState = { day: '01', month:'01', year: '1', hour: '01', minute:
 
 const validateNumber = ( x: number | string ) => {
   const val = typeof x === 'string' ? parseInt(x) : x
+  if ( val === 0) return '00'
   return val < 10 ? `0${x}` : `${val}`;
 }
 

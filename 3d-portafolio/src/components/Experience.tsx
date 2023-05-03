@@ -15,6 +15,7 @@ import TargetDateDisplay from "./timeMachineScene/displays/TargetDateDisplay";
 import CurrentDateDisplay from "./timeMachineScene/displays/CurrentDateDisplay";
 import DateControlHandler from "./timeMachineScene/controls/dateControls/DateControlHandler";
 import TextMachine from "./timeMachineScene/displays/TextMachine";
+import Floor from "./timeMachineScene/world/floor/Floor";
 
 interface timeMachineInterface {
   nodes: {
@@ -40,12 +41,6 @@ const Experience = () => {
 
   const bakedTexture = useTexture("/baked.jpg");
   bakedTexture.flipY = false;
-
-  const { camera } = useThree();
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <>
@@ -83,6 +78,9 @@ const Experience = () => {
             <meshBasicMaterial color="#3657d1" />
           </mesh>
         </group>
+
+        {/* World */}
+        <Floor />
 
         {/* Old Time Machine Text */}
         <BadgeText />

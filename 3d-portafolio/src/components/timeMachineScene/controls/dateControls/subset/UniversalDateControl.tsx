@@ -33,7 +33,7 @@ const UniversalDateControl = ({ timeDuration, dispatchFn, position }: Props) => 
       numberValue = Math.round(numberValue) + 1
       numberValue = Math.min(numberValue, timeDuration)
       dispatch(dispatchFn(numberValue))
-      return set({ position: [-offset ,-offset, offset] })
+      return set({ position: [-offset ,-offset * 0.25, offset] })
     },
     onHover: ({ hovering }) => set({ scale: hovering ? [1.2, 1.2, 1.2] : [1, 1, 1] })
   })
