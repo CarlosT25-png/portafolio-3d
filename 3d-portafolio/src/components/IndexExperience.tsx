@@ -1,7 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience";
 import { useEffect, useState } from "react";
-import { useControls } from "leva";
 
 const IndexExperience = () => {
 
@@ -16,11 +15,10 @@ const IndexExperience = () => {
   return (
     <Canvas
       camera={{
-        fov: 45,
+        fov: 35,
         near: 0.1,
         far: 2000,
-        position: [-4.8, -0.8, 5.55],
-        rotation: [0,-2 ,0]
+        position: [-4.8, -0.2, 5.2],
       }}
       style={{ width: width, height: height }}
     >

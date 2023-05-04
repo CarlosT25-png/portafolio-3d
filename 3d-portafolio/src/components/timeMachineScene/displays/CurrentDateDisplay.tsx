@@ -12,18 +12,6 @@ function getFormatted(number: number): string {
 
 
 const CurrentDateDisplay = () => {
-  const { rotationObj, positionObj } = useControls("currentDate", {
-    rotationObj: {
-      value: [-1.45, -0.10, -0.65],
-      step: 0.001,
-      joystick: "invertY",
-    },
-    positionObj: {
-      value: [0.96, 2.16, -0.24],
-      step: 0.001,
-      joystick: "invertY",
-    },
-  });
 
   // Typing effect
   const today = new Date();
