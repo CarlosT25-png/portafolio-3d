@@ -19,8 +19,8 @@ const IndexExperience = () => {
         fov: 45,
         near: 0.1,
         far: 2000,
-        position: [-1.6, 3.5, 2],
-        rotation: [0,-Math.PI * 0.7 ,0]
+        position: [-4.8, -0.8, 5.55],
+        rotation: [0,-2 ,0]
       }}
       style={{ width: width, height: height }}
     >
