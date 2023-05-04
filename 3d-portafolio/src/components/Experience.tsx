@@ -15,33 +15,11 @@ import TargetDateDisplay from "./timeMachineScene/displays/TargetDateDisplay";
 import CurrentDateDisplay from "./timeMachineScene/displays/CurrentDateDisplay";
 import DateControlHandler from "./timeMachineScene/controls/dateControls/DateControlHandler";
 import TextMachine from "./timeMachineScene/displays/TextMachine";
-import Floor from "./timeMachineScene/world/floor/Floor";
-
-interface timeMachineInterface {
-  nodes: {
-    baked: {
-      geometry: THREE.BufferGeometry;
-    };
-    lightTravel: {
-      geometry: THREE.BufferGeometry;
-      position: THREE.Vector3;
-    };
-    lightOn: {
-      geometry: THREE.BufferGeometry;
-      position: THREE.Vector3;
-    };
-  };
-}
+import Floor from "./timeMachineScene/world/Floor";
+import BasicWorld from "./timeMachineScene/world/Floor";
+import Garage from "./timeMachineScene/world/garage/Garage";
 
 const Experience = () => {
-  const ref = useRef<THREE.Group>(null);
-  const { nodes } = useGLTF(
-    "/timeMachine.glb"
-  ) as unknown as timeMachineInterface;
-
-  const bakedTexture = useTexture("/baked.jpg");
-  bakedTexture.flipY = false;
-
   return (
     <>
       <Perf position="top-left" />
@@ -49,52 +27,25 @@ const Experience = () => {
 
       <OrbitControls makeDefault enabled={true} />
 
-
       <Center position-y={-1}>
-        <group rotation-y={-2.24} ref={ref}>
-          <mesh geometry={nodes.baked.geometry}>
-            <meshBasicMaterial map={bakedTexture} />
-          </mesh>
+        <group scale={0.6} position-y={-0.5}>
+          <BasicWorld />
+          {/* Old Time Machine Text */}
+          <BadgeText />
 
-          <mesh
-            geometry={nodes.lightOn.geometry}
-            position={[
-              nodes.lightOn.position.x - 0.045,
-              nodes.lightOn.position.y - 0.7,
-              nodes.lightOn.position.z - 0.245,
-            ]}
-          >
-            <meshBasicMaterial color="#83b117" />
-          </mesh>
+          {/* Displays */}
+          <PlaceDisplay />
+          <TargetDateDisplay />
+          <CurrentDateDisplay />
 
-          <mesh
-            geometry={nodes.lightTravel.geometry}
-            position={[
-              nodes.lightTravel.position.x - 0.045,
-              nodes.lightTravel.position.y - 0.7,
-              nodes.lightTravel.position.z - 0.245,
-            ]}
-          >
-            <meshBasicMaterial color="#3657d1" />
-          </mesh>
+          {/* Text from the machine */}
+          <TextMachine />
+
+          {/* Date Controls */}
+          <DateControlHandler />
         </group>
 
-        {/* World */}
-        <Floor />
-
-        {/* Old Time Machine Text */}
-        <BadgeText />
-
-        {/* Displays */}
-        <PlaceDisplay />
-        <TargetDateDisplay />
-        <CurrentDateDisplay />
-        
-        {/* Text from the machine */}
-        <TextMachine />
-
-        {/* Date Controls */}
-        <DateControlHandler />
+        <Garage />
       </Center>
     </>
   );
