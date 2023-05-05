@@ -16,6 +16,7 @@ import Garage from "./timeMachineScene/world/garage/Garage";
 import Boxes from "./timeMachineScene/world/garage/Boxes";
 import { gsap } from "gsap";
 import { useControls } from "leva";
+import TextSign from "./timeMachineScene/world/garage/TextSign";
 
 
 const Experience = () => {
@@ -98,6 +99,7 @@ const Experience = () => {
 
         <Garage />
         <Boxes />
+        <TextSign />
       </Center>
     </>
   );
