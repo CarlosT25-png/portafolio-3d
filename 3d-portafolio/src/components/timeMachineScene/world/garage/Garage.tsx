@@ -5,7 +5,6 @@ import * as THREE from 'three'
 const Garage = () => {
   const directionalLight = useRef<THREE.SpotLight>(null)
   const model = useGLTF("/models/timeMachineScene/garage-draco-2.glb");
-  model.scene.receiveShadow = true
   // @ts-ignore
   useHelper(directionalLight, THREE.SpotLightHelper, 1)
 
@@ -13,7 +12,7 @@ const Garage = () => {
     <>
       {/* Shaddow is missing */}
       {/* <Environment preset="city" /> */}
-      <spotLight position={[0, 2, 4]} castShadow ref={directionalLight} intensity={0.5} />
+      <spotLight position={[-2.5, 4, 3]} rotation={[0, -0.528, 0]} castShadow ref={directionalLight} intensity={1.3} />
       <group position-y={-1} scale={1}>
         <group rotation-y={-2.24}>
           <primitive object={model.scene} />
