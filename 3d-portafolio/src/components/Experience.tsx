@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect } from "react";
 import {
   Center,
   OrbitControls,
 } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import BadgeText from "./timeMachineScene/BadgeText";
 import PlaceDisplay from "./timeMachineScene/displays/PlaceDisplay";
@@ -20,40 +20,39 @@ import TextSign from "./timeMachineScene/world/garage/TextSign";
 
 
 const Experience = () => {
-  const [rotationY, setRotationY] = useState(0);
-
   const { camera } = useThree();
-  // @ts-ignore
-  const ref = useRef<OrbitControls>(null);
 
   const { rotationObj, positionObj } = useControls("cameraPos", {
     rotationObj: {
-      value: [-0.743, -0.528, -0.433],
+      value: [-0.31, -0.64, -0.19],
       step: 0.01,
       joystick: "invertY",
     },
     positionObj: {
-      value: [-4.24, 0.26, 4.76],
+      value: [-4.24, 0.26, 4.76], //value: [-4.24, 0.26, 4.76],
       step: 0.01,
       joystick: "invertY",
     },
   });
 
-  console.log(ref);
+  useLayoutEffect(() => {
+    camera.rotation.set( -0.31, -0.64, -0.19 )
+    camera.position.set( -4.24, 0.26, 4.76 )
+  }, [])
 
   // Animations
 
   gsap.fromTo(camera.rotation, {
-    x: -0.51,
-    y: -0.65,
-    z: -0.33
+    x: -0.31,
+    y: -0.64,
+    z: -0.19
   }, {
     x: -0.743,
     y: -0.528,
     z: -0.433,
     duration: 4,
     delay: 2,
-    ease: 'ease-in'
+    // ease: 'ease-in'
   })
 
   gsap.fromTo(camera.position, {
@@ -66,8 +65,13 @@ const Experience = () => {
     z: 4.76,
     duration: 4,
     delay: 2,
-    ease: 'ease-in'
+    // ease: 'ease-in'
   })
+
+  // useFrame(() => {
+  //   camera.rotation.set( ...rotationObj )
+  //   camera.position.set( ...positionObj )
+  // })
 
   return (
     <>
@@ -75,7 +79,7 @@ const Experience = () => {
 
       <color args={["#241a1a"]} attach="background" />
 
-      <OrbitControls ref={ref} makeDefault enabled={true} />
+      <OrbitControls makeDefault enabled={false} />
 
       {/* -1  -0.5 */}
 

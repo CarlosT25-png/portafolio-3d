@@ -2,9 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@react-spring/three': ^9.7.2
-  '@react-three/drei': ^9.65.5
-  '@react-three/fiber': ^8.12.2
-  '@react-three/postprocessing': ^2.10.0
+  '@react-three/drei': ^9.66.1
+  '@react-three/fiber': ^8.13.0
+  '@react-three/postprocessing': ^2.7.1
   '@reduxjs/toolkit': ^1.9.5
   '@types/node': 18.15.13
   '@types/react': 18.0.38
@@ -14,6 +14,7 @@ specifiers:
   gsap: ^3.11.5
   leva: ^0.9.34
   next: 13.3.1
+  postprocessing: ^6.30.2
   r3f-perf: ^7.1.2
   react: 18.2.0
   react-dom: 18.2.0
@@ -35,6 +36,7 @@ dependencies:
   gsap: 3.11.5
   leva: 0.9.34_biqbaboplfbrettd7655fr4n2y
   next: 13.3.1_biqbaboplfbrettd7655fr4n2y
+  postprocessing: 6.30.2_three@0.151.3
   r3f-perf: 7.1.2_fxpeuo4oxyxiz54elztolpoevy
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
