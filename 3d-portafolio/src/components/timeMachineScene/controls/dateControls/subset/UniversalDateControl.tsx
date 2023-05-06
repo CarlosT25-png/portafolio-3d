@@ -2,7 +2,6 @@ import { useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useSpring, a } from "@react-spring/three";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
 import * as THREE from 'three' 
 
 type MeshProps = JSX.IntrinsicElements["mesh"];
@@ -13,7 +12,7 @@ interface Props {
   position: THREE.Vector3,
 }
 
-const OFFSET_RANGE = 1;
+const OFFSET_RANGE = 1.45;
 
 const UniversalDateControl = ({ timeDuration, dispatchFn, position }: Props) => {
 
@@ -33,7 +32,7 @@ const UniversalDateControl = ({ timeDuration, dispatchFn, position }: Props) => 
       numberValue = Math.round(numberValue) + 1
       numberValue = Math.min(numberValue, timeDuration)
       dispatch(dispatchFn(numberValue))
-      return set({ position: [-offset ,-offset * 0.25, offset] })
+      return set({ position: [-offset*0.825 ,-offset * 0.225, offset] })
     },
     onHover: ({ hovering }) => set({ scale: hovering ? [1.2, 1.2, 1.2] : [1, 1, 1] })
   })

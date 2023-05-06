@@ -22,10 +22,10 @@ const dateSlice = createSlice({
       state.year = action.payload
     },
     setHour(state, action) {
-      state.hour = action.payload
+      state.hour = validateNumber(action.payload - 1)
     },
     setMinute(state, action) {
-      state.minute = action.payload
+      state.minute = validateNumber(action.payload - 1)
     },
     setAvailableDays(state, action) {
       state.availableDays = action.payload

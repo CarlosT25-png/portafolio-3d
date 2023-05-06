@@ -12,7 +12,7 @@ interface Props {
   position: THREE.Vector3,
 }
 
-const OFFSET_RANGE = 1;
+const OFFSET_RANGE = 1.45;
 
 const DayControl = ({ dispatchFn, position }: Props) => {
 
@@ -29,12 +29,14 @@ const DayControl = ({ dispatchFn, position }: Props) => {
 
       // Clamp offset value to within the range of -1 to 0
       offset = Math.max(-OFFSET_RANGE, Math.min(0, offset));
+
+      console.log(timeDuration)
     
       let numberValue = offset * timeDuration * -1;
       numberValue = Math.round(numberValue) + 1
       numberValue = Math.min(numberValue, timeDuration)
       dispatch(dispatchFn(numberValue))
-      return set({ position: [-offset ,-offset, offset] })
+      return set({ position: [-offset*0.825 ,-offset * 0.225, offset] })
     },
     onHover: ({ hovering }) => set({ scale: hovering ? [1.2, 1.2, 1.2] : [1, 1, 1] })
   })

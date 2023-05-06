@@ -33,14 +33,17 @@ const TargetDateDisplay = () => {
 
   // Check if there is any update in the date slice
   useEffect(() => {
-    setText(`${month}/${day}/${(+year)+2005} ${hour - 1}:${minute - 1}`) 
+    const formattedHour = hour - 1 === 0 ? '00' : `${ hour - 1}`
+    const formattedMinute = minute - 1 === 0 ? '00' : `${ minute - 1}`
+
+    setText(`${month}/${day}/${(+year)+2005} ${hour}:${minute}`) 
   }, [month, day, year, hour, minute])
   
   useEffect(() => {
-    let newMonth = (parseInt(month) - 1)
-    dispatch(dateActions.setAvailableDays(getDaysInMonth(newMonth, (+year) + 2005 )))
-    // setDaysDuration(getDaysInMonth(newMonth, 2005))
-  }, [month])
+    const availableDays = getDaysInMonth(parseInt(month), (+year) + 2005 )
+    dispatch(dateActions.setAvailableDays(availableDays))
+    if( day > availableDays ) dispatch(dateActions.setDay(availableDays))
+  }, [month, year])
 
   return (
     <group position={[-0.69, 1.975, -0.11]} rotation={[-1.46, -0.09, -0.66]}>
