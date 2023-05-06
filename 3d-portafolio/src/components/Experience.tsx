@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import {
   Center,
   OrbitControls,
@@ -14,13 +14,17 @@ import TextMachine from "./timeMachineScene/displays/TextMachine";
 import BasicWorld from "./timeMachineScene/world/BasicWorld";
 import Garage from "./timeMachineScene/world/garage/Garage";
 import Boxes from "./timeMachineScene/world/garage/Boxes";
+import TextSign from "./timeMachineScene/world/garage/TextSign";
 import { gsap } from "gsap";
 import { useControls } from "leva";
-import TextSign from "./timeMachineScene/world/garage/TextSign";
+import { collectGenerateParams } from "next/dist/build/utils";
+
 
 
 const Experience = () => {
   const { camera } = useThree();
+
+  const cameraRef = useRef(camera)
 
   const { rotationObj, positionObj } = useControls("cameraPos", {
     rotationObj: {
@@ -35,42 +39,23 @@ const Experience = () => {
     },
   });
 
-  useLayoutEffect(() => {
-    camera.rotation.set( -0.31, -0.64, -0.19 )
-    camera.position.set( -4.24, 0.26, 4.76 )
-  }, [])
-
   // Animations
 
-  gsap.fromTo(camera.rotation, {
-    x: -0.31,
-    y: -0.64,
-    z: -0.19
-  }, {
+  useLayoutEffect(() => {
+    cameraRef.current.rotation.set(-0.31, -0.64, -0.19);
+    cameraRef.current.position.set(-4.24, 0.26, 4.76);
+  }, []);
+
+  gsap.to(cameraRef.current.rotation, {
     x: -0.743,
     y: -0.528,
     z: -0.433,
     duration: 4,
-    delay: 2,
-    // ease: 'ease-in'
-  })
-
-  gsap.fromTo(camera.position, {
-    x: -4.24,
-    y:  0.26,
-    z: 4.76
-  }, {
-    x: -4.24,
-    y:  0.26,
-    z: 4.76,
-    duration: 4,
-    delay: 2,
-    // ease: 'ease-in'
-  })
+    delay: 3.5,
+  });
 
   // useFrame(() => {
-  //   camera.rotation.set( ...rotationObj )
-  //   camera.position.set( ...positionObj )
+  //   cameraRef.current.rotation.copy(camera.rotation);
   // })
 
   return (

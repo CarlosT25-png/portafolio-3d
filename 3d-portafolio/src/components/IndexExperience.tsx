@@ -14,6 +14,7 @@ const IndexExperience = () => {
 
   return (
     <Canvas
+      dpr={[ 1, 2 ]}
       camera={{
         fov: 35,
         near: 0.1,
