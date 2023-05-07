@@ -2,7 +2,7 @@
 # Welcome to my portafolio👋🏼
 
 
- \Welcome to my 3D portfolio 🌟 built with React Three Fiber 🚀 In this project, I showcase my work in a visually appealing way, using 3D models made with blender 🎨, animations 🎬, and interactive elements 🕹️. I hope you enjoy it and have fun 🎉, and feel free to ask me any questions ❓. Let's explore the exciting world of 3D together! 🌎
+Welcome to my 3D portfolio 🌟 built with React Three Fiber 🚀 In this project, I showcase my work in a visually appealing way, using 3D models made with blender 🎨, animations 🎬, and interactive elements 🕹️. I hope you enjoy it and have fun 🎉, and feel free to ask me any questions ❓. Let's explore the exciting world of 3D together! 🌎
 ## Demo
 
 [Live Demo here](https://www.github.com/carlost25-png)
