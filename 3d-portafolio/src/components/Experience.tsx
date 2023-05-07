@@ -1,8 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-import {
-  Center,
-  OrbitControls,
-} from "@react-three/drei";
+import { Center, OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import BadgeText from "./timeMachineScene/BadgeText";
@@ -18,26 +15,31 @@ import TextSign from "./timeMachineScene/world/garage/TextSign";
 import { gsap } from "gsap";
 import { useControls } from "leva";
 import { collectGenerateParams } from "next/dist/build/utils";
-
-
+import Shifter from "./timeMachineScene/controls/shifter/Shifter";
 
 const Experience = () => {
   const { camera } = useThree();
 
-  const cameraRef = useRef(camera)
+  const cameraRef = useRef(camera);
 
-  const { rotationObj, positionObj } = useControls("cameraPos", {
-    rotationObj: {
-      value: [-0.31, -0.64, -0.19],
-      step: 0.01,
-      joystick: "invertY",
-    },
-    positionObj: {
-      value: [-4.24, 0.26, 4.76], //value: [-4.24, 0.26, 4.76],
-      step: 0.01,
-      joystick: "invertY",
-    },
-  });
+  // Debug
+
+  // const { rotationObj, positionObj } = useControls("cameraPos", {
+  //   rotationObj: {
+  //     value: [-0.31, -0.64, -0.19],
+  //     step: 0.01,
+  //     joystick: "invertY",
+  //   },
+  //   positionObj: {
+  //     value: [-4.24, 0.26, 4.76], //value: [-4.24, 0.26, 4.76],
+  //     step: 0.01,
+  //     joystick: "invertY",
+  //   },
+  // });
+
+  // useFrame(() => {
+  //   cameraRef.current.rotation.copy(camera.rotation);
+  // })
 
   // Animations
 
@@ -52,12 +54,8 @@ const Experience = () => {
     z: -0.433,
     duration: 4,
     delay: 3.5,
-    ease: 'easeIn'
+    ease: "easeIn",
   });
-
-  // useFrame(() => {
-  //   cameraRef.current.rotation.copy(camera.rotation);
-  // })
 
   return (
     <>
@@ -85,8 +83,12 @@ const Experience = () => {
 
           {/* Date Controls */}
           <DateControlHandler />
+
+          {/* Shifter */}
+          <Shifter />
         </group>
 
+        {/* Environment */}
         <Garage />
         <Boxes />
         <TextSign />
