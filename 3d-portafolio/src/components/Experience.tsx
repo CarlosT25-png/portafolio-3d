@@ -52,6 +52,7 @@ const Experience = () => {
     z: -0.433,
     duration: 4,
     delay: 3.5,
+    ease: 'easeIn'
   });
 
   // useFrame(() => {
