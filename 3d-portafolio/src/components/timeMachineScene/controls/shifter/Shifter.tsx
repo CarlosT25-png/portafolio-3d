@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import * as THREE from 'three'
@@ -18,7 +18,7 @@ const Shifter = () => {
 
   const { size, viewport } = useThree()
   const aspect = size.width / viewport.width;
-  const dispatch = useDispatch();
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   const [spring, set] = useSpring(() => ({ scale: [1, 1, 1], position: [0, 0, 0], config: { friction: 20 } }))
   const bind = useGesture({
@@ -28,9 +28,17 @@ const Shifter = () => {
       // Clamp offset value to within the range of 0 to 0.5
       offset = Math.max(0 , Math.min(0.5, offset));
 
+      if (!isAudioPlaying) {
+        const audio = new Audio('/sounds/timeMachineScene/lever.mp3')
+        audio.volume = 0.4;
+        audio.play();
+        setIsAudioPlaying(true);
+      }
+
       // Here I fix the position by some decimals
       return set({ position: [-(offset*0.78) ,(offset * 0.55) * -1, offset] })
     },
+    onDragEnd: () => { setIsAudioPlaying(false) },
     onHover: ({ hovering }) => set({ scale: hovering ? [1, 1, 1] : [1, 1, 1] })
   })
 

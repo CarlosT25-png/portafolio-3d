@@ -16,11 +16,14 @@ import { gsap } from "gsap";
 import { useControls } from "leva";
 import { collectGenerateParams } from "next/dist/build/utils";
 import Shifter from "./timeMachineScene/controls/shifter/Shifter";
+import SoundEffects from "./timeMachineScene/world/SoundEffects";
 
 const Experience = () => {
   const { camera } = useThree();
 
   const cameraRef = useRef(camera);
+
+  const machineSound = new Audio("/sounds/timeMachineScene/machine.mp3");
 
   // Debug
 
@@ -44,6 +47,7 @@ const Experience = () => {
   // Animations
 
   useLayoutEffect(() => {
+    // Setting camer position
     cameraRef.current.rotation.set(-0.31, -0.64, -0.19);
     cameraRef.current.position.set(-4.24, 0.26, 4.76);
   }, []);
@@ -92,6 +96,9 @@ const Experience = () => {
         <Garage />
         <Boxes />
         <TextSign />
+
+        {/* Sounds */}
+        <SoundEffects fixedSoundUrl="/sounds/timeMachineScene/machine.mp3" randomSoundUrl="/sounds/timeMachineScene/electric.mp3" />
       </Center>
     </>
   );
