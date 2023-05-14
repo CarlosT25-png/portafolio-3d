@@ -4,6 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from 'react'
 import { Loader } from '@react-three/drei'
 import BedroomExperience from './BedroomExperience'
 import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three'
+import IntroScreen from './shared/html/IntroScreen'
 
 const IndexExperience = () => {
   const [width, setWidth] = useState('')
@@ -17,7 +18,7 @@ const IndexExperience = () => {
   return (
     <>
       <Suspense fallback={null}>
-        <Canvas
+        {/* <Canvas
           dpr={[1, 2]}
           gl={{
             antialias: true,
@@ -35,8 +36,9 @@ const IndexExperience = () => {
           shadows
         >
           {/* <TimeMachineExperience /> */}
-          <BedroomExperience />
-        </Canvas>
+          {/* <BedroomExperience /> */}
+        {/* </Canvas> */}
+        <IntroScreen />
       </Suspense>
       <Loader />
     </>

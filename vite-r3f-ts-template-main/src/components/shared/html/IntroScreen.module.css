@@ -1,4 +1,18 @@
 .main {
   background-color: black;
-  
+}
+
+.message-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border: 1px solid white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.button {
+  border: 1px solid white;
+  padding: 0.75rem 2rem;
 }
