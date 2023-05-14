@@ -22,10 +22,10 @@ const BasicWorld = () => {
 
   const ref = useRef<THREE.Group>(null);
   const { nodes } = useGLTF(
-    "/timeMachine.glb"
+    "/models/timeMachineScene/timeMachine.glb"
   ) as unknown as timeMachineInterface;
 
-  const bakedTexture = useTexture("/baked.jpg");
+  const bakedTexture = useTexture("/textures/timeMachineScene/baked.jpg");
   bakedTexture.flipY = false;
 
   return (
