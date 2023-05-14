@@ -1,5 +1,6 @@
 import { Environment, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
+import Poster from "./scene/Poster";
 
 const BasicWorld = () => {
   const { gl } = useThree();
@@ -8,13 +9,17 @@ const BasicWorld = () => {
   console.log(model.scene)
   console.log(model.nodes)
 
+  model.scene.castShadow = true;
+  model.scene.receiveShadow = true;
+
 
   return (
     <>
       <Environment preset="city" />
-      <group rotation-y={-3.25}>
+      <group>
         <primitive object={model.scene} />
       </group>
+      <Poster />
     </>
   );
 };

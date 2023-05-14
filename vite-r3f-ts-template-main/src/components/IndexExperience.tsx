@@ -3,7 +3,7 @@ import TimeMachineExperience from './TimeMachineExperience'
 import { Suspense, useEffect, useMemo, useState } from 'react'
 import { Loader } from '@react-three/drei'
 import BedroomExperience from './BedroomExperience'
-import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
+import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three'
 
 const IndexExperience = () => {
   const [width, setWidth] = useState('')
@@ -23,6 +23,7 @@ const IndexExperience = () => {
             antialias: true,
             toneMapping: ACESFilmicToneMapping,
             outputEncoding: sRGBEncoding,
+            // toneMappingExposure: 1.75
           }}
           camera={{
             fov: 35,
