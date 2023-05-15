@@ -6,11 +6,11 @@ import * as THREE from 'three'
 
 const PlayRecord = () => {
   return (
-    <mesh scale={0.1}>
+    <mesh position={[ -0.6, 0.5, 0 ]} scale={0.01}>
       <boxBufferGeometry attach='geometry' />
       <meshBasicMaterial attach='material' color='black' />
       {/* @ts-ignore */}
-      <PositionalAudio url='/sounds/timeMachineScene/machine.mp3' />
+      <PositionalAudio url='/sounds/timeMachineScene/machine.mp3' autoplay loop/>
     </mesh>
   )
 }

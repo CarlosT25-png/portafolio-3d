@@ -15,4 +15,10 @@
 .button {
   border: 1px solid white;
   padding: 0.75rem 2rem;
+  margin-top: 1rem;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
 }

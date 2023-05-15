@@ -3,6 +3,7 @@ import { useThree } from "@react-three/fiber";
 import Poster from "./scene/Poster";
 import Lights from "./scene/Lights";
 import PlayRecord from "./scene/PlayRecord";
+import Screen from "../html/Screen";
 
 const BasicWorld = () => {
   const { gl } = useThree();
@@ -23,6 +24,7 @@ const BasicWorld = () => {
       </group>
       <Poster />
       <PlayRecord />
+      <Screen />
     </>
   );
 };
