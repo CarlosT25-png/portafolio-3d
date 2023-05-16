@@ -4,27 +4,31 @@ import Poster from "./scene/Poster";
 import Lights from "./scene/Lights";
 import PlayRecord from "./scene/PlayRecord";
 import Screen from "../html/Screen";
+import Structure from "./Structure";
+
+interface BedroomInterface {
+  nodes: {
+    scene001: THREE.Group;
+    library: THREE.Mesh;
+    monitor001: THREE.Group;
+    periferics: THREE.Group
+    lightOn: {
+      geometry: THREE.BufferGeometry;
+      position: THREE.Vector3;
+    };
+  };
+}
 
 const BasicWorld = () => {
   const { gl } = useThree();
-  const model = useGLTF("/models/bedroomScene/bedroom-draco.glb");
-
-  console.log(model.scene)
-  // console.log(model.nodes)
-
-  model.scene.castShadow = true;
-  model.scene.receiveShadow = true;
-
 
   return (
     <>
       <Lights />
-      <group>
-        <primitive object={model.scene} />
-      </group>
+      <Structure />
       <Poster />
       <PlayRecord />
-      <Screen />
+      {/* <Screen /> */}
     </>
   );
 };
