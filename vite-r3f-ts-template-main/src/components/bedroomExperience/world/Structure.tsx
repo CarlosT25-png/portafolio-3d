@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useThree } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -30,12 +30,12 @@ const Structure = () => {
 
   const { rotationObj, positionObj } = useControls('cameraPos', {
     rotationObj: {
-      value: [0.038442, -0.7450511, 0.026071],
+      value: [0, -Math.PI * 0.5, 0],
       step: 0.01,
       joystick: 'invertY',
     },
     positionObj: {
-      value: [-4.8, -0.2, 5.2], //value: [-4.24, 0.26, 4.76],
+      value: [0.89, 0.46, 0.4275], //value: [-4.24, 0.26, 4.76],
       step: 0.01,
       joystick: 'invertY',
     },
@@ -49,7 +49,6 @@ const Structure = () => {
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
     camera.lookAt(model.nodes.monitor001.position)
-    // camera.position.set( 0.59, -0.24, -0.4125 ) //...positionObj
     gsap.to(camera.position, {
       x: 0.59,
       y: -0.24,
@@ -62,7 +61,6 @@ const Structure = () => {
       z: -1.13,
       duration: 1.5,
     })
-    // camera.rotation.set( -1.13, -1.51, -1.13) //...rotationObj
 
     setTimeout(() => {
       setIsEnterPlaying(false)
@@ -71,7 +69,6 @@ const Structure = () => {
   }
 
   const mouseLeaveAnimation = () => {
-    camera.lookAt(new THREE.Vector3())
     // camera.position.set( -2.43, 0.72, 2.55 ) //...positionObj
     // camera.rotation.set( -0.32, -0.74, -0.22 ) //...rotationObj
     gsap.to(camera.position, {
@@ -85,6 +82,7 @@ const Structure = () => {
       y: -0.74,
       z: -0.22,
       duration: 1.5,
+
     })
 
     setTimeout(() => {
@@ -93,8 +91,11 @@ const Structure = () => {
   }
 
   const onMouseEnter = () => {
-    if(!isEnterPlaying){
-      mouseEnterAnimation()
+    if(!isEnterPlaying){ // Checking if the animation is not playing
+      if(camera.position.x !== 0.59 && camera.position.y !== -0.24)
+      {
+        mouseEnterAnimation()
+      }
     }
   }
 
@@ -104,15 +105,22 @@ const Structure = () => {
     }
   }
 
+  // onPointerEnter={onMouseEnter} onPointerLeave={onMouseLeave}
+
   return (
     <group>
       {/* <primitive object={model.scene} /> */}
       <primitive object={model.nodes.scene001} />
       <primitive object={model.nodes.library} />
       <primitive object={model.nodes.periferics} />
-      <group ref={pcRef} onPointerEnter={onMouseEnter} onPointerLeave={onMouseLeave}>
+      <group ref={pcRef} onClick={onMouseEnter} onPointerMissed={onMouseLeave}>
         <primitive object={model.nodes.monitor001} />
       </group>
+      {/* This will act as the real screen */}
+      <mesh rotation={[ -1.56, -1.23, -1.56]} position={[0.89, 0.46, 0.4275]}>
+        <planeGeometry args={[0.12, 0.092]} />
+        <meshBasicMaterial color={'yellow'} />
+      </mesh>
     </group>
   )
 }
