@@ -19,9 +19,10 @@ interface BedroomInterface {
 }
 
 const Structure = () => {
-  const [ isEnterPlaying , setIsEnterPlaying ] = useState(false)
+  const [isEnterPlaying, setIsEnterPlaying] = useState(false)
   const pcRef = useRef<THREE.Group>(null!)
-  const { camera, controls } = useThree()
+  const screenRef = useRef<THREE.Mesh>(null!)
+  const { camera, size } = useThree()
   const model = useGLTF(
     '/models/bedroomScene/bedroom-draco.glb'
   ) as unknown as BedroomInterface
@@ -46,6 +47,29 @@ const Structure = () => {
     camera.rotation.set(-0.32, -0.74, -0.22)
   }, [])
 
+  const showIframeHandler = () => {
+    // Get the position of the mesh in 3D space
+    const { x, y, z } = screenRef.current.position
+
+    console.log(x, y, z)
+
+    // Project the position to pixel coordinates
+    camera.updateMatrix()
+    camera.updateMatrixWorld()
+    camera.updateProjectionMatrix()
+    const screenPosition = new THREE.Vector3(x, y, z).project(camera)
+
+    console.log(size)
+    console.log(screenPosition)
+    // Convert the projected coordinates to pixels
+    const pixelX = (screenPosition.x * 0.5 + 0.5) * size.width
+    const pixelY =
+      (1 - (screenPosition.y * 0.5 + 0.5)) * size.height
+
+    // Use the pixel coordinates as needed
+    console.log('Mesh position in pixels:', pixelX, pixelY)
+  }
+
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
     camera.lookAt(model.nodes.monitor001.position)
@@ -54,6 +78,7 @@ const Structure = () => {
       y: -0.24,
       z: -0.4125,
       duration: 1.5,
+      onComplete: () => showIframeHandler(),
     })
     gsap.to(camera.rotation, {
       x: -1.13,
@@ -65,7 +90,6 @@ const Structure = () => {
     setTimeout(() => {
       setIsEnterPlaying(false)
     }, 1500)
-  
   }
 
   const mouseLeaveAnimation = () => {
@@ -82,7 +106,6 @@ const Structure = () => {
       y: -0.74,
       z: -0.22,
       duration: 1.5,
-
     })
 
     setTimeout(() => {
@@ -91,16 +114,16 @@ const Structure = () => {
   }
 
   const onMouseEnter = () => {
-    if(!isEnterPlaying){ // Checking if the animation is not playing
-      if(camera.position.x !== 0.59 && camera.position.y !== -0.24)
-      {
+    if (!isEnterPlaying) {
+      // Checking if the animation is not playing
+      if (camera.position.x !== 0.59 && camera.position.y !== -0.24) {
         mouseEnterAnimation()
       }
     }
   }
 
   const onMouseLeave = () => {
-    if(!isEnterPlaying){
+    if (!isEnterPlaying) {
       mouseLeaveAnimation()
     }
   }
@@ -117,7 +140,11 @@ const Structure = () => {
         <primitive object={model.nodes.monitor001} />
       </group>
       {/* This will act as the real screen */}
-      <mesh rotation={[ -1.56, -1.23, -1.56]} position={[0.89, 0.46, 0.4275]}>
+      <mesh
+        ref={screenRef}
+        rotation={[-1.56, -1.23, -1.56]}
+        position={[0.89, 0.46, 0.4275]}
+      >
         <planeGeometry args={[0.12, 0.092]} />
         <meshBasicMaterial color={'yellow'} />
       </mesh>
