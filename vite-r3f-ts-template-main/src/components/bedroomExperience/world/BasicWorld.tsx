@@ -3,7 +3,6 @@ import { useThree } from "@react-three/fiber";
 import Poster from "./scene/Poster";
 import Lights from "./scene/Lights";
 import PlayRecord from "./scene/PlayRecord";
-import Screen from "../html/Screen";
 import Structure from "./Structure";
 
 interface BedroomInterface {
@@ -28,7 +27,6 @@ const BasicWorld = () => {
       <Structure />
       <Poster />
       <PlayRecord />
-      {/* <Screen /> */}
     </>
   );
 };

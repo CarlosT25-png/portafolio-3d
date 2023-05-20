@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import TimeMachineExperience from './TimeMachineExperience'
 import { Suspense, useEffect, useMemo, useState } from 'react'
-import { Loader } from '@react-three/drei'
+import { Loader, Preload } from '@react-three/drei'
 import BedroomExperience from './BedroomExperience'
 import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three'
 import IntroScreen from './shared/html/IntroScreen'
@@ -42,6 +42,7 @@ const IndexExperience = () => {
             <BedroomExperience />
           </Canvas>
         )}
+        <Preload all  />
       </Suspense>
       <Loader />
     </>
