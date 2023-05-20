@@ -1,10 +1,15 @@
-import { Canvas, useThree } from '@react-three/fiber'
-import TimeMachineExperience from './TimeMachineExperience'
-import { Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { Loader, Preload } from '@react-three/drei'
-import BedroomExperience from './BedroomExperience'
+import { ReactNode, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three'
+import { Canvas, useThree } from '@react-three/fiber'
+import { Loader, Preload } from '@react-three/drei'
+import { useSelector } from 'react-redux'
+import TimeMachineExperience from './TimeMachineExperience'
+import BedroomExperience from './BedroomExperience'
 import IntroScreen from './shared/html/IntroScreen'
+import { RootState } from '../store'
+import { scenes } from '../store/global/globalConfigSlice'
+
+// Hook to handle window resize
 function useWindowSize() {
   const [sizes, setSizes] = useState([0, 0]);
   useLayoutEffect(() => {
@@ -21,6 +26,7 @@ function useWindowSize() {
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize();
   const [isStarted, setIsStarted] = useState(false)
+  const scene = useSelector<RootState>( state => state.globalConfig.scene ) as scenes;
   // const [width, setWidth] = useState('')
   // const [height, setHeight] = useState('')
 
@@ -28,34 +34,40 @@ const IndexExperience = () => {
   //   setWidth(`${window.innerWidth}px`)
   //   setHeight(`${window.innerHeight}px`)
   // }, [])
+  
+  let content: ReactNode;
+
+  if( scene !== scenes.TRANSITION ) {
+    content = <Canvas
+    dpr={[1, 2]}
+    gl={{
+      antialias: true,
+      toneMapping: ACESFilmicToneMapping,
+      outputEncoding: sRGBEncoding,
+      // toneMappingExposure: 1.75
+    }}
+    camera={{
+      fov: 35,
+      near: 0.1,
+      far: 2000,
+      position: [-4.8, -0.2, 5.2],
+    }}
+    style={{ width: widthR, height: heightR }}
+    shadows
+  >
+    {scene === scenes.TIMEMACHINE && <TimeMachineExperience />}
+    {scene === scenes.BEDROOM && <BedroomExperience />}
+    <Preload all  />
+  </Canvas>
+  } else if ( scene === scenes.TRANSITION ) {
+    content = null;
+  }
 
   return (
     <>
       <Suspense fallback={null}>
         {!isStarted && <IntroScreen onStart={setIsStarted} />}
-        {isStarted && (
-          <Canvas
-            dpr={[1, 2]}
-            gl={{
-              antialias: true,
-              toneMapping: ACESFilmicToneMapping,
-              outputEncoding: sRGBEncoding,
-              // toneMappingExposure: 1.75
-            }}
-            camera={{
-              fov: 35,
-              near: 0.1,
-              far: 2000,
-              position: [-4.8, -0.2, 5.2],
-            }}
-            style={{ width: widthR, height: heightR }}
-            shadows
-          >
-            <TimeMachineExperience />
-            {/* <BedroomExperience /> */}
-            <Preload all  />
-          </Canvas>
-        )}
+        {isStarted && content}
       </Suspense>
       <Loader />
     </>
