@@ -9,26 +9,30 @@
   translate: -50% -50%;
   border: 1px solid white;
   text-align: center;
-  padding: 1rem;
-  padding-bottom: 2rem;
+  padding: 2rem 3rem;
+  padding-bottom: 5rem;
 }
 
-.title {}
+.title {
+  font-size: 3rem;
+}
 
-.text {}
+.text {
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
 
 .btn{
   position: relative;
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: white;
-  border: 1px solid #fff;
+  border: 1.5px solid #fff;
   background: transparent;
   font-family: "montserrat",sans-serif;
-  text-transform: uppercase;
   padding: 1rem 2rem;
   margin: 0px 2rem;
   text-decoration: none;
-  font-weight: bolder;
+  font-weight: 500;
   transition: 0.4s all ease-in-out 0s;
 }
 .btn:hover{
