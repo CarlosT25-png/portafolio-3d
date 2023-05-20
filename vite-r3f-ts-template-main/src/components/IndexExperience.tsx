@@ -39,10 +39,10 @@ const IndexExperience = () => {
             shadows
           >
             {/* <TimeMachineExperience /> */}
-            <BedroomExperience />
+            {/* <BedroomExperience /> */}
+            <Preload all  />
           </Canvas>
         )}
-        <Preload all  />
       </Suspense>
       <Loader />
     </>

@@ -2,7 +2,7 @@ import { Html, useGLTF } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { Glitch, EffectComposer, Select, Selection } from '@react-three/postprocessing'
 import { GlitchMode } from 'postprocessing'
-import { useState, useRef, useLayoutEffect } from 'react'
+import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 
@@ -22,6 +22,7 @@ interface BedroomInterface {
 const Screen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
   const [showIframe, setShowIframe] = useState(false)
+  const [ hovered, setHovered ] = useState(false);
   const pcRef = useRef<THREE.Group>(null!)
   const screenRef = useRef<THREE.Mesh>(null!)
   const sceneRef = useRef<THREE.Scene>(null!)
@@ -118,47 +119,41 @@ const Screen = () => {
     }
   }
 
+  // Pointer handler
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+  }, [hovered])
+
   return (
     <>
-      <group ref={pcRef} onClick={onMouseEnter} onPointerMissed={onMouseLeave}>
+      <group ref={pcRef} onClick={onMouseEnter} onPointerMissed={onMouseLeave} onPointerEnter={() => setHovered(true)} onPointerLeave={ () => setHovered(false)}>
         <primitive object={model.nodes.monitor001} />
       </group>
       {/* This will act as the real screen */}
-      <Selection>
-        {/* Effect Composer */}
-        <EffectComposer>
-          <Glitch
-            delay={new THREE.Vector2(0.5, 1)}
-            duration={new THREE.Vector2(0.1, 0.3)}
-            strength={new THREE.Vector2(0.2, 0.4)}
-          />
-        </EffectComposer>
-        <Select enabled>
-          <group>
-            <mesh
-              ref={screenRef}
-              rotation={[-1.51, -1.22, -1.51]}
-              position={[0.89, 0.46, 0.43]}
-            >
-              <planeGeometry args={[0.118, 0.0915]} />
-              <meshBasicMaterial color={'#5c5c5c'} />
-            </mesh>
-            {showIframe && (
-              <Html
-                transform
-                distanceFactor={0.11}
-                rotation={[-1.56, -1.29, -1.56]}
-                position={[1.16, 0.44, 0.42]}
-              >
-                <iframe
-                  src='https://carlostorres.dev'
-                  style={{ width: '1000px', height: '750px', border: 'none' }}
-                />
-              </Html>
-            )}
-          </group>
-        </Select>
-      </Selection>
+      <group>
+        <mesh
+          ref={screenRef}
+          rotation={[-1.51, -1.22, -1.51]}
+          position={[0.89, 0.46, 0.43]}
+        >
+          <planeGeometry args={[0.118, 0.0915]} />
+          <meshBasicMaterial color={'#5c5c5c'} />
+        </mesh>
+        {showIframe && (
+          <Html
+            transform
+            distanceFactor={0.11}
+            rotation={[-1.56, -1.29, -1.56]}
+            position={[1.16, 0.44, 0.42]}
+          >
+            <iframe
+              src='https://carlostorres.dev'
+              style={{ width: '1000px', height: '750px', border: 'none' }}
+            />
+          </Html>
+        )}
+      </group>
     </>
   )
 }

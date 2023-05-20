@@ -16,7 +16,7 @@ const IntroScreen = ( { onStart }: Props ) => {
       <div className={styles['message-container']}>
         <h2>Welcome to my portafolio</h2>
         <p>I hope you enjoy it</p>
-        <a onClick={clickHandler} className={styles.button}>Start</a>
+        <a onClick={clickHandler} className={`${styles['btn']} ${styles['btn-1']}`}>Start</a>
       </div>
     </div>
   );
