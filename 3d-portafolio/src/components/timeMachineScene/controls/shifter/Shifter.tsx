@@ -54,7 +54,7 @@ const Shifter = () => {
       if(isDragging === false) {
         // Check if the lever has reached the bottom
         if(internalPos.x === -0.39 && internalPos.y === -0.275 && internalPos.z === 0.5){
-          disptach(globalConfigActions.setScene(scenes.BEDROOM))
+          disptach(globalConfigActions.setScene(scenes.TRANSITION))
         }
       }
     }

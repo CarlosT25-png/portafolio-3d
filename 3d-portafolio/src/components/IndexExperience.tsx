@@ -8,6 +8,7 @@ import BedroomExperience from './BedroomExperience'
 import IntroScreen from './shared/html/IntroScreen'
 import { RootState } from '../store'
 import { scenes } from '../store/global/globalConfigSlice'
+import TimeTravelVideoPlayer from './shared/transitions/TimeTravelVideoPlayer'
 
 // Hook to handle window resize
 function useWindowSize() {
@@ -60,7 +61,7 @@ const IndexExperience = () => {
     <Preload all  />
   </Canvas>
   } else if ( scene === scenes.TRANSITION ) {
-    content = null;
+    content = <TimeTravelVideoPlayer />;
   }
 
   return (
