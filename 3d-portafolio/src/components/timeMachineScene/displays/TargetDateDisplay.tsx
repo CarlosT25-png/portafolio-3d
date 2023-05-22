@@ -2,8 +2,8 @@ import { Text } from "@react-three/drei";
 import { useControls } from "leva";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { dateActions } from "@/store";
+import { RootState } from "../../../store";
+import { dateActions } from "../../../store";
 
 function getDaysInMonth(month: number, year: number) {
   return new Date(year, month, 0).getDate();

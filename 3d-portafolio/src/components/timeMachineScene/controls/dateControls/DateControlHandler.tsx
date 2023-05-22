@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import MonthControl from "./subset/DayControl";
 import UniversalDateControl from "./subset/UniversalDateControl";
-import { RootState, dateActions } from "@/store";
+import { RootState, dateActions } from "../../../../store";
 import * as THREE from "three";
 import { useSelector } from "react-redux";
 import DayControl from "./subset/DayControl";

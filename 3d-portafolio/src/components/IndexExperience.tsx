@@ -1,56 +1,77 @@
-import { Canvas } from "@react-three/fiber";
-import TimeMachineExperience from "./TimeMachineExperience";
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { Loader } from "@react-three/drei";
-import BedroomExperience from "./BedroomExperience";
-import { WebGL1Renderer } from "three";
-// import {  } from "three";
+import { ReactNode, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three'
+import { Canvas, useThree } from '@react-three/fiber'
+import { Loader, Preload } from '@react-three/drei'
+import { useSelector } from 'react-redux'
+import TimeMachineExperience from './TimeMachineExperience'
+import BedroomExperience from './BedroomExperience'
+import IntroScreen from './shared/html/IntroScreen'
+import { RootState } from '../store'
+import { scenes } from '../store/global/globalConfigSlice'
 
-
-
-// const CustomWebGLRenderer = () => {
-//   // @ts-ignore
-//   const renderer = useMemo(() => new WebGLRenderer({ gammaOutput: true });
-//   return <primitive object={renderer} />;
-// };
-
-const renderer = (canvas: any) => {
-  const render = new WebGL1Renderer({ canvas });
-  render.
-
+// Hook to handle window resize
+function useWindowSize() {
+  const [sizes, setSizes] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSizes([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return sizes;
 }
 
 const IndexExperience = () => {
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
+  const [widthR, heightR] = useWindowSize();
+  const [isStarted, setIsStarted] = useState(false)
+  const scene = useSelector<RootState>( state => state.globalConfig.scene ) as scenes;
+  // const [width, setWidth] = useState('')
+  // const [height, setHeight] = useState('')
 
-  useEffect(() => {
-    setWidth(`${window.innerWidth}px`);
-    setHeight(`${window.innerHeight}px`);
-  }, []);
+  // useEffect(() => {
+  //   setWidth(`${window.innerWidth}px`)
+  //   setHeight(`${window.innerHeight}px`)
+  // }, [])
+  
+  let content: ReactNode;
+
+  if( scene !== scenes.TRANSITION ) {
+    content = <Canvas
+    dpr={[1, 2]}
+    gl={{
+      antialias: true,
+      toneMapping: ACESFilmicToneMapping,
+      outputEncoding: sRGBEncoding,
+      // toneMappingExposure: 1.75
+    }}
+    camera={{
+      fov: 35,
+      near: 0.1,
+      far: 2000,
+      position: [-4.8, -0.2, 5.2],
+    }}
+    style={{ width: widthR, height: heightR }}
+    shadows
+  >
+    {scene === scenes.TIMEMACHINE && <TimeMachineExperience />}
+    {scene === scenes.BEDROOM && <BedroomExperience />}
+    <Preload all  />
+  </Canvas>
+  } else if ( scene === scenes.TRANSITION ) {
+    content = null;
+  }
 
   return (
     <>
-      <Suspense fallback={ null }>
-        <Canvas
-          dpr={[1, 2]}
-          gl={canvas => new WebGL1Renderer({ canvas })}
-          camera={{
-            fov: 35,
-            near: 0.1,
-            far: 2000,
-            position: [-4.8, -0.2, 5.2],
-          }}
-          
-          style={{ width: width, height: height }}
-        >
-          {/* <TimeMachineExperience /> */}
-          <BedroomExperience />
-        </Canvas>
+      <Suspense fallback={null}>
+        {!isStarted && <IntroScreen onStart={setIsStarted} />}
+        {isStarted && content}
       </Suspense>
       <Loader />
     </>
-  );
-};
+  )
+}
 
-export default IndexExperience;
+export default IndexExperience

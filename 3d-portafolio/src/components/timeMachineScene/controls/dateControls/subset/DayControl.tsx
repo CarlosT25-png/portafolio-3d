@@ -2,7 +2,7 @@ import { useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useSpring, a } from "@react-spring/three";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { RootState } from "../../../../../store";
 import * as THREE from 'three' 
 
 type MeshProps = JSX.IntrinsicElements["mesh"];

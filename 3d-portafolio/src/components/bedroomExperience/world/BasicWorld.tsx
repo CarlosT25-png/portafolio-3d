@@ -1,20 +1,32 @@
 import { Environment, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
+import Poster from "./scene/Poster";
+import Lights from "./scene/Lights";
+import PlayRecord from "./scene/PlayRecord";
+import Structure from "./Structure";
+
+interface BedroomInterface {
+  nodes: {
+    scene001: THREE.Group;
+    library: THREE.Mesh;
+    monitor001: THREE.Group;
+    periferics: THREE.Group
+    lightOn: {
+      geometry: THREE.BufferGeometry;
+      position: THREE.Vector3;
+    };
+  };
+}
 
 const BasicWorld = () => {
   const { gl } = useThree();
-  const model = useGLTF("/models/bedroomScene/bedroom-draco.glb");
-
-  console.log(model.scene)
-  console.log(model.nodes)
-
 
   return (
     <>
-      <Environment preset="city" />
-      <group rotation-y={-3.25}>
-        <primitive object={model.scene} />
-      </group>
+      <Lights />
+      <Structure />
+      <Poster />
+      <PlayRecord />
     </>
   );
 };
