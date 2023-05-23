@@ -1,17 +1,38 @@
+import { useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
+import { useDispatch } from 'react-redux'
+import { globalConfigActions } from '../../../store';
+import { scenes } from '../../../store/global/globalConfigSlice';
 
 const TimeTravelVideoPlayer = () => {
+  const dispacth = useDispatch();
+  const videoRef = useRef<ReactPlayer>(null!)
+
+  const beginningHandler = () => {
+    const videoTag = videoRef.current.getInternalPlayer() as HTMLVideoElement;
+    videoTag.style.objectFit = 'cover';
+  }
+
+  const endHandler = () => {
+    setTimeout(() => {
+      dispacth(globalConfigActions.setScene(scenes.BEDROOM))
+    }, 800)
+  }
+
   return (
-    <div style={{ width: '100vw', height: '100vh'}}>
-      <ReactPlayer volume={1} onEnded={() => console.log('finish')} url={'./videos/time-travel.mp4'} width={'100%'} height={'100%'} config={{
-        file: {
-          attributes: {
-            autoPlay: true
-          },
-        }
-      }} />
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <ReactPlayer
+        ref={videoRef}
+        volume={1}
+        onEnded={endHandler}
+        url={'./videos/time-travel.mp4'}
+        width={'100%'}
+        height={'100%'}
+        playing
+        onStart={beginningHandler}
+      />
     </div>
-  );
+  )
 }
 
-export default TimeTravelVideoPlayer;
+export default TimeTravelVideoPlayer

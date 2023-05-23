@@ -1,28 +1,27 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { Center, OrbitControls } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { Perf } from "r3f-perf";
-import BadgeText from "./timeMachineScene/BadgeText";
-import PlaceDisplay from "./timeMachineScene/displays/PlaceDisplay";
-import TargetDateDisplay from "./timeMachineScene/displays/TargetDateDisplay";
-import CurrentDateDisplay from "./timeMachineScene/displays/CurrentDateDisplay";
-import DateControlHandler from "./timeMachineScene/controls/dateControls/DateControlHandler";
-import TextMachine from "./timeMachineScene/displays/TextMachine";
-import BasicWorld from "./timeMachineScene/world/BasicWorld";
-import Garage from "./timeMachineScene/world/garage/Garage";
-import Boxes from "./timeMachineScene/world/garage/Boxes";
-import TextSign from "./timeMachineScene/world/garage/TextSign";
-import { gsap } from "gsap";
-import { useControls } from "leva";
-import Shifter from "./timeMachineScene/controls/shifter/Shifter";
-import SoundEffects from "./timeMachineScene/world/SoundEffects";
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Center, OrbitControls } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
+import { Perf } from 'r3f-perf'
+import BadgeText from './timeMachineScene/BadgeText'
+import PlaceDisplay from './timeMachineScene/displays/PlaceDisplay'
+import TargetDateDisplay from './timeMachineScene/displays/TargetDateDisplay'
+import CurrentDateDisplay from './timeMachineScene/displays/CurrentDateDisplay'
+import DateControlHandler from './timeMachineScene/controls/dateControls/DateControlHandler'
+import TextMachine from './timeMachineScene/displays/TextMachine'
+import BasicWorld from './timeMachineScene/world/BasicWorld'
+import Garage from './timeMachineScene/world/garage/Garage'
+import Boxes from './timeMachineScene/world/garage/Boxes'
+import TextSign from './timeMachineScene/world/garage/TextSign'
+import { gsap } from 'gsap'
+import { useControls } from 'leva'
+import Shifter from './timeMachineScene/controls/shifter/Shifter'
+import SoundEffects from './timeMachineScene/world/SoundEffects'
 
 const TimeMachineExperience = () => {
-  const { camera } = useThree();
+  const [moveToTheNextScene, setMoveToTheNextScene] = useState(false)
+  const { camera } = useThree()
 
-  const cameraRef = useRef(camera);
-
-  const machineSound = new Audio("/sounds/timeMachineScene/machine.mp3");
+  const cameraRef = useRef(camera)
 
   // Debug
 
@@ -47,9 +46,9 @@ const TimeMachineExperience = () => {
 
   useLayoutEffect(() => {
     // Setting camer position
-    cameraRef.current.rotation.set(-0.31, -0.64, -0.19);
-    cameraRef.current.position.set(-4.24, 0.26, 4.76);
-  }, []);
+    cameraRef.current.rotation.set(-0.31, -0.64, -0.19)
+    cameraRef.current.position.set(-4.24, 0.26, 4.76)
+  }, [])
 
   gsap.to(cameraRef.current.rotation, {
     x: -0.743,
@@ -57,14 +56,14 @@ const TimeMachineExperience = () => {
     z: -0.433,
     duration: 4,
     delay: 3.5,
-    ease: "easeIn",
-  });
+    ease: 'easeIn',
+  })
 
   return (
     <>
-      <Perf position="top-left" />
+      <Perf position='top-left' />
 
-      <color args={["#241a1a"]} attach="background" />
+      <color args={['#241a1a']} attach='background' />
 
       <OrbitControls makeDefault enabled={false} />
 
@@ -88,7 +87,7 @@ const TimeMachineExperience = () => {
           <DateControlHandler />
 
           {/* Shifter */}
-          <Shifter />
+          <Shifter moveToNextScene={setMoveToTheNextScene} />
         </group>
 
         {/* Environment */}
@@ -97,10 +96,14 @@ const TimeMachineExperience = () => {
         <TextSign />
 
         {/* Sounds */}
-        <SoundEffects fixedSoundUrl="/sounds/timeMachineScene/machine.mp3" randomSoundUrl="/sounds/timeMachineScene/electric.mp3" />
+        <SoundEffects
+            fixedSoundUrl='/sounds/timeMachineScene/machine.mp3'
+            randomSoundUrl='/sounds/timeMachineScene/electric.mp3'
+            destroy={moveToTheNextScene}
+          />
       </Center>
     </>
-  );
-};
+  )
+}
 
-export default TimeMachineExperience;
+export default TimeMachineExperience

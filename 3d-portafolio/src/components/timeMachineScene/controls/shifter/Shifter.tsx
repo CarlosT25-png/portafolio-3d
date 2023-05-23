@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import * as THREE from 'three'
@@ -9,7 +9,11 @@ import { useDispatch } from "react-redux";
 import { globalConfigActions } from "../../../../store";
 import { scenes } from "../../../../store/global/globalConfigSlice";
 
-const Shifter = () => {
+interface Props {
+  moveToNextScene: Dispatch<SetStateAction<boolean>>
+}
+
+const Shifter = ( { moveToNextScene }: Props ) => {
 
   // Model
 
@@ -54,7 +58,10 @@ const Shifter = () => {
       if(isDragging === false) {
         // Check if the lever has reached the bottom
         if(internalPos.x === -0.39 && internalPos.y === -0.275 && internalPos.z === 0.5){
-          disptach(globalConfigActions.setScene(scenes.TRANSITION))
+          moveToNextScene(true)
+          setTimeout(() => {
+            disptach(globalConfigActions.setScene(scenes.TRANSITION))
+          }, 2500)
         }
       }
     }
