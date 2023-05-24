@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Center, OrbitControls } from '@react-three/drei'
+import { Center, Html, OrbitControls } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Perf } from 'r3f-perf'
+import { useSelector } from 'react-redux'
 import BadgeText from './timeMachineScene/BadgeText'
 import PlaceDisplay from './timeMachineScene/displays/PlaceDisplay'
 import TargetDateDisplay from './timeMachineScene/displays/TargetDateDisplay'
@@ -16,8 +17,10 @@ import { gsap } from 'gsap'
 import { useControls } from 'leva'
 import Shifter from './timeMachineScene/controls/shifter/Shifter'
 import SoundEffects from './timeMachineScene/world/SoundEffects'
+import { RootState } from '../store'
 
 const TimeMachineExperience = () => {
+  const dialogIsCompleteTimeMachine = useSelector<RootState>((state) => state.globalConfig.dialogIsCompleteTimeMachine) as boolean
   const [moveToTheNextScene, setMoveToTheNextScene] = useState(false)
   const { camera } = useThree()
 
@@ -50,14 +53,18 @@ const TimeMachineExperience = () => {
     cameraRef.current.position.set(-4.24, 0.26, 4.76)
   }, [])
 
-  gsap.to(cameraRef.current.rotation, {
-    x: -0.743,
-    y: -0.528,
-    z: -0.433,
-    duration: 4,
-    delay: 3.5,
-    ease: 'easeIn',
-  })
+  useEffect(() => {
+    if(dialogIsCompleteTimeMachine) {
+      gsap.to(cameraRef.current.rotation, {
+        x: -0.743,
+        y: -0.528,
+        z: -0.433,
+        duration: 4,
+        delay: 2.5,
+        ease: 'easeIn',
+      })
+    }
+  }, [dialogIsCompleteTimeMachine])
 
   return (
     <>
@@ -97,10 +104,10 @@ const TimeMachineExperience = () => {
 
         {/* Sounds */}
         <SoundEffects
-            fixedSoundUrl='/sounds/timeMachineScene/machine.mp3'
-            randomSoundUrl='/sounds/timeMachineScene/electric.mp3'
-            destroy={moveToTheNextScene}
-          />
+          fixedSoundUrl='/sounds/timeMachineScene/machine.mp3'
+          randomSoundUrl='/sounds/timeMachineScene/electric.mp3'
+          destroy={moveToTheNextScene}
+        />
       </Center>
     </>
   )

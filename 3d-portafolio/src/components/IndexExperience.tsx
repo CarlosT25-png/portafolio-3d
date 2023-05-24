@@ -9,7 +9,7 @@ import IntroScreen from './shared/html/IntroScreen'
 import { RootState } from '../store'
 import { scenes } from '../store/global/globalConfigSlice'
 import TimeTravelVideoPlayer from './shared/transitions/TimeTravelVideoPlayer'
-import Messages from './shared/messageDialogs/Messages'
+import TimeMachineDialogs from './shared/messageDialogs/TimeMachineDialogs'
 
 // Hook to handle window resize
 function useWindowSize() {
@@ -28,7 +28,9 @@ function useWindowSize() {
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
   const [isStarted, setIsStarted] = useState(false)
-  const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
+  const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes;
+  const isReadyToPlayDialogTimeMachine = useSelector<RootState>((state) => state.globalConfig.isReadyToPlayDialogTimeMachine) as boolean
+  const dialogIsCompleteTimeMachine = useSelector<RootState>((state) => state.globalConfig.dialogIsCompleteTimeMachine) as boolean
   // const [width, setWidth] = useState('')
   // const [height, setHeight] = useState('')
 
@@ -67,8 +69,8 @@ const IndexExperience = () => {
           {scene === scenes.BEDROOM && <BedroomExperience />}
           <Preload all />
         </Canvas>
-        {scene === scenes.TIMEMACHINE && (
-          <Messages />
+        {scene === scenes.TIMEMACHINE && isReadyToPlayDialogTimeMachine && !dialogIsCompleteTimeMachine &&  (
+          <TimeMachineDialogs />
         )}
       </>
     )

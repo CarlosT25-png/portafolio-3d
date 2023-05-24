@@ -6,15 +6,26 @@ import TypingEffectText from './TypingEffectText'
 
 interface Props {
   title?: string
-  message: string
+  message: string,
+  onClick?: Function
 }
 
-const MessageDialog = ({ title, message }: Props) => {
+const MessageDialog = ({ title, message, onClick }: Props) => {
   const [titleIsDone, setTitleIsDone] = useState(title ? false : true)
   const [messageIsDone, setMessageIsDone] = useState(false)
+  const [ messageDialogIsDone, setMessageDialogIsDone ] = useState(false)
+
+  const clickHandler = () => {
+    if(onClick && messageDialogIsDone) onClick();
+  }
+
+  // Animation
+
+  
+
   return (
     <>
-      <div className={styles['message-container']}>
+      <div className={styles['message-container']} onClick={clickHandler}>
         <div className={styles['main-container']}>
           {title && (
             <h2>
@@ -39,7 +50,7 @@ const MessageDialog = ({ title, message }: Props) => {
               <TypingEffectText
                 messageText='click to continue...'
                 speedEffect={40}
-                onComplete={() => {}}
+                onComplete={() => setMessageDialogIsDone(true)}
               />
             </a>
           )}

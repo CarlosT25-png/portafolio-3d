@@ -1,6 +1,8 @@
 import { Clone, Environment, useGLTF, useTexture } from "@react-three/drei";
 import { useRef } from "react";
 import Garage from "./garage/Garage";
+import { useDispatch } from "react-redux";
+import { globalConfigActions } from "../../../store";
 
 interface timeMachineInterface {
   nodes: {
@@ -19,7 +21,7 @@ interface timeMachineInterface {
 }
 
 const BasicWorld = () => {
-
+  const dispatch = useDispatch();
   const ref = useRef<THREE.Group>(null);
   const { nodes } = useGLTF(
     "/models/timeMachineScene/timeMachine.glb"
@@ -28,12 +30,16 @@ const BasicWorld = () => {
   const bakedTexture = useTexture("/textures/timeMachineScene/baked.jpg");
   bakedTexture.flipY = false;
 
+  const afterRenderHandler = () => {
+    dispatch(globalConfigActions.setIsReadyToPlayDialogTimeMachine(true))
+  }
+
   return (
     <>
       <group ref={ref} rotation-y={-2.24}>
           {/* Base Scene */}
           <group castShadow>
-            <mesh geometry={nodes.baked.geometry} castShadow>
+            <mesh geometry={nodes.baked.geometry} castShadow onAfterRender={afterRenderHandler}>
               <meshBasicMaterial map={bakedTexture} />
             </mesh>
 
