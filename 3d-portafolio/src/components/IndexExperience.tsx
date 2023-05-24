@@ -10,6 +10,7 @@ import { RootState } from '../store'
 import { scenes } from '../store/global/globalConfigSlice'
 import TimeTravelVideoPlayer from './shared/transitions/TimeTravelVideoPlayer'
 import TimeMachineDialogs from './shared/messageDialogs/TimeMachineDialogs'
+import { unmountOverlay } from './shared/html/FadeInOverlay'
 
 // Hook to handle window resize
 function useWindowSize() {

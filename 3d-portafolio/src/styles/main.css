@@ -22,6 +22,7 @@ body {
   --def: #96B7C4; 	
 	--inv: #fff;
   font-size: 62.5%;
+  background-color: black;
 }
 
 #root {

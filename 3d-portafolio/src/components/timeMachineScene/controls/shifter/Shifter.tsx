@@ -8,6 +8,8 @@ import { useGesture } from "@use-gesture/react";
 import { useDispatch } from "react-redux";
 import { globalConfigActions } from "../../../../store";
 import { scenes } from "../../../../store/global/globalConfigSlice";
+import { createPortal } from "react-dom";
+import { mountOverlay } from "../../../shared/html/FadeInOverlay";
 
 interface Props {
   moveToNextScene: Dispatch<SetStateAction<boolean>>
@@ -58,7 +60,7 @@ const Shifter = ( { moveToNextScene }: Props ) => {
       if(isDragging === false) {
         // Check if the lever has reached the bottom
         if(internalPos.x === -0.39 && internalPos.y === -0.275 && internalPos.z === 0.5){
-          moveToNextScene(true)
+          mountOverlay(2);
           setTimeout(() => {
             disptach(globalConfigActions.setScene(scenes.TRANSITION))
           }, 2500)
