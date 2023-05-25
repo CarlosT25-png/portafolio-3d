@@ -17,6 +17,7 @@ const Shifter = ( ) => {
 
   const model = useGLTF('/models/timeMachineScene/shifter.glb');
   const shifterRef = useRef<THREE.Group>(null)
+  const [ hovered, setHovered ] = useState(false);
 
   // Animation
 
@@ -66,10 +67,14 @@ const Shifter = ( ) => {
     }
   }, [isDragging])
 
+  useEffect(() => {
+    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+  }, [hovered])
+
   return (
     <group position={[0.3, -0.8, 0]}>
       {/* @ts-ignore */}
-      <a.group ref={shifterRef}  rotation-y={-2.24} {...bind()} {...spring} >
+      <a.group ref={shifterRef}  rotation-y={-2.24} {...bind()} {...spring}  onPointerEnter={() => setHovered(true)} onPointerLeave={ () => setHovered(false)} >
       <primitive object={model.scene} />
     </a.group>
     </group>

@@ -7,17 +7,19 @@ const Dog = ({ showAnimation }: { showAnimation: boolean}  ) => {
   const imgRef = useRef<HTMLImageElement>(null!)
   
   if(showAnimation) {
-    gsap.to(imgRef.current, {
-      opacity: 1,
-      duration: .8,
-    })
-    gsap.set(imgRef.current, { y: '2rem'})
-    gsap.to(imgRef.current, {
-      y: '-2rem',
-      yoyo: true,
-      repeat: 2,
-      duration: 1
-    })
+    if(imgRef.current) {
+      gsap.to(imgRef.current, {
+        opacity: 1,
+        duration: .8,
+      })
+      gsap.set(imgRef.current, { y: '2rem'})
+      gsap.to(imgRef.current, {
+        y: '-2rem',
+        yoyo: true,
+        repeat: 2,
+        duration: 1
+      })
+    }
   }
 
   return (

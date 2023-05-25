@@ -47,8 +47,6 @@ const SoundEffects: React.FC<{ fixedSoundUrl: string, randomSoundUrl: string }> 
 
   useEffect(() => { // In case that scene has changed
     if(!playSoundTimeMachine) {
-      console.dir(fixedSound)
-      console.dir(rndmSound)
       gsap.to(fixedSound, {
         volume: 0,
         duration: 2.5,
