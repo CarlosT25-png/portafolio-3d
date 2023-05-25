@@ -1,5 +1,4 @@
 import { Environment, useGLTF } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import Poster from "./scene/Poster";
 import Lights from "./scene/Lights";
 import PlayRecord from "./scene/PlayRecord";
@@ -19,7 +18,6 @@ interface BedroomInterface {
 }
 
 const BasicWorld = () => {
-  const { gl } = useThree();
 
   return (
     <>

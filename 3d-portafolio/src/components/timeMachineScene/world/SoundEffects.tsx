@@ -36,7 +36,6 @@ const SoundEffects: React.FC<{ fixedSoundUrl: string, randomSoundUrl: string }> 
       const audio = new Audio(randomSoundUrl);
       audio.play();
       audio.volume = Math.random() * 0.04 + 0.01;
-      console.log(audio)
       setRndmSound(audio)
     }, (Math.floor(Math.random() * 16) + 10) * 1000); // Random interval between 10 and 25 seconds
 

@@ -2,6 +2,7 @@ import { Center, OrbitControls } from "@react-three/drei";
 import BasicWorld from "./bedroomExperience/world/BasicWorld";
 import { Perf } from "r3f-perf";
 import Effect from "./bedroomExperience/utils/Effect";
+import CameraAnimation from "./bedroomExperience/utils/CameraAnimation";
 
 const BedroomExperience = () => {
   return (
@@ -16,7 +17,8 @@ const BedroomExperience = () => {
         <BasicWorld />
       </Center>
 
-      <Effect />
+      {/* <Effect /> */}
+      <CameraAnimation />
     </>
   );
 };

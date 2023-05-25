@@ -5,6 +5,8 @@ import { GlitchMode } from 'postprocessing'
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
+import { useDispatch } from 'react-redux'
+import { animationsBedroomActions } from '../../../../store'
 
 interface BedroomInterface {
   nodes: {
@@ -25,8 +27,8 @@ const Screen = () => {
   const [ hovered, setHovered ] = useState(false);
   const pcRef = useRef<THREE.Group>(null!)
   const screenRef = useRef<THREE.Mesh>(null!)
-  const sceneRef = useRef<THREE.Scene>(null!)
   const { camera, size } = useThree()
+  const dispatch = useDispatch()
 
   const model = useGLTF(
     '/models/bedroomScene/bedroom-draco.glb'
@@ -41,8 +43,6 @@ const Screen = () => {
     setShowIframe(true)
     // Get the position of the mesh in 3D space
     const { x, y, z } = screenRef.current.position
-
-    console.log(x, y, z)
 
     // Project the position to pixel coordinates
     camera.updateMatrix()
@@ -62,6 +62,8 @@ const Screen = () => {
 
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
+    dispatch(animationsBedroomActions.setIsFocusAnObject(true))
+
     camera.lookAt(model.nodes.monitor001.position)
     gsap.to(camera.position, {
       x: 0.59,
@@ -83,8 +85,7 @@ const Screen = () => {
   }
 
   const mouseLeaveAnimation = () => {
-    // camera.position.set( -2.43, 0.72, 2.55 ) //...positionObj
-    // camera.rotation.set( -0.32, -0.74, -0.22 ) //...rotationObj
+    dispatch(animationsBedroomActions.setIsFocusAnObject(false))
     setShowIframe(false)
     gsap.to(camera.position, {
       x: -2.43,
