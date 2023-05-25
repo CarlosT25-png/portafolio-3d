@@ -40,7 +40,7 @@ const MessageDialog = ({ title, message, onClick, showAnimation }: Props) => {
       <div
         style={{
           width: `${window.innerWidth}px`,
-          height: `${window.innerHeight}px;`,
+          height: `${window.innerHeight}px`,
           overflow: 'hidden',
         }}
       >

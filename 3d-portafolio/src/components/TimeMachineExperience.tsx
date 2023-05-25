@@ -21,7 +21,6 @@ import { RootState } from '../store'
 
 const TimeMachineExperience = () => {
   const dialogIsCompleteTimeMachine = useSelector<RootState>((state) => state.globalConfig.dialogIsCompleteTimeMachine) as boolean
-  const [moveToTheNextScene, setMoveToTheNextScene] = useState(false)
   const { camera } = useThree()
 
   const cameraRef = useRef(camera)
@@ -94,7 +93,7 @@ const TimeMachineExperience = () => {
           <DateControlHandler />
 
           {/* Shifter */}
-          <Shifter moveToNextScene={setMoveToTheNextScene} />
+          <Shifter />
         </group>
 
         {/* Environment */}
@@ -106,7 +105,6 @@ const TimeMachineExperience = () => {
         <SoundEffects
           fixedSoundUrl='/sounds/timeMachineScene/machine.mp3'
           randomSoundUrl='/sounds/timeMachineScene/electric.mp3'
-          destroy={moveToTheNextScene}
         />
       </Center>
     </>

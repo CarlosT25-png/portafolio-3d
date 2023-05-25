@@ -10,14 +10,21 @@ interface initialConfig {
   playAudio: boolean
   scene: scenes
   isReadyToPlayDialogTimeMachine: boolean
-  dialogIsCompleteTimeMachine: boolean
+  dialogIsCompleteTimeMachine: boolean,
+
+
+  // Sounds
+  playSoundAllWebsite: boolean,
+  playSoundTimeMachine: boolean
 }
 
 const initialGlobalConfigState: initialConfig = {
   playAudio: true,
   scene: scenes.TIMEMACHINE,
   isReadyToPlayDialogTimeMachine: false,
-  dialogIsCompleteTimeMachine: false
+  dialogIsCompleteTimeMachine: false,
+  playSoundAllWebsite: true,
+  playSoundTimeMachine: true
 }
 
 const globalConfig = createSlice({
@@ -35,6 +42,12 @@ const globalConfig = createSlice({
     },
     setDialogIsCompleteTimeMachine(state, action) {
       state.dialogIsCompleteTimeMachine = action.payload
+    },
+    setPlaySoundAllWebsite ( state, action ) {
+      state.playSoundAllWebsite= action.payload
+    },
+    setPlaySoundTimeMachine ( state, action ) {
+      state.playSoundTimeMachine= action.payload
     }
   },
 })
