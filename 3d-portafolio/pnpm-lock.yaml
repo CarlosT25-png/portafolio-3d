@@ -20,6 +20,7 @@ specifiers:
   react-dom: ^18.2.0
   react-player: ^2.12.0
   react-redux: ^8.0.5
+  react-spring: ^9.7.1
   three: ^0.152.2
   typescript: ^5.0.4
   vite: ^4.3.5
@@ -43,6 +44,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-player: 2.12.0_react@18.2.0
   react-redux: 8.0.5_rzyliz2j3ixzcs72aaxsyibazq
+  react-spring: 9.7.1_m5w7gp53gjh66wekkqzqhddyiy
   three: 0.152.2
 
 devDependencies:
@@ -836,6 +838,33 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-spring/konva/9.7.2_react@18.2.0:
+    resolution: {integrity: sha512-xMA0XkIyv02euso8BGlLA4iXVJ76p6WCjABMTjdvcp//KvIub596vLwoLzmqHYjqRhH7BP4UQKxzhHvM7AylQA==}
+    peerDependencies:
+      konva: '>=2.6'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-konva: ^16.8.0 || ^16.8.7-0 || ^16.9.0-0 || ^16.10.1-0 || ^16.12.0-0 || ^16.13.0-0 || ^17.0.0-0 || ^17.0.1-0 || ^17.0.2-0 || ^18.0.0-0
+    dependencies:
+      '@react-spring/animated': 9.7.2_react@18.2.0
+      '@react-spring/core': 9.7.2_react@18.2.0
+      '@react-spring/shared': 9.7.2_react@18.2.0
+      '@react-spring/types': 9.7.2
+      react: 18.2.0
+    dev: false
+
+  /@react-spring/native/9.7.2_react@18.2.0:
+    resolution: {integrity: sha512-Ltq/F+4jY7aqHW1/f1xUb+e3XGbVxnllXfDYU+3nXi4sa7O+du755hpNbCHJ5ZgtkQYFKtQ7I+InTY+CDXPYfw==}
+    peerDependencies:
+      react: ^16.8.0  || >=17.0.0 || >=18.0.0
+      react-native: '>=0.58'
+    dependencies:
+      '@react-spring/animated': 9.7.2_react@18.2.0
+      '@react-spring/core': 9.7.2_react@18.2.0
+      '@react-spring/shared': 9.7.2_react@18.2.0
+      '@react-spring/types': 9.7.2
+      react: 18.2.0
+    dev: false
+
   /@react-spring/rafz/9.6.1:
     resolution: {integrity: sha512-v6qbgNRpztJFFfSE3e2W1Uz+g8KnIBs6SmzCzcVVF61GdGfGOuBrbjIcp+nUz301awVmREKi4eMQb2Ab2gGgyQ==}
     dev: false
@@ -902,6 +931,36 @@ packages:
 
   /@react-spring/types/9.7.2:
     resolution: {integrity: sha512-GEflx2Ex/TKVMHq5g5MxQDNNPNhqg+4Db9m7+vGTm8ttZiyga7YQUF24shgRNebKIjahqCuei16SZga8h1pe4g==}
+    dev: false
+
+  /@react-spring/web/9.7.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-7qNc7/5KShu2D05x7o2Ols2nUE7mCKfKLaY2Ix70xPMfTle1sZisoQMBFgV9w/fSLZlHZHV9P0uWJqEXQnbV4Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/animated': 9.7.2_react@18.2.0
+      '@react-spring/core': 9.7.2_react@18.2.0
+      '@react-spring/shared': 9.7.2_react@18.2.0
+      '@react-spring/types': 9.7.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@react-spring/zdog/9.7.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6z2qqhmbpoZrw1oThyn4zfejtLkuadsaZFVMFf/5l5cHTEdRC8HZsBRLo+Wiomkprg/F1hyhcXI5X1lJ+T/zdQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-zdog: '>=1.0'
+      zdog: '>=1.0'
+    dependencies:
+      '@react-spring/animated': 9.7.2_react@18.2.0
+      '@react-spring/core': 9.7.2_react@18.2.0
+      '@react-spring/shared': 9.7.2_react@18.2.0
+      '@react-spring/types': 9.7.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@react-three/drei/9.68.3_2tveqr77biwfqrfukusee5rszu:
@@ -1758,6 +1817,30 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-spring/9.7.1_m5w7gp53gjh66wekkqzqhddyiy:
+    resolution: {integrity: sha512-o2+r2DNQDVEuefiz33ZF76DPd/gLq3kbdObJmllGF2IUfv2W6x+ZP0gR97QYCSR4QLbmOl1mPKUBbI+FJdys2Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/core': 9.7.2_react@18.2.0
+      '@react-spring/konva': 9.7.2_react@18.2.0
+      '@react-spring/native': 9.7.2_react@18.2.0
+      '@react-spring/three': 9.7.2_ttqqn6qwqy3fbu5kr3upuddewu
+      '@react-spring/web': 9.7.2_biqbaboplfbrettd7655fr4n2y
+      '@react-spring/zdog': 9.7.2_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - '@react-three/fiber'
+      - konva
+      - react-konva
+      - react-native
+      - react-zdog
+      - three
+      - zdog
+    dev: false
 
   /react-use-measure/2.1.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==}

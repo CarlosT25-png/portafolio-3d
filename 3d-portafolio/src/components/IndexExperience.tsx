@@ -27,10 +27,14 @@ function useWindowSize() {
 
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
-  const [isStarted, setIsStarted] = useState(false)
-  const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes;
-  const isReadyToPlayDialogTimeMachine = useSelector<RootState>((state) => state.globalConfig.isReadyToPlayDialogTimeMachine) as boolean
-  const dialogIsCompleteTimeMachine = useSelector<RootState>((state) => state.globalConfig.dialogIsCompleteTimeMachine) as boolean
+  const [isStarted, setIsStarted] = useState(true) // DEBUG
+  const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
+  const isReadyToPlayDialogTimeMachine = useSelector<RootState>(
+    (state) => state.globalConfig.isReadyToPlayDialogTimeMachine
+  ) as boolean
+  const dialogIsCompleteTimeMachine = useSelector<RootState>(
+    (state) => state.globalConfig.dialogIsCompleteTimeMachine
+  ) as boolean
   // const [width, setWidth] = useState('')
   // const [height, setHeight] = useState('')
 
@@ -61,17 +65,13 @@ const IndexExperience = () => {
           style={{ width: widthR, height: heightR }}
           shadows
         >
-          {scene === scenes.TIMEMACHINE && (
-            <>
-              <TimeMachineExperience />
-            </>
-          )}
+          {scene === scenes.TIMEMACHINE && <TimeMachineExperience />}
           {scene === scenes.BEDROOM && <BedroomExperience />}
           <Preload all />
         </Canvas>
-        {scene === scenes.TIMEMACHINE && isReadyToPlayDialogTimeMachine && !dialogIsCompleteTimeMachine &&  (
-          <TimeMachineDialogs />
-        )}
+        {scene === scenes.TIMEMACHINE &&
+          isReadyToPlayDialogTimeMachine &&
+          !dialogIsCompleteTimeMachine && <TimeMachineDialogs />}
       </>
     )
   } else if (scene === scenes.TRANSITION) {
