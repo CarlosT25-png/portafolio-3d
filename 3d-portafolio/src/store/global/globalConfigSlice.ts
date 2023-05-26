@@ -20,7 +20,7 @@ interface initialConfig {
 
 const initialGlobalConfigState: initialConfig = {
   playAudio: true,
-  scene: scenes.BEDROOM, //DEBUG
+  scene: scenes.TIMEMACHINE, //DEBUG
   isReadyToPlayDialogTimeMachine: false,
   dialogIsCompleteTimeMachine: false,
   playSoundAllWebsite: true,
