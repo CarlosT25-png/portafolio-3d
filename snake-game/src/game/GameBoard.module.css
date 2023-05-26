@@ -1,0 +1,15 @@
+.game-board {
+  border: 5px solid black;
+  display: grid;
+}
+
+.grid-item {
+  width: 20px;
+  height: 20px;
+  border: 1px solid blue;
+  background-color: transparent;
+}
+
+.active-grid-item {
+  background-color: var(--snake-color);
+}

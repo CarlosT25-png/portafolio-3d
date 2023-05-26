@@ -1,3 +1,6 @@
 .main-container {
-  background-color: #89af3f;
+  background-color: var(--game-board-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
