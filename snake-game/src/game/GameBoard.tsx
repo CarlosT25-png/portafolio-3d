@@ -27,6 +27,7 @@ const GameBoard = () => {
   const [delay, setDelay] = useState<number | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
+  const [firstGame, setFirstGame] = useState(true);
 
   useInterval(() => runGame(), delay);
 
@@ -38,7 +39,7 @@ const GameBoard = () => {
       if (ctx) {
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        ctx.fillStyle = "#a3d001";
+        ctx.fillStyle = "#820002";
         snake.forEach(([x, y]) => ctx.fillRect(x, y, 1, 1));
         ctx.drawImage(fruit, apple[0], apple[1], 1, 1);
       }
@@ -52,6 +53,7 @@ const GameBoard = () => {
     setDelay(timeDelay);
     setScore(0);
     setGameOver(false);
+    setFirstGame(false);
   }
 
   function checkCollision(head: number[]) {
@@ -118,7 +120,7 @@ const GameBoard = () => {
 
   useEffect(() => {
     const handleKeyDown = (ev: KeyboardEvent) => {
-      if (ev.code === "Space") {
+      if (ev.code === "Space") {  
         play();
       } else {
         changeDirection(ev);
@@ -144,20 +146,30 @@ const GameBoard = () => {
         alt="fruit"
         width="30"
       />
-      <canvas
-        className={styles["playArea"]}
-        ref={canvasRef}
-        width={`${canvasX}px`}
-        height={`${canvasY}px`}
-      />
-      {gameOver && <div className={styles["gameOver"]}>Game Over</div>}
-      {/* <button onClick={play} className={styles["playButton"]}>
-        Play
-      </button> */}
-      <div className={styles["scoreBox"]}>
-        <h2>Score: {score}</h2>
-        <h2>High Score: {localStorage.getItem("snakeScore")}</h2>
+      <div className={styles["playArea-Container"]}>
+        <canvas
+          className={styles["playArea"]}
+          ref={canvasRef}
+          width={`${canvasX}px`}
+          height={`${canvasY}px`}
+        />
+        <div className={styles["scoreBox"]}>
+          <h2>Score: {score}</h2>
+          <h2>High Score: {localStorage.getItem("snakeScore")}</h2>
+        </div>
       </div>
+      {gameOver && (
+        <div className={styles["gameOver"]}>
+          <h2>Game Over</h2>
+          <h4>Press 'Space' to restart the game</h4>
+        </div>
+      )}
+      {firstGame && (
+        <div className={styles["gameOver"]}>
+          <h2>The Snake Game</h2>
+          <h4>Press 'Space' to start the game</h4>
+        </div>
+      )}
     </div>
   );
 };
