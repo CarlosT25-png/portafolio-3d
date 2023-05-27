@@ -1,7 +1,7 @@
 import { db } from "../store/Firebase";
-import { ref, set } from "firebase/database";
+import { ref, set, get } from "firebase/database";
 
-const databaseRef = ref(db, '/scores')
+const scoresRef = ref(db, '/scores')
 
 // Interface
 
@@ -11,7 +11,7 @@ interface UserScore {
 }
 
 export const addNewScore = ( data: UserScore ) => {
-  set(databaseRef, data)
+  set(scoresRef, data)
   .then(() => {
     console.log("Data inserted successfully");
   })
@@ -19,3 +19,19 @@ export const addNewScore = ( data: UserScore ) => {
     console.error("Error inserting data:", error);
   })
 }
+
+export const getScores = () => {
+  get(scoresRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const scores: UserScore[] = Object.values(snapshot.val());
+        console.log("Scores:", scores);
+        // Do something with the scores
+      } else {
+        console.log("No scores found");
+      }
+    })
+    .catch((error) => {
+      console.error("Error retrieving scores:", error);
+    });
+};
