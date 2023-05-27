@@ -51,6 +51,11 @@
   white-space: nowrap;
 }
 
+.--column {
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
 .gameOver-dual--right {
   border: 2px solid white;
   padding: 1rem;
@@ -81,11 +86,12 @@
 .gameOver-dual--right ul {
   text-align: left;
   padding: 0 0 0 1rem;
-  margin: 1rem 0;
+  margin: 3rem 0;
+  list-style: none;
 }
 
 .gameOver-dual--right li {
-  font-size: 1.6rem
+  font-size: 2.5rem
 }
 
 .gameOver h2 {

@@ -208,13 +208,13 @@ const GameBoard = () => {
       </div>
       {/* When the user lose the game */}
       {!firstGame && gameOver && userName && (
-        <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]}`}>
+        <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]} ${styles["--column"]}`}>
           <div>
             <h2>The Snake Game</h2>
             <h4 className={styles["subtitle"]}>Press 'Space' to restart the game</h4>
           </div>
-          <div className={styles["gameOver-dual--right"]}>
-            <h4>Ranking</h4>
+          <div className={`${styles["gameOver-dual--right"]}`}>
+            <h4 className={styles["subtitle"]}>Ranking</h4>
             {userRanking && (
               <ul>
                 {userRanking.map((userScore, idx) => {
