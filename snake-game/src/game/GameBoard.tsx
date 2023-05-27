@@ -175,6 +175,21 @@ const GameBoard = () => {
     setUserName(name);
   };
 
+  // This is a fix for the focus while render in an ifram
+  useEffect(() => {
+    const firstClick = () => {
+      if (firstGame) {
+        document.dispatchEvent(new KeyboardEvent('keypress', {'key': ' '}));
+      } 
+    };
+
+    document.body.addEventListener("click", firstClick);
+
+    return () => {
+      document.body.removeEventListener("click", firstClick);
+    };
+  }, [])
+
   return (
     <div
       onKeyDown={(ev) => changeDirection(ev as unknown as KeyboardEvent)}
