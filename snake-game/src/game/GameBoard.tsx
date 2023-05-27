@@ -204,7 +204,7 @@ const GameBoard = () => {
         <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]}`}>
           <div>
             <h2>The Snake Game</h2>
-            <h4>Press 'Space' to restart the game</h4>
+            <h4 className={styles["subtitle"]}>Press 'Space' to restart the game</h4>
           </div>
           <div className={styles["gameOver-dual--right"]}>
             <h4>Ranking</h4>
@@ -228,10 +228,10 @@ const GameBoard = () => {
         <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]}`}>
           <div>
             <h2>The Snake Game</h2>
-            <h4>Press 'Space' to restart the game</h4>
+            <h4 className={styles["subtitle"]}>Press 'Space' to restart the game</h4>
           </div>
           <div className={styles["gameOver-dual--right"]}>
-            <h4>Your Name</h4>
+            <h4 className={styles["subtitle"]}>Your Name</h4>
             <form onSubmit={submitNameHandler}>
               <input name="name" placeholder="Name" required max={15} min={3} />
               <button>Save</button>
@@ -243,7 +243,7 @@ const GameBoard = () => {
       {firstGame && (
         <div className={styles["gameOver"]}>
           <h2>The Snake Game</h2>
-          <h4>Press 'Space' to start the game</h4>
+          <h4 className={styles["subtitle"]}>Click to start the game</h4>
         </div>
       )}
     </div>
