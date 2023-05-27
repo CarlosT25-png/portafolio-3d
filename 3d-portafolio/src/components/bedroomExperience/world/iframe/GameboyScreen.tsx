@@ -1,12 +1,10 @@
-import { Html, useGLTF } from '@react-three/drei'
+import { Html } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { Glitch, EffectComposer, Select, Selection } from '@react-three/postprocessing'
-import { GlitchMode } from 'postprocessing'
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
-import * as THREE from 'three'
-import { gsap } from 'gsap'
 import { useDispatch } from 'react-redux'
+import * as THREE from 'three'
 import { animationsBedroomActions } from '../../../../store'
+import { gsap } from 'gsap'
 
 interface BedroomInterface {
   nodes: {
@@ -21,45 +19,48 @@ interface BedroomInterface {
   }
 }
 
-const Screen = () => {
+const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
   const [showIframe, setShowIframe] = useState(false)
-  const [ hovered, setHovered ] = useState(false);
-  const pcRef = useRef<THREE.Group>(null!)
-  const screenRef = useRef<THREE.Mesh>(null!)
+  const [hovered, setHovered] = useState(false)
+  const gameboyRef = useRef<THREE.Mesh>(null!)
   const htmlRef = useRef<HTMLIFrameElement>(null)
   const { camera, size } = useThree()
   const dispatch = useDispatch()
-
-  const model = useGLTF(
-    '/models/bedroomScene/bedroom-draco.glb'
-  ) as unknown as BedroomInterface
-
-  useLayoutEffect(() => {
-    camera.position.set(-2.43, 0.72, 2.55)
-    camera.rotation.set(-0.32, -0.74, -0.22)
-  }, [])
 
   const showIframeHandler = () => {
     setShowIframe(true)
   }
 
+  useEffect(() => {
+    if (showIframe) {
+      setTimeout(() => {
+        if (htmlRef.current) {
+          htmlRef.current.click()
+        }
+      }, 500)
+    }
+  }, [showIframe])
+
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
     dispatch(animationsBedroomActions.setIsFocusAnObject(true))
 
-    camera.lookAt(model.nodes.monitor001.position)
+    if (gameboyRef.current) {
+      camera.lookAt(gameboyRef.current.position)
+    }
     gsap.to(camera.position, {
-      x: 0.59,
-      y: -0.24,
-      z: -0.4125,
+      x: -0.485,
+      y: -0.5,
+      z: -0.105,
       duration: 1.5,
       onComplete: () => showIframeHandler(),
     })
     gsap.to(camera.rotation, {
-      x: -1.13,
-      y: -1.51,
-      z: -1.13,
+      // -1.60,-0.01,-2.49
+      x: -1.6,
+      y: -0.01,
+      z: -2.49,
       duration: 1.5,
     })
 
@@ -92,7 +93,7 @@ const Screen = () => {
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       // Checking if the animation is not playing
-      if (camera.position.x !== 0.59 && camera.position.y !== -0.24) {
+      if (camera.position.x !== -0.485 && camera.position.y !== -0.5) {
         mouseEnterAnimation()
       }
     }
@@ -107,34 +108,35 @@ const Screen = () => {
   // Pointer handler
 
   useEffect(() => {
-    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
 
   return (
     <>
-      <group ref={pcRef} onClick={onMouseEnter} onPointerMissed={onMouseLeave} onPointerEnter={() => setHovered(true)} onPointerLeave={ () => setHovered(false)}>
-        <primitive object={model.nodes.monitor001} />
-      </group>
-      {/* This will act as the real screen */}
       <group>
+        {/* Whis will act as the device box */}
         <mesh
-          ref={screenRef}
-          rotation={[-1.51, -1.22, -1.51]}
-          position={[0.89, 0.46, 0.43]}
+          ref={gameboyRef}
+          rotation={[0, -0.94, 0]}
+          position={[-0.36, 0.05, 0.75]}
+          onClick={onMouseEnter}
+          onPointerMissed={onMouseLeave}
+          onPointerEnter={() => setHovered(true)}
+          onPointerLeave={() => setHovered(false)}
         >
-          <planeGeometry args={[0.118, 0.0915]} />
-          <meshBasicMaterial color={'#5c5c5c'} />
+          <boxGeometry args={[0.09, 0.02, 0.07]} />
+          <meshBasicMaterial opacity={0} transparent />
         </mesh>
         {showIframe && (
           <Html
             transform
-            distanceFactor={0.11}
-            rotation={[-1.56, -1.29, -1.56]}
-            position={[1.16, 0.44, 0.42]}
+            distanceFactor={0.025}
+            rotation={[-1.63, 0.02, -2.493]}
+            position={[-0.343, -0.02, 0.77]}
           >
             <iframe
-              src='https://carlostorres.dev'
-              style={{ width: '1000px', height: '750px', border: 'none', opacity: 0, backgroundColor: 'black' }}
+              src='https://snake-game-portafolio.vercel.app/'
+              style={{ width: '800px', height: '700px', border: 'none',opacity: 0 }}
               onLoad={() => { // To avoid white flashes while is loading
                 const element = htmlRef.current;
                 if (element && element.style) {
@@ -150,4 +152,4 @@ const Screen = () => {
   )
 }
 
-export default Screen
+export default GameboyScreen

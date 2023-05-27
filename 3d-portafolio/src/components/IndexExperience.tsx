@@ -27,7 +27,7 @@ function useWindowSize() {
 
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
-  const [isStarted, setIsStarted] = useState(false) // DEBUG
+  const [isStarted, setIsStarted] = useState(true) // DEBUG
   const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
   const isReadyToPlayDialogTimeMachine = useSelector<RootState>(
     (state) => state.globalConfig.isReadyToPlayDialogTimeMachine
@@ -54,6 +54,7 @@ const IndexExperience = () => {
             antialias: true,
             toneMapping: ACESFilmicToneMapping,
             outputEncoding: sRGBEncoding,
+            alpha: true
             // toneMappingExposure: 1.75
           }}
           camera={{

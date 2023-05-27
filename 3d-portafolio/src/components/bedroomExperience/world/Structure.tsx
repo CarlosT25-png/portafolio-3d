@@ -1,5 +1,6 @@
 import { useGLTF } from '@react-three/drei'
 import Screen from './iframe/Screen'
+import GameboyScreen from './iframe/GameboyScreen'
 
 interface BedroomInterface {
   nodes: {
@@ -27,6 +28,7 @@ const Structure = () => {
       <primitive object={model.nodes.library} />
       <primitive object={model.nodes.periferics} />
       <Screen />
+      <GameboyScreen />
     </group>
   )
 }
