@@ -43,6 +43,50 @@
   text-align: center;
 }
 
+.gameOver-dual {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  column-gap: 3rem;
+  white-space: nowrap;
+}
+
+.gameOver-dual--right {
+  border: 2px solid white;
+  padding: 1rem;
+}
+
+.gameOver-dual--right input {
+  font-family: 'VT323', monospace;
+  font-size: 2rem;
+}
+
+.gameOver-dual--right button {
+  font-family: 'VT323', monospace;
+  font-size: 2rem;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.gameOver-dual--right button:hover {
+  background-color: white;
+  color: black;
+}
+
+.gameOver-dual--right ul {
+  text-align: left;
+  padding: 0 0 0 1rem;
+  margin: 1rem 0;
+}
+
+.gameOver-dual--right li {
+  font-size: 1.6rem
+}
+
 .gameOver h2 {
   margin: 0;
 }

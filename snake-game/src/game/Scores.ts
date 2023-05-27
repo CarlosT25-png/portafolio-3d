@@ -1,37 +1,39 @@
 import { db } from "../store/Firebase";
-import { ref, set, get } from "firebase/database";
+import { ref, set, get, orderByChild, limitToLast, DataSnapshot, query } from "firebase/database";
+import { v4 } from 'uuid'
 
-const scoresRef = ref(db, '/scores')
+const scoresRef = ref(db, 'scores/')
 
 // Interface
 
-interface UserScore {
+export interface UserScore {
   name: string,
   score: number
 }
 
-export const addNewScore = ( data: UserScore ) => {
-  set(scoresRef, data)
-  .then(() => {
-    console.log("Data inserted successfully");
-  })
-  .catch((error) => {
-    console.error("Error inserting data:", error);
-  })
-}
-
-export const getScores = () => {
-  get(scoresRef)
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const scores: UserScore[] = Object.values(snapshot.val());
-        console.log("Scores:", scores);
-        // Do something with the scores
-      } else {
-        console.log("No scores found");
-      }
+export const addNewScore = (data: UserScore) => {
+  console.log(data)
+  set(ref(db, 'scores/' + v4()), data)
+    .then(() => {
+      console.log("Data inserted successfully");
     })
     .catch((error) => {
-      console.error("Error retrieving scores:", error);
+      console.error("Error inserting data:", error);
+    })
+}
+
+export const getHighestScores = async () => {
+  const q = query(ref(db, 'scores/'), orderByChild("score"), limitToLast(5))
+
+  try {
+    const snapshot: DataSnapshot = await get(q);
+    const scores: UserScore[] = [];
+    snapshot.forEach((childSnapshot) => {
+      scores.push(childSnapshot.val() as UserScore);
     });
+    return scores
+    // Do something with the highest scores
+  } catch (error) {
+    console.error("Error retrieving highest scores:", error);
+  }
 };

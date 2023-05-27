@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import styles from "./GameBoard.module.css";
 import AppleLogo from "/apple.png";
 import useInterval from "./useInterval";
+import { UserScore, addNewScore, getHighestScores } from "./Scores";
 
 // interface Props {
 //   height: number,
@@ -28,6 +29,8 @@ const GameBoard = () => {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [firstGame, setFirstGame] = useState(true);
+  const [userName, setUserName] = useState<string>();
+  const [userRanking, setUserRanking] = useState<UserScore[]>();
 
   useInterval(() => runGame(), delay);
 
@@ -46,7 +49,7 @@ const GameBoard = () => {
     }
   }, [snake, apple, gameOver]);
 
-  function play() {
+  const play = async () => {
     setSnake(initialSnake);
     setApple(initialApple);
     setDirection([1, 0]);
@@ -54,7 +57,11 @@ const GameBoard = () => {
     setScore(0);
     setGameOver(false);
     setFirstGame(false);
-  }
+
+    const rank = await getHighestScores();
+    rank?.reverse();
+    setUserRanking(rank);
+  };
 
   function checkCollision(head: number[]) {
     for (let i = 0; i < head.length; i++) {
@@ -78,10 +85,37 @@ const GameBoard = () => {
   }
 
   function handleSetScore() {
-    if (score > Number(localStorage.getItem("snakeScore"))) {
+    if (score > Number(localStorage.getItem("snakeScore")) && userName) {
       localStorage.setItem("snakeScore", JSON.stringify(score));
+      const data = {
+        name: userName,
+        score,
+      };
+      addNewScore(data);
+    } else if (firstGame && userName) {
+      localStorage.setItem("snakeScore", JSON.stringify(score));
+      const data = {
+        name: userName,
+        score,
+      };
+      addNewScore(data);
     }
   }
+
+  // Because it execute handleSetScore before adding a name
+  useEffect(() => {
+    handleSetScore();
+  }, [userName]);
+
+  useEffect(() => {
+    const getRank = async () => {
+      const rank = await getHighestScores();
+      rank?.reverse();
+      setUserRanking(rank);
+    };
+
+    getRank();
+  }, [gameOver]);
 
   function runGame() {
     const newSnake = [...snake];
@@ -120,7 +154,7 @@ const GameBoard = () => {
 
   useEffect(() => {
     const handleKeyDown = (ev: KeyboardEvent) => {
-      if (ev.code === "Space") {  
+      if (ev.code === "Space" && (ev.target as Element).nodeName !== "INPUT") {
         play();
       } else {
         changeDirection(ev);
@@ -133,6 +167,13 @@ const GameBoard = () => {
       document.body.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  const submitNameHandler = (ev: FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    const formData = new FormData(ev.currentTarget);
+    const name = formData.get("name") as string;
+    setUserName(name);
+  };
 
   return (
     <div
@@ -158,12 +199,47 @@ const GameBoard = () => {
           <h2>High Score: {localStorage.getItem("snakeScore")}</h2>
         </div>
       </div>
-      {gameOver && (
-        <div className={styles["gameOver"]}>
-          <h2>Game Over</h2>
-          <h4>Press 'Space' to restart the game</h4>
+      {/* When the user lose the game */}
+      {!firstGame && gameOver && userName && (
+        <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]}`}>
+          <div>
+            <h2>The Snake Game</h2>
+            <h4>Press 'Space' to restart the game</h4>
+          </div>
+          <div className={styles["gameOver-dual--right"]}>
+            <h4>Ranking</h4>
+            {userRanking && (
+              <ul>
+                {userRanking.map((userScore, idx) => {
+                  return (
+                    <li key={idx}>
+                      {idx + 1} - {userScore.name} {userScore.score} points
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            {!userRanking && <p>Not set.</p>}
+          </div>
         </div>
       )}
+      {/* Show a dialog score after the first lose */}
+      {!userName && gameOver && (
+        <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]}`}>
+          <div>
+            <h2>The Snake Game</h2>
+            <h4>Press 'Space' to restart the game</h4>
+          </div>
+          <div className={styles["gameOver-dual--right"]}>
+            <h4>Your Name</h4>
+            <form onSubmit={submitNameHandler}>
+              <input name="name" placeholder="Name" required max={15} min={3} />
+              <button>Save</button>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* Show a Intro screen in the first game */}
       {firstGame && (
         <div className={styles["gameOver"]}>
           <h2>The Snake Game</h2>
