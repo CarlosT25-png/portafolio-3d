@@ -2,8 +2,6 @@ import { db } from "../store/Firebase";
 import { ref, set, get, orderByChild, limitToLast, DataSnapshot, query } from "firebase/database";
 import { v4 } from 'uuid'
 
-const scoresRef = ref(db, 'scores/')
-
 // Interface
 
 export interface UserScore {
