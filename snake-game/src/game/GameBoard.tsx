@@ -176,19 +176,11 @@ const GameBoard = () => {
   };
 
   // This is a fix for the focus while render in an ifram
-  useEffect(() => {
-    const firstClick = () => {
-      if (firstGame) {
-        document.dispatchEvent(new KeyboardEvent('keypress', {'key': ' '}));
-      } 
-    };
-
-    document.body.addEventListener("click", firstClick);
-
-    return () => {
-      document.body.removeEventListener("click", firstClick);
-    };
-  }, [])
+  const firstClickHandler = () => {
+    if (firstGame) {
+      play();
+    } 
+  };
 
   return (
     <div
@@ -202,7 +194,7 @@ const GameBoard = () => {
         alt="fruit"
         width="30"
       />
-      <div className={styles["playArea-Container"]}>
+      <div className={styles["playArea-Container"]} onClick={firstClickHandler}>
         <canvas
           className={styles["playArea"]}
           ref={canvasRef}
