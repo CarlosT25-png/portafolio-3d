@@ -1,0 +1,24 @@
+.header {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--bshadow-inset-glossy-top);
+  background-image: linear-gradient(to bottom, #0f60cb, #1e6bd3, #2b77db, #3782e3, #438eea);
+  padding: 1rem;
+}
+
+.header img {
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  text-shadow: var(--text-shadow);
+  margin-left: 1rem;
+}

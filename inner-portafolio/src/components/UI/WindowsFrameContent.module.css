@@ -1,0 +1,8 @@
+.grid-container {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  list-style: none;
+}

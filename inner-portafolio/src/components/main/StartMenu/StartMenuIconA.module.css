@@ -1,0 +1,46 @@
+.link {
+  display: flex;
+  text-decoration: none;
+  font-family: inherit;
+  padding: .5rem;
+}
+
+.link:hover,
+.link:active{
+  background-color: var(--primary-color);
+}
+.link img {
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.link div {
+  margin-left: .75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.link h3 {
+  color: black;
+  font-weight: 400;
+  margin-bottom: .35rem;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.link h4 {
+  color: var(--gray-700);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.link:hover h3,
+.link:active h3,
+.link:hover h4,
+.link:active h4{
+  color: white;
+}

@@ -1,0 +1,22 @@
+:root {
+  --primary-color: #2959D3;
+  --primary-light-color: #0F8EE9;
+  --gray-700: #4a4a48;
+  --gray-400: #F0EEDC;
+
+  --bshadow-inset-glossy-top: inset 0 7px 9px -7px #e7dede;
+  --bshadow-inset-glossy-left: inset 7px 0 7px -7px #e7dede;
+  --bshadow-inset-glossy-bottom: inset 0 -7px 9px -7px #e7dede;
+
+  --bshadow-inset-dark-bottom: inset 0 -7px 9px -7px #00000066;
+  --bshadow-inset-dark-right:  inset -7px 0 9px -7px #00000066;
+  --bshadow-inset-dark-top: inset 0 7px 9px -7px #00000066;
+
+  --text-shadow: 2px 2px 2px #414141;
+}
+
+.app{
+  min-height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
+}

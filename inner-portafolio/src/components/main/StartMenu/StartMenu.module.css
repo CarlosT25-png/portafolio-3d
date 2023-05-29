@@ -1,0 +1,37 @@
+.frame {
+  width: 30vw;
+  height: 65vh;
+  display: grid;
+  grid-template-areas: "header header"
+                       "side1 side2"
+                       "footer footer";
+  grid-template-rows: min-content 1fr min-content;
+  border-radius: 6px 6px 0 0;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  padding: 0 .35rem;
+  background-color: var(--primary-color);
+}
+
+.frame header {
+  grid-area: header;
+}
+
+.frame div:first-child {
+  grid-area: side1;
+}
+
+.frame div:last-child {
+  grid-area: side2;
+}
+
+.frame footer {
+  grid-area: footer;
+}
+
+@media screen and (max-width: 768px){
+  .frame{
+    width: 70vw;
+    height: 55vh;
+  }
+}

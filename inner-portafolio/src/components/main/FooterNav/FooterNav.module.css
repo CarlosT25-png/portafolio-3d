@@ -1,0 +1,10 @@
+.container {
+  background-color: var(--primary-color);
+  box-shadow: var(--bshadow-inset-glossy-top), var(--bshadow-inset-dark-bottom);
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+

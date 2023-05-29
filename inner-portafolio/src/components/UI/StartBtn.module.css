@@ -1,0 +1,30 @@
+.start {
+  width: 7vw;
+  height: 100%;
+  background-color: #45A745;
+  border-top-right-radius: 12%30px;
+  border-bottom-right-radius: 12%30px; 
+  box-shadow: var(--bshadow-inset-glossy-top), inset 0 -7px 9px -7px rgba(0, 0, 0, 0.9), inset -7px 0 9px -7px rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  padding-left: .5rem;
+}
+
+.start img {
+  margin-left: .5rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.start h2{
+  font-size: 1.8rem;
+  margin-left: .5rem;
+  color: white;
+  text-shadow: var(--text-shadow);
+}
+
+@media screen and (max-width: 768px){
+  .start {
+    width: 20vw;
+  }
+}
