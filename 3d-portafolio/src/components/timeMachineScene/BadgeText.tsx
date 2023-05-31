@@ -1,8 +1,6 @@
 import { Text } from "@react-three/drei";
 
 const BadgeText = () => {
-
-  // chivo-mono-v5-latin-regular
   return (
     <Text
           font="/fonts/patua-one-v16-latin-regular.woff"
