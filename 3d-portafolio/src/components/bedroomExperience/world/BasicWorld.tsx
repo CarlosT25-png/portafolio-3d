@@ -1,8 +1,8 @@
-import { Environment, useGLTF } from "@react-three/drei";
 import Poster from "./scene/Poster";
 import Lights from "./scene/Lights";
 import PlayRecord from "./scene/PlayRecord";
 import Structure from "./Structure";
+import PolaroidImages from "./scene/PolaroidImages";
 
 interface BedroomInterface {
   nodes: {
@@ -25,6 +25,7 @@ const BasicWorld = () => {
       <Structure />
       <Poster />
       <PlayRecord />
+      <PolaroidImages />
     </>
   );
 };
