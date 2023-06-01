@@ -1,6 +1,6 @@
 import { Html } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { useState, useRef, useLayoutEffect, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
 import { RootState, animationsBedroomActions } from '../../../../store'
@@ -121,10 +121,7 @@ const GameboyScreen = () => {
   }
 
   const onMouseLeave = () => {
-    console.log(isUsingControls)
-    console.log(isEnterPlaying)
-    if (!isEnterPlaying && !isUsingControls) {
-      console.log(isUsingControls)
+    if (!isEnterPlaying) {
       mouseLeaveAnimation()
     }
   }
@@ -174,7 +171,7 @@ const GameboyScreen = () => {
               />
             </Html>
             {/* Controls */}
-            <GameBoyControls iframe={htmlRef} setIsUsingControls={setIsUsingControls} />
+            <GameBoyControls iframe={htmlRef} />
           </>
         )}
       </group>

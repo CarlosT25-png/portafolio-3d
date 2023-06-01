@@ -2,14 +2,12 @@ import { ThreeEvent, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { gsap } from 'gsap'
 
 interface Props {
   iframe: RefObject<HTMLIFrameElement>
-  setIsUsingControls: Dispatch<SetStateAction<boolean>>
 }
 
-const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
+const GameBoyControls = ({ iframe }: Props) => {
   const upArrowRef = useRef<THREE.Mesh>(null)
   const [hovered, setHovered] = useState(false)
 
@@ -39,13 +37,8 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
 
   // Handler
 
-  const keyPressHandler = (ev: ThreeEvent<MouseEvent>) => {
-    console.log(ev)
-    setIsUsingControls(true)
-    // iframe.current?.contentDocument?.dispatchEvent(
-    //   new KeyboardEvent('keydown', { key: ' ' })
-    // )
-    setIsUsingControls(false)
+  const keyPressHandler = ( key: string ) => {
+    iframe.current?.contentWindow?.postMessage(key, 'https://snake-game-portafolio.vercel.app/')
   }
 
   return (
@@ -55,7 +48,9 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
         // ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.352, 0.058, 0.734]}
-        // onClick={onMouseEnter}
+        onClick={() => {
+          keyPressHandler("UP")
+        }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
@@ -68,7 +63,9 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
         // ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.36, 0.058, 0.733]}
-        // onClick={onMouseEnter}
+        onClick={() => {
+          keyPressHandler("RIGHT")
+        }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
@@ -81,7 +78,9 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
         // ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.359, 0.058, 0.725]}
-        // onClick={onMouseEnter}
+        onClick={() => {
+          keyPressHandler("DOWN")
+        }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
@@ -94,7 +93,9 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
         // ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.351, 0.058, 0.726]}
-        // onClick={onMouseEnter}
+        onClick={() => {
+          keyPressHandler("LEFT")
+        }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
@@ -107,8 +108,8 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
         ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.378, 0.058, 0.74]}
-        onClick={(ev) => {
-          keyPressHandler(ev)
+        onClick={() => {
+          keyPressHandler("SPACE")
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
