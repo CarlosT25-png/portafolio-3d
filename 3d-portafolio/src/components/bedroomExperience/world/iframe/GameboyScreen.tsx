@@ -64,7 +64,7 @@ const GameboyScreen = () => {
     }
     gsap.to(camera.position, {
       x: -0.476, //-0.485
-      y: -0.5465,
+      y: -0.5462,
       z: -0.095, //-0.105
       duration: 1.5,
       onComplete: () => showIframeHandler(),
