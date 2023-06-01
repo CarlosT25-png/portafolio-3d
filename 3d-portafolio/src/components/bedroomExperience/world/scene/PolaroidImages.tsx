@@ -14,6 +14,7 @@ const PolaroidImages = () => {
   const [hovered, setHovered] = useState(false)
   const [showLinks, setShowLinks] = useState(false)
   const picturesRef = useRef<THREE.Mesh>(null!)
+  const specialThanksTextRef = useRef(null)
   const { camera } = useThree()
   const dispatch = useDispatch()
 
@@ -93,6 +94,16 @@ const PolaroidImages = () => {
     }
   }
 
+  // Effect for special thanks text
+  useEffect(() => {
+    if (showLinks) {
+      gsap.to(specialThanksTextRef.current, {
+        fillOpacity: 1,
+        duration: 1,
+      })
+    }
+  }, [showLinks])
+
   return (
     <>
       <group>
@@ -113,12 +124,14 @@ const PolaroidImages = () => {
         {/* Special Thanks */}
         {showLinks && (
           <Text
+            ref={specialThanksTextRef}
             font={PANGOLIN_FONT_URL}
             rotation={[0, -Math.PI * 0.5, 0]}
             position={[1.065, 0.95, 0.515]}
             scale={0.015}
             maxWidth={7}
             color={'black'}
+            fillOpacity={0}
           >
             Special Thanks
           </Text>
