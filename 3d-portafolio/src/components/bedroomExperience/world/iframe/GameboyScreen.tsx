@@ -5,19 +5,7 @@ import { useDispatch } from 'react-redux'
 import * as THREE from 'three'
 import { animationsBedroomActions } from '../../../../store'
 import { gsap } from 'gsap'
-
-interface BedroomInterface {
-  nodes: {
-    scene001: THREE.Group
-    library: THREE.Mesh
-    monitor001: THREE.Group
-    periferics: THREE.Group
-    lightOn: {
-      geometry: THREE.BufferGeometry
-      position: THREE.Vector3
-    }
-  }
-}
+import { useControls } from 'leva'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
@@ -27,6 +15,30 @@ const GameboyScreen = () => {
   const htmlRef = useRef<HTMLIFrameElement>(null)
   const { camera, size } = useThree()
   const dispatch = useDispatch()
+
+  // Debug
+
+  // const { rotationObj, positionObj } = useControls('cameraPos', {
+  //   rotationObj: {
+  //     value: [-0.31, -0.64, -0.19],
+  //     step: 0.001,
+  //     joystick: 'invertY',
+  //   },
+  //   positionObj: {
+  //     value: [-0.485, -0.5475, -0.105], //value: [-4.24, 0.26, 4.76],
+  //     step: 0.001,
+  //     joystick: 'invertY',
+  //   },
+  // })
+
+  // useEffect(() => {
+  //   gsap.set(camera.position, {
+  //     x: positionObj[0],
+  //     y: positionObj[1],
+  //     z: positionObj[2],
+  //   })
+  //   console.log(camera.position)
+  // }, [positionObj])
 
   const showIframeHandler = () => {
     setShowIframe(true)
@@ -50,9 +62,9 @@ const GameboyScreen = () => {
       camera.lookAt(gameboyRef.current.position)
     }
     gsap.to(camera.position, {
-      x: -0.485,
-      y: -0.5,
-      z: -0.105,
+      x: -0.476, //-0.485
+      y: -0.5465,
+      z: -0.095, //-0.105
       duration: 1.5,
       onComplete: () => showIframeHandler(),
     })
@@ -93,7 +105,7 @@ const GameboyScreen = () => {
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       // Checking if the animation is not playing
-      if (camera.position.x !== -0.485 && camera.position.y !== -0.5) {
+      if (camera.position.x !== -0.476 && camera.position.y !== -0.5465) {
         mouseEnterAnimation()
       }
     }
@@ -130,17 +142,18 @@ const GameboyScreen = () => {
         {showIframe && (
           <Html
             transform
-            distanceFactor={0.025}
+            distanceFactor={0.028}
             rotation={[-1.63, 0.02, -2.493]}
-            position={[-0.343, -0.02, 0.77]}
+            position={[-0.347, -0.02, 0.767]}
           >
             <iframe
               src='https://snake-game-portafolio.vercel.app/'
-              style={{ width: '800px', height: '700px', border: 'none',opacity: 0 }}
-              onLoad={() => { // To avoid white flashes while is loading
-                const element = htmlRef.current;
+              style={{ width: '800px', height: '700px', border: 'none', opacity: 0 }}
+              onLoad={() => {
+                // To avoid white flashes while is loading
+                const element = htmlRef.current
                 if (element && element.style) {
-                  element.style.opacity = '1';
+                  element.style.opacity = '1'
                 }
               }}
               ref={htmlRef}
