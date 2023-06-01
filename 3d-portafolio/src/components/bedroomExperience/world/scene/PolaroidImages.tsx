@@ -1,10 +1,11 @@
 import { Image, Text } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
-import { animationsBedroomActions } from '../../../../store'
+import { RootState, animationsBedroomActions } from '../../../../store'
 import { gsap } from 'gsap'
+import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 
 const INDIE_FONT_URL = '/fonts/indie-flower-v17-latin-regular.woff'
 const PANGOLIN_FONT_URL = '/fonts/pangolin-v11-latin-regular.woff'
@@ -17,10 +18,13 @@ const PolaroidImages = () => {
   const specialThanksTextRef = useRef(null)
   const { camera } = useThree()
   const dispatch = useDispatch()
+  const isFocusAnObject = useSelector<RootState>(
+    (state) => state.animationBedroom.isFocusAnObject
+  )
 
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
-    dispatch(animationsBedroomActions.setIsFocusAnObject(true))
+    dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.PICTURES))
 
     if (picturesRef.current) {
       camera.lookAt(picturesRef.current.position)
@@ -46,24 +50,27 @@ const PolaroidImages = () => {
   }
 
   const mouseLeaveAnimation = () => {
-    dispatch(animationsBedroomActions.setIsFocusAnObject(false))
-    setShowLinks(false)
-    gsap.to(camera.position, {
-      x: -2.43,
-      y: 0.72,
-      z: 2.55,
-      duration: 1.5,
-    })
-    gsap.to(camera.rotation, {
-      x: -0.32,
-      y: -0.74,
-      z: -0.22,
-      duration: 1.5,
-    })
+    // Fix to a weid glitch that this function execute when I'm focus other objects
+    if (isFocusAnObject === ObjectsToFocus.PICTURES) {
+      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
+      setShowLinks(false)
+      gsap.to(camera.position, {
+        x: -2.43,
+        y: 0.72,
+        z: 2.55,
+        duration: 1.5,
+      })
+      gsap.to(camera.rotation, {
+        x: -0.32,
+        y: -0.74,
+        z: -0.22,
+        duration: 1.5,
+      })
 
-    setTimeout(() => {
-      setIsEnterPlaying(false)
-    }, 1500)
+      setTimeout(() => {
+        setIsEnterPlaying(false)
+      }, 1500)
+    }
   }
 
   const onMouseEnter = () => {

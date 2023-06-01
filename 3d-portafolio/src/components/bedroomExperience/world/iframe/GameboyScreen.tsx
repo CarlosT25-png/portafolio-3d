@@ -1,12 +1,13 @@
 import { Html } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
-import { animationsBedroomActions } from '../../../../store'
+import { RootState, animationsBedroomActions } from '../../../../store'
 import { gsap } from 'gsap'
 import { useControls } from 'leva'
 import GameBoyControls from './GameBoyControls'
+import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
@@ -17,6 +18,9 @@ const GameboyScreen = () => {
   const htmlRef = useRef<HTMLIFrameElement>(null)
   const { camera, size } = useThree()
   const dispatch = useDispatch()
+  const isFocusAnObject = useSelector<RootState>(
+    (state) => state.animationBedroom.isFocusAnObject
+  )
 
   // Debug
 
@@ -58,7 +62,7 @@ const GameboyScreen = () => {
 
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
-    dispatch(animationsBedroomActions.setIsFocusAnObject(true))
+    dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.GAMEBOY))
 
     if (gameboyRef.current) {
       camera.lookAt(gameboyRef.current.position)
@@ -84,24 +88,27 @@ const GameboyScreen = () => {
   }
 
   const mouseLeaveAnimation = () => {
-    dispatch(animationsBedroomActions.setIsFocusAnObject(false))
-    setShowIframe(false)
-    gsap.to(camera.position, {
-      x: -2.43,
-      y: 0.72,
-      z: 2.55,
-      duration: 1.5,
-    })
-    gsap.to(camera.rotation, {
-      x: -0.32,
-      y: -0.74,
-      z: -0.22,
-      duration: 1.5,
-    })
-
-    setTimeout(() => {
-      setIsEnterPlaying(false)
-    }, 1500)
+    // Fix to a weid glitch that this function execute when I'm focus other objects
+    if (isFocusAnObject === ObjectsToFocus.GAMEBOY) {
+      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
+      setShowIframe(false)
+      gsap.to(camera.position, {
+        x: -2.43,
+        y: 0.72,
+        z: 2.55,
+        duration: 1.5,
+      })
+      gsap.to(camera.rotation, {
+        x: -0.32,
+        y: -0.74,
+        z: -0.22,
+        duration: 1.5,
+      })
+  
+      setTimeout(() => {
+        setIsEnterPlaying(false)
+      }, 1500)
+    }
   }
 
   const onMouseEnter = () => {

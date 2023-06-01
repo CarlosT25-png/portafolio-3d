@@ -1,10 +1,11 @@
-import { ThreeEvent } from '@react-three/fiber'
+import { ThreeEvent, useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { gsap } from 'gsap'
 
 interface Props {
-  iframe: RefObject<HTMLIFrameElement>,
+  iframe: RefObject<HTMLIFrameElement>
   setIsUsingControls: Dispatch<SetStateAction<boolean>>
 }
 
@@ -39,9 +40,11 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
   // Handler
 
   const keyPressHandler = (ev: ThreeEvent<MouseEvent>) => {
-    ev.stopPropagation()
+    console.log(ev)
     setIsUsingControls(true)
-    iframe.current?.contentDocument?.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+    // iframe.current?.contentDocument?.dispatchEvent(
+    //   new KeyboardEvent('keydown', { key: ' ' })
+    // )
     setIsUsingControls(false)
   }
 
@@ -104,7 +107,7 @@ const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
         ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.378, 0.058, 0.74]}
-        onClick={( ev ) => {
+        onClick={(ev) => {
           keyPressHandler(ev)
         }}
         onPointerEnter={() => setHovered(true)}

@@ -5,8 +5,9 @@ import { GlitchMode } from 'postprocessing'
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
-import { useDispatch } from 'react-redux'
-import { animationsBedroomActions } from '../../../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState, animationsBedroomActions } from '../../../../store'
+import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 
 interface BedroomInterface {
   nodes: {
@@ -24,12 +25,15 @@ interface BedroomInterface {
 const Screen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
   const [showIframe, setShowIframe] = useState(false)
-  const [ hovered, setHovered ] = useState(false);
+  const [hovered, setHovered] = useState(false)
   const pcRef = useRef<THREE.Group>(null!)
   const screenRef = useRef<THREE.Mesh>(null!)
   const htmlRef = useRef<HTMLIFrameElement>(null)
   const { camera, size } = useThree()
   const dispatch = useDispatch()
+  const isFocusAnObject = useSelector<RootState>(
+    (state) => state.animationBedroom.isFocusAnObject
+  )
 
   const model = useGLTF(
     '/models/bedroomScene/bedroom-draco.glb'
@@ -46,7 +50,7 @@ const Screen = () => {
 
   const mouseEnterAnimation = () => {
     setIsEnterPlaying(true)
-    dispatch(animationsBedroomActions.setIsFocusAnObject(true))
+    dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.DESKTOP))
 
     camera.lookAt(model.nodes.monitor001.position)
     gsap.to(camera.position, {
@@ -69,24 +73,27 @@ const Screen = () => {
   }
 
   const mouseLeaveAnimation = () => {
-    dispatch(animationsBedroomActions.setIsFocusAnObject(false))
-    setShowIframe(false)
-    gsap.to(camera.position, {
-      x: -2.43,
-      y: 0.72,
-      z: 2.55,
-      duration: 1.5,
-    })
-    gsap.to(camera.rotation, {
-      x: -0.32,
-      y: -0.74,
-      z: -0.22,
-      duration: 1.5,
-    })
+    // Fix to a weid glitch that this function execute when I'm focus other objects
+    if (isFocusAnObject === ObjectsToFocus.DESKTOP) {
+      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
+      setShowIframe(false)
+      gsap.to(camera.position, {
+        x: -2.43,
+        y: 0.72,
+        z: 2.55,
+        duration: 1.5,
+      })
+      gsap.to(camera.rotation, {
+        x: -0.32,
+        y: -0.74,
+        z: -0.22,
+        duration: 1.5,
+      })
 
-    setTimeout(() => {
-      setIsEnterPlaying(false)
-    }, 1500)
+      setTimeout(() => {
+        setIsEnterPlaying(false)
+      }, 1500)
+    }
   }
 
   const onMouseEnter = () => {
@@ -107,12 +114,18 @@ const Screen = () => {
   // Pointer handler
 
   useEffect(() => {
-    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+    document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
 
   return (
     <>
-      <group ref={pcRef} onClick={onMouseEnter} onPointerMissed={onMouseLeave} onPointerEnter={() => setHovered(true)} onPointerLeave={ () => setHovered(false)}>
+      <group
+        ref={pcRef}
+        onClick={onMouseEnter}
+        onPointerMissed={onMouseLeave}
+        onPointerEnter={() => setHovered(true)}
+        onPointerLeave={() => setHovered(false)}
+      >
         <primitive object={model.nodes.monitor001} />
       </group>
       {/* This will act as the real screen */}
@@ -134,11 +147,18 @@ const Screen = () => {
           >
             <iframe
               src='https://carlostorres.dev'
-              style={{ width: '1000px', height: '750px', border: 'none', opacity: 0, backgroundColor: 'black' }}
-              onLoad={() => { // To avoid white flashes while is loading
-                const element = htmlRef.current;
+              style={{
+                width: '1000px',
+                height: '750px',
+                border: 'none',
+                opacity: 0,
+                backgroundColor: 'black',
+              }}
+              onLoad={() => {
+                // To avoid white flashes while is loading
+                const element = htmlRef.current
                 if (element && element.style) {
-                  element.style.opacity = '1';
+                  element.style.opacity = '1'
                 }
               }}
               ref={htmlRef}
