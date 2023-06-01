@@ -10,6 +10,7 @@ import GameBoyControls from './GameBoyControls'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
+  const [isUsingControls, setIsUsingControls] = useState(false)
   const [showIframe, setShowIframe] = useState(false)
   const [hovered, setHovered] = useState(false)
   const gameboyRef = useRef<THREE.Mesh>(null!)
@@ -113,7 +114,10 @@ const GameboyScreen = () => {
   }
 
   const onMouseLeave = () => {
-    if (!isEnterPlaying) {
+    console.log(isUsingControls)
+    console.log(isEnterPlaying)
+    if (!isEnterPlaying && !isUsingControls) {
+      console.log(isUsingControls)
       mouseLeaveAnimation()
     }
   }
@@ -163,7 +167,7 @@ const GameboyScreen = () => {
               />
             </Html>
             {/* Controls */}
-            <GameBoyControls />
+            <GameBoyControls iframe={htmlRef} setIsUsingControls={setIsUsingControls} />
           </>
         )}
       </group>

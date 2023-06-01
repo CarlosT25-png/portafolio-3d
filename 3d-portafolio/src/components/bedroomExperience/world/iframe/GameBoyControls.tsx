@@ -1,8 +1,14 @@
+import { ThreeEvent } from '@react-three/fiber'
 import { useControls } from 'leva'
-import { useEffect, useRef, useState } from 'react'
+import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
-const GameBoyControls = () => {
+interface Props {
+  iframe: RefObject<HTMLIFrameElement>,
+  setIsUsingControls: Dispatch<SetStateAction<boolean>>
+}
+
+const GameBoyControls = ({ iframe, setIsUsingControls }: Props) => {
   const upArrowRef = useRef<THREE.Mesh>(null)
   const [hovered, setHovered] = useState(false)
 
@@ -30,14 +36,14 @@ const GameBoyControls = () => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
 
-  useEffect(() => {
-    if (upArrowRef.current) {
-      console.log('------------------')
-      console.log(upArrowRef.current.position)
-      console.log(upArrowRef.current.geometry)
-      console.log(sizeObj)
-    }
-  }, [positionObj])
+  // Handler
+
+  const keyPressHandler = (ev: ThreeEvent<MouseEvent>) => {
+    ev.stopPropagation()
+    setIsUsingControls(true)
+    iframe.current?.contentDocument?.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+    setIsUsingControls(false)
+  }
 
   return (
     <group>
@@ -98,7 +104,9 @@ const GameBoyControls = () => {
         ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.378, 0.058, 0.74]}
-        // onClick={onMouseEnter}
+        onClick={( ev ) => {
+          keyPressHandler(ev)
+        }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
