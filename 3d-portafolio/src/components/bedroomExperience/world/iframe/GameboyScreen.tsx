@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { animationsBedroomActions } from '../../../../store'
 import { gsap } from 'gsap'
 import { useControls } from 'leva'
+import GameBoyControls from './GameBoyControls'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
@@ -140,25 +141,30 @@ const GameboyScreen = () => {
           <meshBasicMaterial opacity={0} transparent />
         </mesh>
         {showIframe && (
-          <Html
-            transform
-            distanceFactor={0.028}
-            rotation={[-1.63, 0.02, -2.493]}
-            position={[-0.347, -0.02, 0.767]}
-          >
-            <iframe
-              src='https://snake-game-portafolio.vercel.app/'
-              style={{ width: '800px', height: '700px', border: 'none', opacity: 0 }}
-              onLoad={() => {
-                // To avoid white flashes while is loading
-                const element = htmlRef.current
-                if (element && element.style) {
-                  element.style.opacity = '1'
-                }
-              }}
-              ref={htmlRef}
-            />
-          </Html>
+          <>
+            {/* Screen */}
+            <Html
+              transform
+              distanceFactor={0.028}
+              rotation={[-1.63, 0.02, -2.493]}
+              position={[-0.347, -0.02, 0.767]}
+            >
+              <iframe
+                src='https://snake-game-portafolio.vercel.app/'
+                style={{ width: '800px', height: '700px', border: 'none', opacity: 0 }}
+                onLoad={() => {
+                  // To avoid white flashes while is loading
+                  const element = htmlRef.current
+                  if (element && element.style) {
+                    element.style.opacity = '1'
+                  }
+                }}
+                ref={htmlRef}
+              />
+            </Html>
+            {/* Controls */}
+            <GameBoyControls />
+          </>
         )}
       </group>
     </>
