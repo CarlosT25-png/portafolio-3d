@@ -31,6 +31,7 @@ const GameBoard = () => {
   const [firstGame, setFirstGame] = useState(true);
   const [userName, setUserName] = useState<string>();
   const [userRanking, setUserRanking] = useState<UserScore[]>();
+  const gameBoardRef = useRef<HTMLDivElement>(null);
 
   useInterval(() => runGame(), delay);
 
@@ -179,13 +180,49 @@ const GameBoard = () => {
   const firstClickHandler = () => {
     if (firstGame) {
       play();
-    } 
+    }
   };
+
+  // Post Message Communication
+
+  const emitKeyboardPress = (key: string) => {
+    if (key === "PLAY") {
+      play();
+    } else {
+      const keyboardEvent = new KeyboardEvent("keydown", { key: key });
+      changeDirection(keyboardEvent);
+    }
+  };
+
+  window.addEventListener("message", (ev) => {
+    switch (ev.data) {
+      case "PLAY":
+        emitKeyboardPress("PLAY");
+        break;
+
+      case "UP":
+        emitKeyboardPress("ArrowUp");
+        break;
+
+      case "RIGHT":
+        emitKeyboardPress("ArrowRight");
+        break;
+
+      case "DOWN":
+        emitKeyboardPress("ArrowDown");
+        break;
+
+      case "LEFT":
+        emitKeyboardPress("ArrowLeft");
+        break;
+    }
+  });
 
   return (
     <div
       onKeyDown={(ev) => changeDirection(ev as unknown as KeyboardEvent)}
       className={styles["game-board"]}
+      ref={gameBoardRef}
     >
       <img
         id="fruit"
@@ -208,10 +245,14 @@ const GameBoard = () => {
       </div>
       {/* When the user lose the game */}
       {!firstGame && gameOver && userName && (
-        <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]} ${styles["--column"]}`}>
+        <div
+          className={`${styles["gameOver"]} ${styles["gameOver-dual"]} ${styles["--column"]}`}
+        >
           <div>
             <h2>The Snake Game</h2>
-            <h4 className={styles["subtitle"]}>Press 'Space' to restart the game</h4>
+            <h4 className={styles["subtitle"]}>
+              Press 'Space' to restart the game
+            </h4>
           </div>
           <div className={`${styles["gameOver-dual--right"]}`}>
             <h4 className={styles["subtitle"]}>Ranking</h4>
@@ -235,7 +276,9 @@ const GameBoard = () => {
         <div className={`${styles["gameOver"]} ${styles["gameOver-dual"]}`}>
           <div>
             <h2>The Snake Game</h2>
-            <h4 className={styles["subtitle"]}>Press 'Space' to restart the game</h4>
+            <h4 className={styles["subtitle"]}>
+              Press 'Space' to restart the game
+            </h4>
           </div>
           <div className={styles["gameOver-dual--right"]}>
             <h4 className={styles["subtitle"]}>Your Name</h4>
