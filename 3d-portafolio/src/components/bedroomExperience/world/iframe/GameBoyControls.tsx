@@ -1,4 +1,4 @@
-import { ThreeEvent, useThree } from '@react-three/fiber'
+import { Text } from '@react-three/drei'
 import { useControls } from 'leva'
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
@@ -20,12 +20,12 @@ const GameBoyControls = ({ iframe }: Props) => {
       joystick: 'invertY',
     },
     positionObj: {
-      value: [-0.378, 0.058, 0.739], //value: [-4.24, 0.26, 4.76],
+      value: [-0.378, 0.058, 0.74], //value: [-4.24, 0.26, 4.76],
       step: 0.001,
       joystick: 'invertY',
     },
     rotationObj: {
-      value: [0, 0, 0], //value: [-4.24, 0.26, 4.76],
+      value: [-Math.PI* 0.75, 0, 0], //value: [-4.24, 0.26, 4.76],
       step: 0.001,
       joystick: 'invertY',
     },
@@ -37,12 +37,18 @@ const GameBoyControls = ({ iframe }: Props) => {
 
   // Handler
 
-  const keyPressHandler = ( key: string ) => {
-    iframe.current?.contentWindow?.postMessage(key, 'https://snake-game-portafolio.vercel.app/')
+  const keyPressHandler = (key: string) => {
+    iframe.current?.contentWindow?.postMessage(
+      key,
+      'https://snake-game-portafolio.vercel.app/'
+    )
     const audio = new Audio('/sounds/bedroomScene/gameboy/button1.mp3')
-    audio.volume = 0.025;
-    audio.play();
+    audio.volume = 0.025
+    audio.play()
   }
+
+  console.log(positionObj)
+  console.log(rotationObj)
 
   return (
     <group>
@@ -52,7 +58,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.352, 0.058, 0.734]}
         onClick={() => {
-          keyPressHandler("UP")
+          keyPressHandler('UP')
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
@@ -67,7 +73,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.36, 0.058, 0.733]}
         onClick={() => {
-          keyPressHandler("RIGHT")
+          keyPressHandler('RIGHT')
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
@@ -82,7 +88,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.359, 0.058, 0.725]}
         onClick={() => {
-          keyPressHandler("DOWN")
+          keyPressHandler('DOWN')
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
@@ -97,7 +103,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.351, 0.058, 0.726]}
         onClick={() => {
-          keyPressHandler("LEFT")
+          keyPressHandler('LEFT')
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
@@ -107,12 +113,23 @@ const GameBoyControls = ({ iframe }: Props) => {
       </mesh>
 
       {/* Play button */}
+      <Text
+        font={'/fonts/goldman-v16-latin-regular.woff'}
+        rotation={[1.545, -3.186, 0.626]}
+        position={[-0.378, 0.061, 0.74]}
+        scale={0.005}
+        maxWidth={7}
+        color={'black'}
+        fillOpacity={1}
+      >
+        Play
+      </Text>
       <mesh
         ref={upArrowRef}
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.378, 0.058, 0.74]}
         onClick={() => {
-          keyPressHandler("PLAY")
+          keyPressHandler('PLAY')
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
