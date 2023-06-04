@@ -11,26 +11,6 @@ const GameBoyControls = ({ iframe }: Props) => {
   const upArrowRef = useRef<THREE.Mesh>(null)
   const [hovered, setHovered] = useState(false)
 
-  // Debug
-
-  const { sizeObj, positionObj, rotationObj } = useControls('cameraPos', {
-    sizeObj: {
-      value: [0.03, 0.03, 0.019],
-      step: 0.001,
-      joystick: 'invertY',
-    },
-    positionObj: {
-      value: [-0.378, 0.058, 0.74], //value: [-4.24, 0.26, 4.76],
-      step: 0.001,
-      joystick: 'invertY',
-    },
-    rotationObj: {
-      value: [-Math.PI* 0.75, 0, 0], //value: [-4.24, 0.26, 4.76],
-      step: 0.001,
-      joystick: 'invertY',
-    },
-  })
-
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
@@ -46,9 +26,6 @@ const GameBoyControls = ({ iframe }: Props) => {
     audio.volume = 0.025
     audio.play()
   }
-
-  console.log(positionObj)
-  console.log(rotationObj)
 
   return (
     <group>
@@ -114,10 +91,10 @@ const GameBoyControls = ({ iframe }: Props) => {
 
       {/* Play button */}
       <Text
-        font={'/fonts/goldman-v16-latin-regular.woff'}
-        rotation={[1.545, -3.186, 0.626]}
-        position={[-0.378, 0.061, 0.74]}
-        scale={0.005}
+        font={'/fonts/ibm-plex-sans-condensed-v14-latin-regular.woff'}
+        rotation={[1.543, -3.186, 0.665]}
+        position={[-0.372, 0.061, 0.735]}
+        scale={0.0025}
         maxWidth={7}
         color={'black'}
         fillOpacity={1}
