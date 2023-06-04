@@ -39,6 +39,9 @@ const GameBoyControls = ({ iframe }: Props) => {
 
   const keyPressHandler = ( key: string ) => {
     iframe.current?.contentWindow?.postMessage(key, 'https://snake-game-portafolio.vercel.app/')
+    const audio = new Audio('/sounds/bedroomScene/gameboy/button1.mp3')
+    audio.volume = 0.025;
+    audio.play();
   }
 
   return (
@@ -55,7 +58,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         onPointerLeave={() => setHovered(false)}
       >
         <boxGeometry args={[0.006, 0.008, 0.006]} />
-        <meshBasicMaterial opacity={1} transparent />
+        <meshBasicMaterial opacity={0} transparent />
       </mesh>
 
       {/* Right Arrow */}
@@ -70,7 +73,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         onPointerLeave={() => setHovered(false)}
       >
         <boxGeometry args={[0.006, 0.008, 0.006]} />
-        <meshBasicMaterial opacity={1} transparent />
+        <meshBasicMaterial opacity={0} transparent />
       </mesh>
 
       {/* Down Arrow */}
@@ -85,7 +88,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         onPointerLeave={() => setHovered(false)}
       >
         <boxGeometry args={[0.006, 0.008, 0.006]} />
-        <meshBasicMaterial opacity={1} transparent />
+        <meshBasicMaterial opacity={0} transparent />
       </mesh>
 
       {/* Left Arrow */}
@@ -100,7 +103,7 @@ const GameBoyControls = ({ iframe }: Props) => {
         onPointerLeave={() => setHovered(false)}
       >
         <boxGeometry args={[0.006, 0.008, 0.006]} />
-        <meshBasicMaterial opacity={1} transparent />
+        <meshBasicMaterial opacity={0} transparent />
       </mesh>
 
       {/* Play button */}
@@ -109,13 +112,13 @@ const GameBoyControls = ({ iframe }: Props) => {
         rotation={[0, Math.PI * 0.71, 0]}
         position={[-0.378, 0.058, 0.74]}
         onClick={() => {
-          keyPressHandler("SPACE")
+          keyPressHandler("PLAY")
         }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
         <boxGeometry args={[0.007, 0.008, 0.007]} />
-        <meshBasicMaterial opacity={1} transparent />
+        <meshBasicMaterial opacity={0} transparent />
       </mesh>
     </group>
   )
