@@ -1,7 +1,4 @@
 import { PositionalAudio } from "@react-three/drei";
-import { useLoader, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
-import * as THREE from 'three'
 
 
 const PlayRecord = () => {
@@ -10,7 +7,7 @@ const PlayRecord = () => {
       <boxGeometry attach='geometry' />
       <meshBasicMaterial attach='material' color='black' />
       {/* @ts-ignore */}
-      <PositionalAudio url='/sounds/timeMachineScene/machine.mp3' autoplay loop/>
+      <PositionalAudio url='/sounds/bedroomScene/red-eye-by-hola-beats.mp3' autoplay loop setVolume={0.2}/>
     </mesh>
   )
 }
