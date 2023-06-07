@@ -23,7 +23,7 @@ const GameBoyControls = ({ iframe }: Props) => {
       'https://snake-game-portafolio.vercel.app/'
     )
     const audio = new Audio('/sounds/bedroomScene/gameboy/button1.mp3')
-    audio.volume = 0.025
+    audio.volume = 0.02
     audio.play()
   }
 
