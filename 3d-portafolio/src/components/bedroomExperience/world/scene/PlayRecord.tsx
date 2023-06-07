@@ -1,14 +1,18 @@
 import { PositionalAudio } from "@react-three/drei";
+import { useEffect } from "react";
 
 
 const PlayRecord = () => {
+
+  useEffect(() => {
+    const audio = new Audio('/sounds/bedroomScene/red-eye-by-hola-beats.mp3');
+    audio.volume = 0.05;
+    audio.loop = true
+    audio.play();
+  }, [])
+
   return (
-    <mesh position={[ -0.6, 0.5, 0 ]} scale={0.01}>
-      <boxGeometry attach='geometry' />
-      <meshBasicMaterial attach='material' color='black' />
-      {/* @ts-ignore */}
-      <PositionalAudio url='/sounds/bedroomScene/red-eye-by-hola-beats.mp3' autoplay loop setVolume={0.2}/>
-    </mesh>
+    null
   )
 }
 
