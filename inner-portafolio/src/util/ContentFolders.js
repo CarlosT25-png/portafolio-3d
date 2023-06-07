@@ -36,6 +36,23 @@ export const contentFoldersCV = [
   },
 ];
 
+export const contentFoldersCertifications = [
+  {
+    title: 'AWS Cloud Practitioner',
+    logo: 'aws',
+    filetype: 'Certification',
+    size: '0 KB',
+    url: 'https://www.credly.com/badges/24140889-e6a2-4da1-8040-ef456dbfceed/linked_in_profile',
+  },
+  {
+    title: 'Oracle Cloud',
+    logo: 'oracle',
+    filetype: 'Certification',
+    size: '0 KB',
+    url: 'https://catalog-education.oracle.com/pls/certview/sharebadge?id=425B305E528786034CD13B64B5F35A7CA464D006FECFC883D16CB4AA53374900',
+  },
+];
+
 export const contentFolderInfo = [
   {
     title: 'Project',

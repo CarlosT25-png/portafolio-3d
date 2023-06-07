@@ -1,5 +1,5 @@
 import IconInsideFolder from './IconInsideFolder';
-import { contentFoldersCV, contentFolderInfo, contentFolderProjects } from '../../util/ContentFolders';
+import { contentFoldersCV, contentFolderProjects, contentFoldersCertifications } from '../../util/ContentFolders';
 
 import classes from './WindowsFrameContent.module.css';
 
@@ -9,8 +9,8 @@ const WindowsFrameContent = props => {
     content = contentFoldersCV;
   }
 
-  if(props.type === 'Info'){
-    content = contentFolderInfo;
+  if(props.type === 'Certifications'){
+    content = contentFoldersCertifications;
   }
 
   if(props.type === 'Projects'){
