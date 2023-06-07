@@ -146,7 +146,7 @@ const Screen = () => {
             position={[1.16, 0.44, 0.42]}
           >
             <iframe
-              src='https://carlostorres.dev'
+              src='https://inner-portafolio.vercel.app/'
               style={{
                 width: '1000px',
                 height: '750px',
