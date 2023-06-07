@@ -64,3 +64,14 @@
     margin-bottom: 2rem;
   }
 }
+
+/* For 3d experience */
+@media screen and (width: 1000px){
+  .wrapper > div:first-of-type img {
+    margin: 12rem auto 0 auto;
+    width: 35rem;
+    object-fit: cover;
+    margin-bottom: 4rem;
+  }
+
+}

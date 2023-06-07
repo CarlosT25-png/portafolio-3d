@@ -32,3 +32,14 @@
     width: 15vw;
   }
 }
+
+/* For 3D experience */
+@media screen and (width: 1000px){
+  .clock-container{
+    width: 10rem;
+  }
+
+  .time {
+    font-size: 1.7rem;
+  }
+}

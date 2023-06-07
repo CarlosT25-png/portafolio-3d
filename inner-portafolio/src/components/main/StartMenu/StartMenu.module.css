@@ -35,3 +35,11 @@
     height: 55vh;
   }
 }
+
+/* For 3D experience */
+@media screen and (width: 1000px){
+  .frame{
+    width: 38vw;
+    height: 57vh;
+  }
+}

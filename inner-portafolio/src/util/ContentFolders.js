@@ -42,7 +42,7 @@ export const contentFolderInfo = [
     logo: 'github2',
     filetype: 'GitHub Repository',
     size: '0 KB',
-    url: 'https://github.com/CarlosT25-png/portafolio',
+    url: 'https://github.com/CarlosT25-png/portafolio-3d',
   },
   {
     title: 'Welcome',
@@ -88,6 +88,13 @@ export const contentFolderProjects = [
     filetype: 'Website',
     size: '0 KB',
     url: 'https://carlostorres.dev',
+  },
+  {
+    title: 'Repo',
+    logo: 'github2',
+    filetype: 'GitHub Repository',
+    size: '0 KB',
+    url: 'https://github.com/CarlosT25-png/portafolio-3d',
   },
   {
     title: 'Next',

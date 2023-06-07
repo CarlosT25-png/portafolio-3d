@@ -72,16 +72,16 @@ const StartMenuNetworks = (props) => {
                   .pasteString(`
                   <br />
                   <div class=${classes.text}>
-                    <p>HTML5</p>
-                    <p>CSS</p>
-                    <p>JavaScript</p>
                     <p>ReactJS</p>
-                    <p>Material UI</p>
-                    <p>Figma</p>
-                    <p>AdobeXD</p>
-                    <p>Firebase</p>
+                    <p>React Native</p>
+                    <p>TypeScript</p>
+                    <p>NextJS</p>
+                    <p>ThreeJS</p>
+                    <p>React Three Fiber</p>
+                    <p>AWS</p>
+                    <p>Cypress</p>
+                    <p>NodeJS</p>
                     <p>SQL and NoSQL Database</p>
-                    <p>Some NodeJS</p>
                   </div>`)
                   .pauseFor(2750)
                   .start();

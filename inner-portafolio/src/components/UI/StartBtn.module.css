@@ -28,3 +28,10 @@
     width: 20vw;
   }
 }
+
+/* For 3D experience */
+@media screen and (width: 1000px){
+  .start {
+    width: 13rem;
+  }
+}

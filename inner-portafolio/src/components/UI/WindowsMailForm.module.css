@@ -144,3 +144,11 @@
     width: 90vw;
   }
 }
+
+/* For 3D Experience */
+@media screen and (width: 1000px){
+  .main-frame{
+    height: 58vh;
+    width: 50vw;
+  }
+}

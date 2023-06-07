@@ -23,6 +23,7 @@ const Desktop = (props) => {
         )}
         {folders.map((folder) => folder.item)}
         <IconDesktop foldersName="CV & Summary" onClick={addFolderWindows}/>
+        <IconDesktop foldersName="Certifications" onClick={addFolderWindows} />
         <IconDesktop foldersName="Info" onClick={addFolderWindows} />
         <IconDesktop foldersName="Projects" onClick={addFolderWindows} />
         <IconDesktop type="email" name="Contact Me" onClick={addEmailWindows} />

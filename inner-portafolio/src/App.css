@@ -16,7 +16,5 @@
 }
 
 .app{
-  min-height: 100vh;
-  min-height: fill-available;
-  min-height: -webkit-fill-available;
+  height: 100vh; 
 }
