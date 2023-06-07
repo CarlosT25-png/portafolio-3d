@@ -5,7 +5,6 @@ specifiers:
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
   '@testing-library/user-event': ^13.5.0
-  emailjs-com: ^3.2.0
   i18next: ^21.9.1
   react: ^18.2.0
   react-div-100vh: ^0.7.0
@@ -23,7 +22,6 @@ dependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@testing-library/user-event': 13.5.0
-  emailjs-com: 3.2.0
   i18next: 21.10.0
   react: 18.2.0
   react-div-100vh: 0.7.0_react@18.2.0
@@ -4447,12 +4445,6 @@ packages:
 
   /electron-to-chromium/1.4.424:
     resolution: {integrity: sha512-KOfOIoEE0b3L0CTDgqS+NpokmcBdxpqLIPtp9PL0v5GAMZmZXa9uoUfWJdEy63MNy6jMvKHkBVUYY5DSuqqpdw==}
-    dev: false
-
-  /emailjs-com/3.2.0:
-    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
-    engines: {node: '>=12.0.0'}
-    deprecated: The SDK name changed to @emailjs/browser
     dev: false
 
   /emittery/0.10.2:
