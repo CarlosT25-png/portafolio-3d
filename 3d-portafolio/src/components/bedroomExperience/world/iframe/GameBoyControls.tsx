@@ -24,7 +24,9 @@ const GameBoyControls = ({ iframe }: Props) => {
     )
     const audio = new Audio('/sounds/bedroomScene/gameboy/button1.mp3')
     audio.volume = 0.05
-    audio.play()
+    setTimeout(() => {
+      audio.play()
+    }, 3500);
   }
 
   return (

@@ -156,12 +156,14 @@ const PolaroidImages = () => {
         <Text
           font={INDIE_FONT_URL}
           rotation={[0, -Math.PI * 0.5, 0]}
-          position={[1.065, 0.85, 0.3965]}
+          position={[1.05, 0.835, 0.4]}
           scale={0.007}
           maxWidth={8}
+          lineHeight={1.4}
           color={'black'}
         >
-          ThreeJs Journey The best ThreeJs and R3F out there
+          ThreeJs Journey: Amazing course for mastering Three.js, It really help me out,
+          Highly recommended!
         </Text>
 
         {/* Marianne Gallo */}
@@ -198,22 +200,23 @@ const PolaroidImages = () => {
 
         {/* Academind */}
         <Image
-          url='/images/bedroom/polaroidPictures/academind.jpg'
+          url='/images/bedroom/polaroidPictures/hola-beats.jpg'
           rotation={[0, -Math.PI * 0.5, 0]}
           position={[1.072, 0.76, 0.5815]}
           scale-y={0.066}
           scale-x={0.076}
-          onClick={() => externalLinkHandler('https://academind.com')}
+          onClick={() => externalLinkHandler('https://open.spotify.com/artist/7CvWoscqVQJvqb0OcBRQO7')}
         />
         <Text
           font={INDIE_FONT_URL}
           rotation={[0, -Math.PI * 0.5, 0]}
-          position={[1.065, 0.7, 0.5815]}
+          position={[1.059, 0.698, 0.58]}
           scale={0.0072}
           maxWidth={8}
           color={'black'}
         >
-          Academind - Thanks for the best react courses out there
+          Hola Beats, these are definitely my favorite lo-fi songs, and they are free to
+          use in any of your projects :)
         </Text>
 
         {/* Poly */}
@@ -223,7 +226,7 @@ const PolaroidImages = () => {
           position={[1.072, 0.931, 0.638]}
           scale-y={0.066}
           scale-x={0.076}
-          onClick={() => externalLinkHandler('https://academind.com')}
+          onClick={() => externalLinkHandler('https://poly.pizza/')}
         />
         <Text
           font={INDIE_FONT_URL}
@@ -231,9 +234,11 @@ const PolaroidImages = () => {
           position={[1.065, 0.87, 0.636]}
           scale={0.0059}
           maxWidth={7}
+          lineHeight={1.2}
           color={'black'}
         >
-          Poly Pizza I use a lot of their 3d models and I love it
+          Poly Pizza is an amazing 3D library, with excellent models and great
+          performance.
         </Text>
       </group>
     </>
