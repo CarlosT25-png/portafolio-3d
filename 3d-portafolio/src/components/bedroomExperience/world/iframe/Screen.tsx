@@ -8,6 +8,7 @@ import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, animationsBedroomActions } from '../../../../store'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
+import { useControls } from 'leva'
 
 interface BedroomInterface {
   nodes: {
@@ -29,11 +30,27 @@ const Screen = () => {
   const pcRef = useRef<THREE.Group>(null!)
   const screenRef = useRef<THREE.Mesh>(null!)
   const htmlRef = useRef<HTMLIFrameElement>(null)
-  const { camera, size } = useThree()
+  const { camera, controls } = useThree()
   const dispatch = useDispatch()
   const isFocusAnObject = useSelector<RootState>(
     (state) => state.animationBedroom.isFocusAnObject
   )
+
+  // Debug
+
+  const { rotationObj, positionObj } = useControls('cameraPos', {
+    rotationObj: {
+      value: [-1.56, -1.29, -1.56],
+      step: 0.001,
+      joystick: 'invertY',
+    },
+    positionObj: {
+      value: [1.16, 0.44, 0.42], //value: [-4.24, 0.26, 4.76],
+      step: 0.001,
+      joystick: 'invertY',
+    },
+  })
+
 
   const model = useGLTF(
     '/models/bedroomScene/bedroom-draco.glb'
@@ -54,16 +71,16 @@ const Screen = () => {
 
     camera.lookAt(model.nodes.monitor001.position)
     gsap.to(camera.position, {
-      x: 0.59,
-      y: -0.24,
+      x: 0.56,
+      y: -0.21,
       z: -0.4125,
       duration: 1.5,
       onComplete: () => showIframeHandler(),
     })
     gsap.to(camera.rotation, {
-      x: -1.13,
-      y: -1.51,
-      z: -1.13,
+      x: -1.45,
+      y: -1.4,
+      z: -1.45,
       duration: 1.5,
     })
 
@@ -136,14 +153,14 @@ const Screen = () => {
           position={[0.89, 0.46, 0.43]}
         >
           <planeGeometry args={[0.118, 0.0915]} />
-          <meshBasicMaterial color={'#5c5c5c'} />
+          <meshBasicMaterial color={'#000000'} /> {/*5c5c5c */}
         </mesh>
         {showIframe && (
           <Html
             transform
-            distanceFactor={0.11}
+            distanceFactor={0.106}
             rotation={[-1.56, -1.29, -1.56]}
-            position={[1.16, 0.44, 0.42]}
+            position={[1.17, 0.402, 0.423]}
           >
             <iframe
               src='https://inner-portafolio.vercel.app/'

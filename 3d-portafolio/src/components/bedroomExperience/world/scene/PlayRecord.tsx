@@ -6,7 +6,7 @@ const PlayRecord = () => {
 
   useEffect(() => {
     const audio = new Audio('/sounds/bedroomScene/red-eye-by-hola-beats.mp3');
-    audio.volume = 0.05;
+    audio.volume = 0.075;
     audio.loop = true
     setTimeout(() => {
       audio.play()
