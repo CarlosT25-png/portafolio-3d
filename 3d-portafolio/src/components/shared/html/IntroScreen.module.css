@@ -59,3 +59,10 @@
   bottom: 0;
   height: 100%;
 }
+
+/* Phone */
+@media screen and (max-width: 576px) {
+  .message-container {
+    width: 60vw;
+  }
+}

@@ -27,3 +27,23 @@
   bottom: 1rem;
   right: 1rem;
 }
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+  .message-container {
+    width: 70vw;
+    height: 65vh;
+    /* top: 48%; */
+    font-size: 2.5rem;
+  }
+}
+
+/* Phone */
+@media screen and (max-width: 576px) {
+  .message-container {
+    width: 70vw;
+    height: 65vh;
+    top: 48%;
+    font-size: 2rem;
+  }
+}

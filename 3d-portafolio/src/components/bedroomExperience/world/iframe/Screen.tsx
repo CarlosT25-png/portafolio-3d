@@ -36,22 +36,6 @@ const Screen = () => {
     (state) => state.animationBedroom.isFocusAnObject
   )
 
-  // Debug
-
-  const { rotationObj, positionObj } = useControls('cameraPos', {
-    rotationObj: {
-      value: [-1.56, -1.29, -1.56],
-      step: 0.001,
-      joystick: 'invertY',
-    },
-    positionObj: {
-      value: [1.16, 0.44, 0.42], //value: [-4.24, 0.26, 4.76],
-      step: 0.001,
-      joystick: 'invertY',
-    },
-  })
-
-
   const model = useGLTF(
     '/models/bedroomScene/bedroom-draco.glb'
   ) as unknown as BedroomInterface

@@ -7,7 +7,7 @@ import CameraAnimation from "./bedroomExperience/utils/CameraAnimation";
 const BedroomExperience = () => {
   return (
     <>
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
 
       <color args={["#241a1a"]} attach="background" />
 

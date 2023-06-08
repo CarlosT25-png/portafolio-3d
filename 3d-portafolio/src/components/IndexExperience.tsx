@@ -1,6 +1,6 @@
-import { ReactNode, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { ACESFilmicToneMapping, CineonToneMapping, sRGBEncoding } from 'three'
-import { Canvas, useThree } from '@react-three/fiber'
+import { ReactNode, Suspense, useLayoutEffect, useState } from 'react'
+import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
+import { Canvas } from '@react-three/fiber'
 import { Loader, Preload } from '@react-three/drei'
 import { useSelector } from 'react-redux'
 import TimeMachineExperience from './TimeMachineExperience'
@@ -27,7 +27,7 @@ function useWindowSize() {
 
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
-  const [isStarted, setIsStarted] = useState(true) // DEBUG
+  const [isStarted, setIsStarted] = useState(false) // DEBUG
   const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
   const isReadyToPlayDialogTimeMachine = useSelector<RootState>(
     (state) => state.globalConfig.isReadyToPlayDialogTimeMachine
@@ -35,13 +35,6 @@ const IndexExperience = () => {
   const dialogIsCompleteTimeMachine = useSelector<RootState>(
     (state) => state.globalConfig.dialogIsCompleteTimeMachine
   ) as boolean
-  // const [width, setWidth] = useState('')
-  // const [height, setHeight] = useState('')
-
-  // useEffect(() => {
-  //   setWidth(`${window.innerWidth}px`)
-  //   setHeight(`${window.innerHeight}px`)
-  // }, [])
 
   let content: ReactNode
 
@@ -58,7 +51,7 @@ const IndexExperience = () => {
             // toneMappingExposure: 1.75
           }}
           camera={{
-            fov: 35,
+            fov: window.innerWidth < 768 ? 45 : 35,
             near: 0.1,
             far: 2000,
             position: [-4.8, -0.2, 5.2],

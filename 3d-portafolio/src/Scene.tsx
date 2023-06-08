@@ -25,7 +25,7 @@ function Scene() {
 
   return (
     <>
-      {performance && <Perf position='top-left' />}
+      {/* {performance && <Perf position='top-left' />} */}
 
       <OrbitControls makeDefault />
 

@@ -1,6 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Center, Html, OrbitControls } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import { Center, OrbitControls } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
 import { Perf } from 'r3f-perf'
 import { useSelector } from 'react-redux'
 import BadgeText from './timeMachineScene/BadgeText'
@@ -14,7 +14,6 @@ import Garage from './timeMachineScene/world/garage/Garage'
 import Boxes from './timeMachineScene/world/garage/Boxes'
 import TextSign from './timeMachineScene/world/garage/TextSign'
 import { gsap } from 'gsap'
-import { useControls } from 'leva'
 import Shifter from './timeMachineScene/controls/shifter/Shifter'
 import SoundEffects from './timeMachineScene/world/SoundEffects'
 import { RootState } from '../store'
@@ -24,25 +23,6 @@ const TimeMachineExperience = () => {
   const { camera } = useThree()
 
   const cameraRef = useRef(camera)
-
-  // Debug
-
-  // const { rotationObj, positionObj } = useControls("cameraPos", {
-  //   rotationObj: {
-  //     value: [-0.31, -0.64, -0.19],
-  //     step: 0.01,
-  //     joystick: "invertY",
-  //   },
-  //   positionObj: {
-  //     value: [-4.24, 0.26, 4.76], //value: [-4.24, 0.26, 4.76],
-  //     step: 0.01,
-  //     joystick: "invertY",
-  //   },
-  // });
-
-  // useFrame(() => {
-  //   cameraRef.current.rotation.copy(camera.rotation);
-  // })
 
   // Animations
 
@@ -65,15 +45,23 @@ const TimeMachineExperience = () => {
     }
   }, [dialogIsCompleteTimeMachine])
 
+  // Responsiveness
+
+  useEffect(() => {
+    if(window.innerWidth < 768) {
+      camera.position.set(-4.4, 0.26, 5)
+      
+      // setTimeout(() => {console.log(camera.position)}, 3500)
+    }
+  }, [])
+
   return (
     <>
-      <Perf position='top-left' />
+      {/* <Perf position='top-left' /> */}
 
       <color args={['#241a1a']} attach='background' />
 
       <OrbitControls makeDefault enabled={false} />
-
-      {/* -1  -0.5 */}
 
       <Center position-y={-1}>
         <group scale={0.5} position-y={-0.5}>

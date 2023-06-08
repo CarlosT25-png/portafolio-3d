@@ -12,6 +12,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Breakpoint variables */
+  --bp-mobile: 576px; /* Phones */
+  --bp-tablet: 768px; /* Tablets */
+  --bp-laptop: 992px; /* Laptop */
+  --bp-large-device: 1200px; /* Large devices */
 }
 
 html,
