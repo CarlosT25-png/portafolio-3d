@@ -11,7 +11,7 @@ const TimeTravelVideoPlayer = () => {
 
   useLayoutEffect(() => {
     unmountOverlay();
-  })
+  }, [])
 
   const beginningHandler = () => {
     const videoTag = videoRef.current.getInternalPlayer() as HTMLVideoElement;
@@ -26,6 +26,10 @@ const TimeTravelVideoPlayer = () => {
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
+      <video 
+        autoPlay
+        
+      />
       <ReactPlayer
         ref={videoRef}
         volume={1}
@@ -34,6 +38,8 @@ const TimeTravelVideoPlayer = () => {
         width={'100%'}
         height={'100%'}
         playing
+        controls={false}
+        playsinline
         onStart={beginningHandler}
       />
     </div>
