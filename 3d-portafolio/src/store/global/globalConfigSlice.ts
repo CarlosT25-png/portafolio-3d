@@ -23,7 +23,7 @@ const initialGlobalConfigState: initialConfig = {
   scene: scenes.TIMEMACHINE, //DEBUG
   isReadyToPlayDialogTimeMachine: false,
   dialogIsCompleteTimeMachine: false,
-  playSoundAllWebsite: true,
+  playSoundAllWebsite: false,
   playSoundTimeMachine: true
 }
 

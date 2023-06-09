@@ -41,13 +41,14 @@ const IndexExperience = () => {
   if (scene !== scenes.TRANSITION) {
     content = (
       <>
+        {!isStarted && <IntroScreen onStart={setIsStarted} />}
         <Canvas
           dpr={[1, 2]}
           gl={{
             antialias: true,
             toneMapping: ACESFilmicToneMapping,
             outputEncoding: sRGBEncoding,
-            alpha: true
+            alpha: true,
             // toneMappingExposure: 1.75
           }}
           camera={{
@@ -63,7 +64,7 @@ const IndexExperience = () => {
           {scene === scenes.BEDROOM && <BedroomExperience />}
           <Preload all />
         </Canvas>
-        {scene === scenes.TIMEMACHINE &&
+        {scene === scenes.TIMEMACHINE && isStarted &&
           isReadyToPlayDialogTimeMachine &&
           !dialogIsCompleteTimeMachine && <TimeMachineDialogs />}
       </>
@@ -74,10 +75,7 @@ const IndexExperience = () => {
 
   return (
     <>
-      <Suspense fallback={null}>
-        {!isStarted && <IntroScreen onStart={setIsStarted} />}
-        {isStarted && content}
-      </Suspense>
+      <Suspense fallback={null}>{content}</Suspense>
       <Loader />
     </>
   )

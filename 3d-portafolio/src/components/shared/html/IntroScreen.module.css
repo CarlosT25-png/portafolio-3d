@@ -1,5 +1,7 @@
 .main {
-  background-color: black;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 20;
 }
 
 .message-container {
