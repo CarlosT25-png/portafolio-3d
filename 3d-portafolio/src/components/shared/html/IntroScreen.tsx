@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 import styles from './IntroScreen.module.css'
+import { TimeMachineSounds } from '../../timeMachineScene/sounds/TimeMachineSounds'
 
 interface Props {
   onStart: Dispatch<SetStateAction<boolean>>
@@ -7,6 +8,10 @@ interface Props {
 
 const IntroScreen = ({ onStart }: Props) => {
   const clickHandler = () => {
+    // Fix for mobile that only plays audio in user interactions
+    const sound = TimeMachineSounds.getInstance()
+    sound.machineSounds.play()
+    console.log(navigator.userAgent)
     onStart(true)
   }
 

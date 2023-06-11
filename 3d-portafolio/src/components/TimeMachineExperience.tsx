@@ -15,7 +15,6 @@ import Boxes from './timeMachineScene/world/garage/Boxes'
 import TextSign from './timeMachineScene/world/garage/TextSign'
 import { gsap } from 'gsap'
 import Shifter from './timeMachineScene/controls/shifter/Shifter'
-import SoundEffects from './timeMachineScene/world/SoundEffects'
 import { RootState } from '../store'
 
 const TimeMachineExperience = () => {
@@ -84,12 +83,6 @@ const TimeMachineExperience = () => {
         <Garage />
         <Boxes />
         <TextSign />
-
-        {/* Sounds */}
-        <SoundEffects
-          fixedSoundUrl='/sounds/timeMachineScene/machine.mp3'
-          randomSoundUrl='/sounds/timeMachineScene/electric.mp3'
-        />
       </Center>
     </>
   )

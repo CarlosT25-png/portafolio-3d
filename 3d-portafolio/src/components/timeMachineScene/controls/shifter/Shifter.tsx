@@ -10,6 +10,7 @@ import { globalConfigActions } from "../../../../store";
 import { scenes } from "../../../../store/global/globalConfigSlice";
 import { createPortal } from "react-dom";
 import { mountOverlay } from "../../../shared/html/FadeInOverlay";
+import { TimeMachineSounds } from "../../sounds/TimeMachineSounds";
 
 const Shifter = ( ) => {
 
@@ -57,7 +58,8 @@ const Shifter = ( ) => {
       if(isDragging === false) {
         // Check if the lever has reached the bottom
         if(internalPos.x === -0.39 && internalPos.y === -0.275 && internalPos.z === 0.5){
-          disptach(globalConfigActions.setPlaySoundTimeMachine(false))
+          const snd = TimeMachineSounds.getInstance()
+          snd.stopSounds();
           mountOverlay(2);
           setTimeout(() => {
             disptach(globalConfigActions.setScene(scenes.TRANSITION))
