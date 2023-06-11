@@ -7,11 +7,11 @@ interface Props {
 }
 
 const IntroScreen = ({ onStart }: Props) => {
+  const sound = TimeMachineSounds.getInstance()
   const clickHandler = () => {
     // Fix for mobile that only plays audio in user interactions
-    const sound = TimeMachineSounds.getInstance()
-    sound.machineSounds.play()
-    console.log(navigator.userAgent)
+    console.log(sound)
+    sound.machineSounds.start(0)
     onStart(true)
   }
 
