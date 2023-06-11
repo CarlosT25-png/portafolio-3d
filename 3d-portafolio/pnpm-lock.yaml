@@ -10,6 +10,7 @@ specifiers:
   '@types/react': 18.0.38
   '@types/react-dom': 18.0.11
   '@types/three': ^0.150.2
+  '@types/ua-parser-js': ^0.7.36
   '@use-gesture/react': ^10.2.26
   '@vitejs/plugin-react': ^4.0.0
   gsap: ^3.11.5
@@ -23,6 +24,7 @@ specifiers:
   react-spring: ^9.7.1
   three: ^0.152.2
   typescript: ^5.0.4
+  ua-parser-js: ^1.0.35
   vite: ^4.3.5
 
 dependencies:
@@ -46,8 +48,10 @@ dependencies:
   react-redux: 8.0.5_rzyliz2j3ixzcs72aaxsyibazq
   react-spring: 9.7.1_m5w7gp53gjh66wekkqzqhddyiy
   three: 0.152.2
+  ua-parser-js: 1.0.35
 
 devDependencies:
+  '@types/ua-parser-js': 0.7.36
   '@vitejs/plugin-react': 4.0.0_vite@4.3.5
   typescript: 5.0.4
   vite: 4.3.5_@types+node@18.15.13
@@ -1143,6 +1147,10 @@ packages:
       lil-gui: 0.17.0
     dev: false
 
+  /@types/ua-parser-js/0.7.36:
+    resolution: {integrity: sha512-N1rW+njavs70y2cApeIw1vLMYXRwfBy+7trgavGuuTfOd7j1Yh7QTRc/yqsPl6ncokt72ZXuxEU0PiCp9bSwNQ==}
+    dev: true
+
   /@types/use-sync-external-store/0.0.3:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
     dev: false
@@ -2044,6 +2052,10 @@ packages:
     engines: {node: '>=12.20'}
     hasBin: true
     dev: true
+
+  /ua-parser-js/1.0.35:
+    resolution: {integrity: sha512-fKnGuqmTBnIE+/KXSzCn4db8RTigUzw1AN0DmdU6hJovUTbYJKyqj+8Mt1c4VfRDnOVJnENmfYkIPZ946UrSAA==}
+    dev: false
 
   /update-browserslist-db/1.0.11_browserslist@4.21.5:
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}

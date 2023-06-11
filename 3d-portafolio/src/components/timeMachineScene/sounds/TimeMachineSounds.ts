@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { getBrowser, isMobileOrTablet } from "../../shared/utils/ResponsiveCheck";
 
 export class TimeMachineSounds {
 
@@ -8,7 +9,7 @@ export class TimeMachineSounds {
   private constructor () {
     this.machineSounds = new Audio('/sounds/timeMachineScene/machine.mp3')
     this.machineSounds.loop = true
-    this.machineSounds.volume = 0.025
+    this.machineSounds.volume = isMobileOrTablet() ? 0.005 : 0.05
   }
 
   public static getInstance () {
@@ -28,3 +29,14 @@ export class TimeMachineSounds {
     })
   }
 }
+
+function handleVisibilityChange() {
+  const snd = TimeMachineSounds.getInstance()
+  if (document.visibilityState === 'hidden') {
+    snd.machineSounds.volume = 0;
+  } else {
+    snd.machineSounds.volume = isMobileOrTablet() ? 0.005 : 0.05
+  }
+}
+
+document.addEventListener('visibilitychange', handleVisibilityChange);
