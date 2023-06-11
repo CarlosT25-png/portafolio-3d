@@ -13,10 +13,10 @@ const TimeTravelVideoPlayer = () => {
     unmountOverlay();
   }, [])
 
-  const beginningHandler = () => {
-    const videoTag = videoRef.current.getInternalPlayer() as HTMLVideoElement;
-    videoTag.style.objectFit = 'cover';
-  }
+  // const beginningHandler = () => {
+  //   const videoTag = videoRef.current.getInternalPlayer() as HTMLVideoElement;
+  //   videoTag.style.objectFit = 'cover';
+  // }
 
   const endHandler = () => {
     setTimeout(() => {
@@ -26,7 +26,17 @@ const TimeTravelVideoPlayer = () => {
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      <ReactPlayer
+      <video
+        src='/videos/time-travel.mp4'
+        width={'100%'}
+        height={'100%'}
+        autoPlay
+        playsInline
+        controls={false}
+        style={{objectFit: 'cover'}}
+        onEnded={endHandler}
+      />
+      {/* <ReactPlayer
         ref={videoRef}
         volume={1}
         onEnded={endHandler}
@@ -37,7 +47,7 @@ const TimeTravelVideoPlayer = () => {
         controls={false}
         playsinline
         onStart={beginningHandler}
-      />
+      /> */}
     </div>
   )
 }
