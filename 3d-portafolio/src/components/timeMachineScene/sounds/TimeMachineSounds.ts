@@ -1,16 +1,23 @@
 import { gsap } from "gsap";
-import { getBrowser, isMobileOrTablet } from "../../shared/utils/ResponsiveCheck";
+import { isMobileOrTablet } from "../../shared/utils/ResponsiveCheck";
 
 export class TimeMachineSounds {
   private static instance: TimeMachineSounds;
   audioContext: AudioContext;
   // @ts-ignore
   machineSounds: AudioBufferSourceNode;
+   // @ts-ignore
+  vlmController: GainNode
 
   private constructor() {
     // @ts-ignore
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     this.loadAudio('/sounds/timeMachineScene/machine.mp3');
+
+    // Volume controller
+    this.vlmController = this.audioContext.createGain()
+    this.vlmController.gain.value = isMobileOrTablet() ? 0.1 : 0.2
+    this.vlmController.connect(this.audioContext.destination)
   }
 
   public static getInstance() {
@@ -30,25 +37,17 @@ export class TimeMachineSounds {
         this.machineSounds = this.audioContext.createBufferSource();
         this.machineSounds.buffer = buffer;
         this.machineSounds.loop = true;
-        this.machineSounds.connect(this.audioContext.destination);
-        this.updateVolume();
+        this.machineSounds.connect(this.vlmController);
       });
     };
 
     request.send();
   }
 
-  updateVolume() {
-    if (this.machineSounds) {
-      const gainNode = this.audioContext.createGain()
-      gainNode.gain.value = isMobileOrTablet() ? 0.0005 : 0.025
-      gainNode.connect(this.audioContext.destination)
-    }
-  }
 
   public stopSounds() {
-    gsap.to(this.machineSounds, {
-      volume: 0,
+    gsap.to(this.vlmController.gain, {
+      value: 0,
       duration: 2.5,
       onComplete: () => {
         this.machineSounds.stop(0);
@@ -56,14 +55,3 @@ export class TimeMachineSounds {
     });
   }
 }
-
-// function handleVisibilityChange() {
-//   const snd = TimeMachineSounds.getInstance();
-//   if (document.visibilityState === 'hidden') {
-//     snd.stopSounds();
-//   } else {
-//     snd.updateVolume();
-//   }
-// }
-
-// document.addEventListener('visibilitychange', handleVisibilityChange);

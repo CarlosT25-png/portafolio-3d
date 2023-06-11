@@ -53,7 +53,6 @@ const IndexExperience = () => {
             toneMapping: ACESFilmicToneMapping,
             outputEncoding: sRGBEncoding,
             alpha: true,
-            // toneMappingExposure: 1.75
           }}
           camera={{
             fov: window.innerWidth < 768 ? 45 : 35,

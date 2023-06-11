@@ -1,6 +1,5 @@
 import Poster from "./scene/Poster";
 import Lights from "./scene/Lights";
-import PlayRecord from "./scene/PlayRecord";
 import Structure from "./Structure";
 import PolaroidImages from "./scene/PolaroidImages";
 
@@ -24,7 +23,6 @@ const BasicWorld = () => {
       <Lights />
       <Structure />
       <Poster />
-      <PlayRecord />
       <PolaroidImages />
     </>
   );
