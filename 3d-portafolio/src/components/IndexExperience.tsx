@@ -10,6 +10,7 @@ import { RootState } from '../store'
 import { scenes } from '../store/global/globalConfigSlice'
 import TimeTravelVideoPlayer from './shared/transitions/TimeTravelVideoPlayer'
 import TimeMachineDialogs from './shared/messageDialogs/TimeMachineDialogs'
+import BedroomDialog from './shared/messageDialogs/BedroomDialog'
 
 // Hook to handle window resize
 function useWindowSize() {
@@ -34,6 +35,9 @@ const IndexExperience = () => {
   ) as boolean
   const dialogIsCompleteTimeMachine = useSelector<RootState>(
     (state) => state.globalConfig.dialogIsCompleteTimeMachine
+  ) as boolean
+  const dialogIsCompleteBedroom = useSelector<RootState>(
+    (state) => state.globalConfig.dialogIsCompleteBedroom
   ) as boolean
 
   let content: ReactNode
@@ -67,6 +71,7 @@ const IndexExperience = () => {
         {scene === scenes.TIMEMACHINE && isStarted &&
           isReadyToPlayDialogTimeMachine &&
           !dialogIsCompleteTimeMachine && <TimeMachineDialogs />}
+        {scene === scenes.BEDROOM && !dialogIsCompleteBedroom && <BedroomDialog />}
       </>
     )
   } else if (scene === scenes.TRANSITION) {
