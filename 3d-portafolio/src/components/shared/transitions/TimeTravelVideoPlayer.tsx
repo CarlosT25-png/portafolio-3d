@@ -31,6 +31,7 @@ const TimeTravelVideoPlayer = () => {
         width={'100%'}
         height={'100%'}
         autoPlay
+        muted
         playsInline
         controls={false}
         style={{objectFit: 'cover'}}
