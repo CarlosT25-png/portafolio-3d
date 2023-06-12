@@ -7,6 +7,8 @@ export class BedroomSounds {
   // @ts-ignore
   musicBg: AudioBufferSourceNode
   // @ts-ignore
+  transitioSnd: AudioBufferSourceNode
+  // @ts-ignore
   vlmController: GainNode
 
   private constructor() {
@@ -37,21 +39,37 @@ export class BedroomSounds {
         this.musicBg = this.audioContext.createBufferSource()
         this.musicBg.buffer = buffer
         this.musicBg.loop = true
-        this.musicBg.connect(this.vlmController);
+        this.musicBg.connect(this.vlmController)
       })
     }
 
     request.send()
   }
 
+  loadTransitionAudio() {
+    const request = new XMLHttpRequest()
+    request.open('GET', '/sounds/transitions/time-travel.mp3', true)
+    request.responseType = 'arraybuffer'
+
+    request.onload = () => {
+      this.audioContext.decodeAudioData(request.response, (buffer) => {
+        this.transitioSnd = this.audioContext.createBufferSource()
+        this.transitioSnd.buffer = buffer
+        this.transitioSnd.connect(this.vlmController)
+        this.transitioSnd.start(0)
+      })
+    }
+
+    request.send()
+  }
 
   public stopSounds() {
     gsap.to(this.vlmController.gain, {
       value: 0,
       duration: 2.5,
       onComplete: () => {
-        this.musicBg.stop(0);
+        this.musicBg.stop(0)
       },
-    });
+    })
   }
 }

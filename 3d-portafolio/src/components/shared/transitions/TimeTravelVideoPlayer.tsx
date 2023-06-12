@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import ReactPlayer from 'react-player'
 import { useDispatch } from 'react-redux'
 import { globalConfigActions } from '../../../store';
 import { scenes } from '../../../store/global/globalConfigSlice';
 import { unmountOverlay } from '../html/FadeInOverlay';
+import { BedroomSounds } from '../../bedroomExperience/sounds/BedroomSounds';
 
 const TimeTravelVideoPlayer = () => {
   const dispacth = useDispatch();
@@ -17,6 +18,14 @@ const TimeTravelVideoPlayer = () => {
   //   const videoTag = videoRef.current.getInternalPlayer() as HTMLVideoElement;
   //   videoTag.style.objectFit = 'cover';
   // }
+
+  const snd = useMemo(() => {
+    return BedroomSounds.getInstance();
+  }, [])
+
+  useEffect(() => {
+    snd.loadTransitionAudio()
+  }, [])
 
   const endHandler = () => {
     setTimeout(() => {

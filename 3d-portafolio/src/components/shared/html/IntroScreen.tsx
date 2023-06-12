@@ -13,7 +13,6 @@ const IntroScreen = ({ onStart }: Props) => {
   
   const clickHandler = () => {
     // Fix for mobile that only plays audio in user interactions
-    console.log(sound)
     sound.machineSounds.start(0)
     onStart(true)
   }
