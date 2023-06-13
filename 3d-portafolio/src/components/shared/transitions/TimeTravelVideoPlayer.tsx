@@ -5,6 +5,7 @@ import { globalConfigActions } from '../../../store';
 import { scenes } from '../../../store/global/globalConfigSlice';
 import { unmountOverlay } from '../html/FadeInOverlay';
 import { BedroomSounds } from '../../bedroomExperience/sounds/BedroomSounds';
+import { isMobileOrTablet } from '../utils/ResponsiveCheck';
 
 const TimeTravelVideoPlayer = () => {
   const dispacth = useDispatch();
@@ -39,8 +40,7 @@ const TimeTravelVideoPlayer = () => {
         src='/videos/time-travel.mp4'
         width={'100%'}
         height={'100%'}
-        autoPlay
-        muted
+        autoPlay={!isMobileOrTablet()} // only true for pc
         playsInline
         controls={false}
         style={{objectFit: 'cover'}}
