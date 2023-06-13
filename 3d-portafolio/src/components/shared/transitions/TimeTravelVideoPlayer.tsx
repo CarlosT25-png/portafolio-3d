@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, forwardRef } from 'react'
 import ReactPlayer from 'react-player'
 import { useDispatch } from 'react-redux'
 import { globalConfigActions } from '../../../store';
@@ -7,7 +7,7 @@ import { unmountOverlay } from '../html/FadeInOverlay';
 import { BedroomSounds } from '../../bedroomExperience/sounds/BedroomSounds';
 import { isMobileOrTablet } from '../utils/ResponsiveCheck';
 
-const TimeTravelVideoPlayer = () => {
+const TimeTravelVideoPlayer = forwardRef<HTMLVideoElement>((_, ref) => {
   const dispacth = useDispatch();
   const videoRef = useRef<ReactPlayer>(null!)
 
@@ -15,18 +15,13 @@ const TimeTravelVideoPlayer = () => {
     unmountOverlay();
   }, [])
 
-  // const beginningHandler = () => {
-  //   const videoTag = videoRef.current.getInternalPlayer() as HTMLVideoElement;
-  //   videoTag.style.objectFit = 'cover';
-  // }
+  // const snd = useMemo(() => {
+  //   return BedroomSounds.getInstance();
+  // }, [])
 
-  const snd = useMemo(() => {
-    return BedroomSounds.getInstance();
-  }, [])
-
-  useEffect(() => {
-    snd.loadTransitionAudio()
-  }, [])
+  // useEffect(() => {
+  //   snd.loadTransitionAudio()
+  // }, [])
 
   const endHandler = () => {
     setTimeout(() => {
@@ -37,12 +32,14 @@ const TimeTravelVideoPlayer = () => {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <video
+        ref={ref}
         src='/videos/time-travel.mp4'
         width={'100%'}
         height={'100%'}
         autoPlay={!isMobileOrTablet()} // only true for pc
+        // muted={isMobileOrTablet()} // only true for pc
         playsInline
-        controls={false}
+        // controls={!isMobileOrTablet()}
         style={{objectFit: 'cover'}}
         onEnded={endHandler}
       />
@@ -60,6 +57,6 @@ const TimeTravelVideoPlayer = () => {
       /> */}
     </div>
   )
-}
+})
 
 export default TimeTravelVideoPlayer

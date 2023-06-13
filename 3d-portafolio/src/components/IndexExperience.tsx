@@ -1,4 +1,4 @@
-import { ReactNode, Suspense, useLayoutEffect, useState } from 'react'
+import { ReactNode, Suspense, useLayoutEffect, useRef, useState } from 'react'
 import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
 import { Canvas } from '@react-three/fiber'
 import { Loader, Preload } from '@react-three/drei'
@@ -11,6 +11,8 @@ import { scenes } from '../store/global/globalConfigSlice'
 import TimeTravelVideoPlayer from './shared/transitions/TimeTravelVideoPlayer'
 import TimeMachineDialogs from './shared/messageDialogs/TimeMachineDialogs'
 import BedroomDialog from './shared/messageDialogs/BedroomDialog'
+import ConfirmTravel from './shared/html/ConfirmTravel'
+import { isMobileOrTablet } from './shared/utils/ResponsiveCheck'
 
 // Hook to handle window resize
 function useWindowSize() {
@@ -28,7 +30,9 @@ function useWindowSize() {
 
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [isStarted, setIsStarted] = useState(false) // DEBUG
+  const [videoTransitionConfirm, setVideoTransitionConfirm] = useState(false)
   const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
   const isReadyToPlayDialogTimeMachine = useSelector<RootState>(
     (state) => state.globalConfig.isReadyToPlayDialogTimeMachine
@@ -67,14 +71,27 @@ const IndexExperience = () => {
           {scene === scenes.BEDROOM && <BedroomExperience />}
           <Preload all />
         </Canvas>
-        {scene === scenes.TIMEMACHINE && isStarted &&
+        {scene === scenes.TIMEMACHINE &&
+          isStarted &&
           isReadyToPlayDialogTimeMachine &&
           !dialogIsCompleteTimeMachine && <TimeMachineDialogs />}
         {scene === scenes.BEDROOM && !dialogIsCompleteBedroom && <BedroomDialog />}
       </>
     )
   } else if (scene === scenes.TRANSITION) {
-    content = <TimeTravelVideoPlayer />
+    content = (
+      <>
+        {isMobileOrTablet() && !videoTransitionConfirm && (
+          <ConfirmTravel
+            onConfirm={() => {
+              videoRef.current?.play()
+              setVideoTransitionConfirm(true)
+            }}
+          />
+        )}
+        <TimeTravelVideoPlayer ref={videoRef} />
+      </>
+    )
   }
 
   return (
