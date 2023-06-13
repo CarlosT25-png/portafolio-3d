@@ -14,10 +14,10 @@ const Dog = ({ showAnimation }: { showAnimation: boolean}  ) => {
       })
       gsap.set(imgRef.current, { y: '2rem'})
       gsap.to(imgRef.current, {
-        y: '-2rem',
+        y: '-0rem',
         yoyo: true,
         repeat: 2,
-        duration: 1
+        duration: 1,
       })
     }
   }
