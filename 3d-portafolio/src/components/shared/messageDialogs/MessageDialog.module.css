@@ -28,14 +28,24 @@
   right: 1rem;
 }
 
+/* Laptop */
+@media screen and (max-width: 1600px) {
+  .message-container {
+    width: 42vw;
+    height: 35vh;
+    top: 63%;
+    left: 63%;
+    font-size: 2rem;
+  }
+}
+
 /* Tablet */
 @media screen and (max-width: 768px) {
   .message-container {
-    width: 40vw;
-    height: 45vh;
-    top: 62%;
-    left: 70%;
-    /* top: 48%; */
+    width: 48vw;
+    height: 38vh;
+    top: 63%;
+    left: 60%;
     font-size: 2rem;
   }
 }
@@ -43,9 +53,11 @@
 /* Phone */
 @media screen and (max-width: 576px) {
   .message-container {
-    width: 70vw;
-    height: 65vh;
-    top: 48%;
-    font-size: 2rem;
+    width: 65vw;
+    height: 38vh;
+    top: 63%;
+    left: 48%;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
   }
 }
