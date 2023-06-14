@@ -22,6 +22,7 @@
 .text {
   font-size: 2rem;
   margin-bottom: 4rem;
+  color: rgba(233, 233, 233, 0.5);
 }
 
 .btn{
