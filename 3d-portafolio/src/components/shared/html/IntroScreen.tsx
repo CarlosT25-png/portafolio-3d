@@ -23,14 +23,12 @@ const IntroScreen = ({ onStart }: Props) => {
       className={styles.main}
     >
       <div className={styles['message-container']}>
-        <h2 className={styles['title']}>👋 Welcome to My Portfolio</h2>
+        <h2 className={styles['title']}>Carlos Torres's 3D Portafolio</h2>
         <p className={styles['text']}>
-          Hey there! Get ready to explore an extraordinary world of web development! From
-          captivating designs to seamless user experiences, my portfolio is a showcase of
-          my passion for frontend development. Enjoy the ride!
+          Click start to begin
         </p>
         <a onClick={clickHandler} className={`${styles['btn']} ${styles['btn-1']}`}>
-          Let's Dive In! 🚀
+          Start
         </a>
       </div>
     </div>

@@ -1,15 +1,15 @@
 .message-container {
-  width: 75vw;
-  height: 75vh;
+  width: 30vw;
+  height: 30vh;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 68%;
+  left: 75%;
   transform: translate(-50%, -50%);
   z-index: 10;
   background-color: white;
   color: black;
   font-family: 'Roboto Slab', serif;
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 2rem 5rem;
   border: 3px solid black;
   border-radius: 1.6rem;

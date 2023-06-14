@@ -13,15 +13,15 @@ const TimeMachineDialogs = () => {
         <MessageDialog
           title="Hey there, My name is Soli, I'm Carlos's dog, I'm here to help you"
           showAnimation
-          message='Example of text'
+          message='I think you are here to know a little bit more about Carlos, so let me tell you, you are in the right place.'
           onClick={() => setShowSecondDialog(true)}
         />
       )}
       {showSecondDialog && (
         <MessageDialog
-          title='This is the second dialog'
+          title='A wise man once said, "To know someone well, know their past."'
           showAnimation={false}
-          message='Example of text'
+          message="Luckily, we can use Carlos's time travel machine to go to his childhood bedroom, where you'll find helpful information. So, pick a date with the 'date controls' and then use the lever"
           onClick={() => {
             dispatch(globalConfigActions.setDialogIsCompleteTimeMachine(true))
           }}

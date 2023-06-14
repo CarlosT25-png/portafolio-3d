@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useMemo } from 'react'
-import styles from './IntroScreen.module.css'
+import { useMemo } from 'react'
+import styles from './ConfirmTravel.module.css'
 import { TimeMachineSounds } from '../../timeMachineScene/sounds/TimeMachineSounds'
 
 interface Props {
