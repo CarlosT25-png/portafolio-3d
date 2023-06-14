@@ -31,10 +31,12 @@
 /* Tablet */
 @media screen and (max-width: 768px) {
   .message-container {
-    width: 70vw;
-    height: 65vh;
+    width: 40vw;
+    height: 45vh;
+    top: 62%;
+    left: 70%;
     /* top: 48%; */
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 

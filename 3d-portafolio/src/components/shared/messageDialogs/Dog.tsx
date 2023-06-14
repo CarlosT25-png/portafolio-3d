@@ -1,4 +1,4 @@
-import dogIlustration from '/images/dog.png'
+import dogIlustration from '/images/beagle.png'
 import styles from './Dog.module.css';
 import { useRef } from 'react';
 import { gsap } from 'gsap';
