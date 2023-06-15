@@ -34,9 +34,7 @@ const DayControl = ({ dispatchFn, position }: Props) => {
       // Clamp offset value to within the range of -1 to 0
       offset = Math.max(-OFFSET_RANGE, Math.min(0, offset));
       offsetVal = Math.max(-1, Math.min(0, offsetVal));
-      console.log(offsetVal)
       let numberValue = offsetVal * timeDuration * -1;
-      console.log(numberValue)
       numberValue = Math.round(numberValue) + 1
       numberValue = Math.min(numberValue, timeDuration)
       dispatch(dispatchFn(numberValue))
