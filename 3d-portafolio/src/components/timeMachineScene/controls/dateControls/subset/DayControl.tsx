@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store";
 import * as THREE from 'three' 
 import { useState, useEffect } from "react";
+import { isMobileOrTablet } from "../../../../shared/utils/ResponsiveCheck";
 
 type MeshProps = JSX.IntrinsicElements["mesh"];
 
@@ -13,7 +14,7 @@ interface Props {
   position: THREE.Vector3,
 }
 
-const OFFSET_RANGE = 1.45;
+const OFFSET_RANGE = isMobileOrTablet() ? 0.55 : 0.95;
 
 const DayControl = ({ dispatchFn, position }: Props) => {
 
@@ -28,13 +29,14 @@ const DayControl = ({ dispatchFn, position }: Props) => {
   const bind = useGesture({
     onDrag: ({ offset: [x, y] }) => {
       let offset = y / aspect;
+      let offsetVal = y / aspect;
 
       // Clamp offset value to within the range of -1 to 0
       offset = Math.max(-OFFSET_RANGE, Math.min(0, offset));
-
-      console.log(timeDuration)
-    
-      let numberValue = offset * timeDuration * -1;
+      offsetVal = Math.max(-1, Math.min(0, offsetVal));
+      console.log(offsetVal)
+      let numberValue = offsetVal * timeDuration * -1;
+      console.log(numberValue)
       numberValue = Math.round(numberValue) + 1
       numberValue = Math.min(numberValue, timeDuration)
       dispatch(dispatchFn(numberValue))
@@ -48,9 +50,9 @@ const DayControl = ({ dispatchFn, position }: Props) => {
   }, [hovered])
 
   return (
-    <group position={position} scale={0.08} >
+    <group position={position} scale={isMobileOrTablet() ? [0.14, 0.7, 0.15] : 0.12}>
       {/* @ts-ignore */}
-      <a.mesh rotation-y={0.9} rotation-z={0.15} {...bind()} {...spring} onPointerEnter={() => setHovered(true)} onPointerLeave={ () => setHovered(false)} >
+      <a.mesh rotation-y={isMobileOrTablet() ? 0.92 : 0.9} rotation-z={0.1} {...bind()} {...spring} onPointerEnter={() => setHovered(true)} onPointerLeave={ () => setHovered(false)} >
         <boxGeometry args={[0.2, 0.1]} />
         <meshBasicMaterial color="red" />
       </a.mesh>
