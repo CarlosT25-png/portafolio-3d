@@ -3,8 +3,14 @@ import { useRef } from "react";
 import { DirectionalLightHelper, DirectionalLight, PointLightHelper, PointLight, RectAreaLight } from "three";
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
 import LavaLamp from "./LavaLamp";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store";
+import { getLightIntensityByHour } from "../../utils/LightsPerHour";
 
 const Lights = () => {
+  const hourSelected = useSelector<RootState>(state => state.date.hour) as number
+  const ambientLightIntensity: number = getLightIntensityByHour(hourSelected)
+
   const directionalLightHelper = useRef<DirectionalLight>(null!);
   // useHelper(directionalLightHelper, DirectionalLightHelper);
 
@@ -19,7 +25,7 @@ const Lights = () => {
   return (
     <>
       {/* This light acts like the sun */}
-      <directionalLight ref={directionalLightHelper} color="#FFFFFF" intensity={0.5} position={[-0.5, 3, 3]} />
+      <directionalLight ref={directionalLightHelper} color="#FFFFFF" intensity={ambientLightIntensity} position={[-0.5, 3, 3]} />
       {/* Left table light */}
       <pointLight ref={ pointLightHelper } scale={0.04} position={[ -0.41575, 0.6, -0.05 ]} color={'#fffcb6'} intensity={0.4} />
       {/* Right table light */}
