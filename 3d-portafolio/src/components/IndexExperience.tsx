@@ -1,6 +1,6 @@
-import { ReactNode, Suspense, useLayoutEffect, useRef, useState } from 'react'
+import { ReactNode, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Loader, Preload } from '@react-three/drei'
 import { useSelector } from 'react-redux'
 import TimeMachineExperience from './TimeMachineExperience'
@@ -13,6 +13,7 @@ import TimeMachineDialogs from './shared/messageDialogs/TimeMachineDialogs'
 import BedroomDialog from './shared/messageDialogs/BedroomDialog'
 import ConfirmTravel from './shared/html/ConfirmTravel'
 import { isMobileOrTablet } from './shared/utils/ResponsiveCheck'
+import { ScreenTest } from './shared/html/ScreenTest'
 
 // Hook to handle window resize
 function useWindowSize() {
@@ -46,10 +47,14 @@ const IndexExperience = () => {
 
   let content: ReactNode
 
+  useEffect(() => {
+    ScreenTest.getInstance()
+  }, [])
+
   if (scene !== scenes.TRANSITION) {
     content = (
       <>
-        {!isStarted && <IntroScreen onStart={setIsStarted} />}
+        {!isStarted && <IntroScreen onStart={setIsStarted} />} {/* <IntroScreen onStart={setIsStarted} /> */}
         <Canvas
           dpr={[1, 2]}
           gl={{
