@@ -19,7 +19,7 @@ const Lights = () => {
   return (
     <>
       {/* This light acts like the sun */}
-      <directionalLight ref={directionalLightHelper} color="#FFFFFF" intensity={0.3} position={[-0.5, 3, 3]} />
+      <directionalLight ref={directionalLightHelper} color="#FFFFFF" intensity={0.5} position={[-0.5, 3, 3]} />
       {/* Left table light */}
       <pointLight ref={ pointLightHelper } scale={0.04} position={[ -0.41575, 0.6, -0.05 ]} color={'#fffcb6'} intensity={0.4} />
       {/* Right table light */}

@@ -25,10 +25,7 @@ body {
   height: 100svh;
   margin: 0;
   overflow: hidden;
-  --def: #96B7C4; 	
-	--inv: #fff;
   font-size: 62.5%;
-  background-color: black;
 }
 
 #root {
