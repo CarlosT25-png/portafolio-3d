@@ -13,7 +13,6 @@ import TimeMachineDialogs from './shared/messageDialogs/TimeMachineDialogs'
 import BedroomDialog from './shared/messageDialogs/BedroomDialog'
 import ConfirmTravel from './shared/html/ConfirmTravel'
 import { isMobileOrTablet } from './shared/utils/ResponsiveCheck'
-import { ScreenTest } from './shared/html/ScreenTest'
 
 // Hook to handle window resize
 function useWindowSize() {
@@ -47,9 +46,6 @@ const IndexExperience = () => {
 
   let content: ReactNode
 
-  useEffect(() => {
-    ScreenTest.getInstance()
-  }, [])
 
   if (scene !== scenes.TRANSITION) {
     content = (
