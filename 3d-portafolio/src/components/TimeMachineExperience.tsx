@@ -16,9 +16,22 @@ import TextSign from './timeMachineScene/world/garage/TextSign'
 import { gsap } from 'gsap'
 import Shifter from './timeMachineScene/controls/shifter/Shifter'
 import { RootState } from '../store'
+import { useControls } from 'leva'
 
 const TimeMachineExperience = () => {
   const dialogIsCompleteTimeMachine = useSelector<RootState>((state) => state.globalConfig.dialogIsCompleteTimeMachine) as boolean
+  // const { cameraPos, timeMachinePos } = useControls('camera', {
+  //   cameraPos: {
+  //     value: [-3.010, -0.250, 3.441],
+  //     step: 0.001,
+  //     joystick: 'invertY'
+  //   },
+  //   timeMachinePos: {
+  //     value: [-1.968, -0.499, 2.201],
+  //     step: 0.001,
+  //     joystick: 'invertY'
+  //   }
+  // })
   const { camera } = useThree()
 
   const cameraRef = useRef(camera)
@@ -28,7 +41,7 @@ const TimeMachineExperience = () => {
   useLayoutEffect(() => {
     // Setting camer position
     cameraRef.current.rotation.set(-0.31, -0.64, -0.19)
-    cameraRef.current.position.set(-4.24, 0.26, 2)
+    cameraRef.current.position.set(-3.331, -0.201, 3.875)
   }, [])
 
   useEffect(() => {
@@ -41,8 +54,23 @@ const TimeMachineExperience = () => {
         delay: 2.5,
         ease: 'easeIn',
       })
+      gsap.to(cameraRef.current.position, {
+        // -3.010, -0.250, 3.441
+        x: -3.010,
+        y: -0.250,
+        z: 3.441,
+        duration: 4,
+        delay: 2.5,
+        ease: 'easeIn',
+      })
     }
   }, [dialogIsCompleteTimeMachine])
+
+  // useEffect(() => {
+  //   if(dialogIsCompleteTimeMachine) {
+  //     cameraRef.current.position.set(-3.331, -0.201, 3.875)
+  //   }
+  // }, [])
 
   // Responsiveness
 
@@ -59,7 +87,7 @@ const TimeMachineExperience = () => {
       <OrbitControls makeDefault enabled={false} />
 
       <Center position-y={-1}>
-        <group scale={0.5} position-y={-0.5} position-x={-0.7}>
+        <group scale={0.5} position={[-1.968, -0.499, 2.201]}>
           <BasicWorld />
           {/* Old Time Machine Text */}
           <BadgeText />
