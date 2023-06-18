@@ -39,7 +39,7 @@ const TimeMachineExperience = () => {
   // Animations
 
   useLayoutEffect(() => {
-    // Setting camer position
+    // Setting camera position
     cameraRef.current.rotation.set(-0.31, -0.64, -0.19)
     cameraRef.current.position.set(-3.331, -0.201, 3.875)
   }, [])
