@@ -28,7 +28,7 @@ const TimeMachineExperience = () => {
   useLayoutEffect(() => {
     // Setting camer position
     cameraRef.current.rotation.set(-0.31, -0.64, -0.19)
-    cameraRef.current.position.set(-4.24, 0.26, 4.76)
+    cameraRef.current.position.set(-4.24, 0.26, 2)
   }, [])
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const TimeMachineExperience = () => {
       <OrbitControls makeDefault enabled={false} />
 
       <Center position-y={-1}>
-        <group scale={0.5} position-y={-0.5}>
+        <group scale={0.5} position-y={-0.5} position-x={-0.7}>
           <BasicWorld />
           {/* Old Time Machine Text */}
           <BadgeText />
@@ -81,7 +81,7 @@ const TimeMachineExperience = () => {
 
         {/* Environment */}
         <Garage />
-        <Boxes />
+        {/* <Boxes /> */}
         <TextSign />
       </Center>
     </>

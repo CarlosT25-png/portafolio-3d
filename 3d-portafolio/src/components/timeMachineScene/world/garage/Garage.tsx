@@ -4,7 +4,7 @@ import * as THREE from 'three'
 
 const Garage = () => {
   const directionalLight = useRef<THREE.SpotLight>(null)
-  const model = useGLTF("/models/timeMachineScene/garage-draco.glb");
+  const model = useGLTF("/models/timeMachineScene/attic-draco.glb");
   // @ts-ignore
   useHelper(directionalLight, THREE.SpotLightHelper, 1)
 
