@@ -1,15 +1,8 @@
 import { Text, Image } from '@react-three/drei'
 import { useControls } from 'leva'
+import { useEffect } from 'react'
 
 const TextMachine = () => {
-
-  const { posObj } = useControls('sifter sign', {
-    posObj: {
-      value: [0.44, 2.02, 0.60],
-      step: 0.001,
-      joystick: 'invertY',
-    }
-  })
   return (
     <>
       {/* UP RIGHT SIDE */}
@@ -104,27 +97,55 @@ const TextMachine = () => {
       </group>
 
       {/* BOTTOM SIDE */}
-      <group position={posObj} rotation={[-1.46, -0.09, -0.66]}>
+      <group position={[0.626, 2.0178, 0.565]} rotation={[-1.46, -0.09, -0.66]}>
         {/* Vertical line */}
-        <mesh position-x={-0.035}>
-          <boxGeometry args={[0.015,0.6, 0.01]} />
+        <mesh position-x={-0.05}>
+          <boxGeometry args={[0.015, 0.6, 0.01]} />
+          <meshBasicMaterial color={'#545452'} />
+        </mesh>
+        <mesh position-x={-0.02}>
+          <boxGeometry args={[0.015, 0.6, 0.01]} />
+          <meshBasicMaterial color={'#545452'} />
+        </mesh>
+        <mesh position-x={-0.03} position-y={0.293}>
+          <boxGeometry args={[0.03, 0.015, 0.01]} />
           <meshBasicMaterial color={'#545452'} />
         </mesh>
         {/* Right line */}
-        <mesh position-x={-0.005} position-y={-0.237} rotation-z={-0.5}>
-          <boxGeometry args={[0.015,0.13, 0.01]} />
+        <mesh position-x={0.01} position-y={-0.25} rotation-z={-0.5}>
+          <boxGeometry args={[0.015, 0.13, 0.01]} />
           <meshBasicMaterial color={'#545452'} />
         </mesh>
-        {/* Right line */}
-        <mesh position-x={-0.068} position-y={-0.235} rotation-z={0.5}>
-          <boxGeometry args={[0.015,0.13, 0.01]} />
+        <mesh position-x={0.015} position-y={-0.3} rotation-z={-0.5}>
+          <boxGeometry args={[0.015, 0.2, 0.01]} />
           <meshBasicMaterial color={'#545452'} />
         </mesh>
+        <mesh position-x={0.055} position-y={-0.2095} rotation-z={-0.5}>
+          <boxGeometry args={[0.03, 0.015, 0.01]} />
+          <meshBasicMaterial color={'#545452'} />
+        </mesh>
+        {/* Left line */}
+        <mesh position-x={-0.08} position-y={-0.25} rotation-z={0.5}>
+          <boxGeometry args={[0.015, 0.13, 0.01]} />
+          <meshBasicMaterial color={'#545452'} />
+        </mesh>
+        <mesh position-x={-0.085} position-y={-0.3} rotation-z={0.5}>
+          <boxGeometry args={[0.015, 0.2, 0.01]} />
+          <meshBasicMaterial color={'#545452'} />
+        </mesh>
+        <mesh position-x={-0.125} position-y={-0.2095} rotation-z={0.5}>
+          <boxGeometry args={[0.03, 0.015, 0.01]} />
+          <meshBasicMaterial color={'#545452'} />
+        </mesh>
+      </group>
+      {/* Travel Text lever */}
+      <group position={[0.626, 2.0178, 0.565]} rotation={[-1.46, -0.09, -0.66]}>
         <Text
           font='/fonts/patua-one-v16-latin-regular.woff'
           scale={0.07}
           // position-y={-0.15}
-          position-x={0.15}
+          position-x={-0.03}
+          position-y={-0.5}
           fillOpacity={0.7}
           color={'#070705'}
         >
