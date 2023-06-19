@@ -12,11 +12,11 @@ export class TimeMachineSounds {
   private constructor() {
     // @ts-ignore
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    this.loadAudio('/sounds/timeMachineScene/machine.mp3');
+    this.loadAudio('/sounds/timeMachineScene/wind.mp3');
 
     // Volume controller
     this.vlmController = this.audioContext.createGain()
-    this.vlmController.gain.value = isMobileOrTablet() ? 0.1 : 0.2
+    this.vlmController.gain.value = 1
     this.vlmController.connect(this.audioContext.destination)
   }
 
