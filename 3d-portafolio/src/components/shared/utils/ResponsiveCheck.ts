@@ -8,6 +8,10 @@ export const isMobile = () => {
   } else return false
 }
 
+export const isTablet = () => {
+  return parser.getDevice().type === UAParser.DEVICE.TABLET;
+};
+
 export const isMobileOrTablet = () => {
   if(parser.getDevice().type === UAParser.DEVICE.MOBILE  || parser.getDevice().type === UAParser.DEVICE.TABLET) {
     return true;
