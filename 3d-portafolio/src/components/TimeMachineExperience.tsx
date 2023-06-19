@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { Center, OrbitControls } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { Perf } from 'r3f-perf'
 import { useSelector } from 'react-redux'
 import BadgeText from './timeMachineScene/BadgeText'
 import PlaceDisplay from './timeMachineScene/displays/PlaceDisplay'
@@ -11,7 +10,6 @@ import DateControlHandler from './timeMachineScene/controls/dateControls/DateCon
 import TextMachine from './timeMachineScene/displays/TextMachine'
 import BasicWorld from './timeMachineScene/world/BasicWorld'
 import Garage from './timeMachineScene/world/garage/Garage'
-import Boxes from './timeMachineScene/world/garage/Boxes'
 import TextSign from './timeMachineScene/world/garage/TextSign'
 import { gsap } from 'gsap'
 import Shifter from './timeMachineScene/controls/shifter/Shifter'
@@ -51,12 +49,11 @@ const TimeMachineExperience = () => {
           delay: 2.5,
           ease: 'easeIn',
         })
-      } 
-      if(!isMobileOrTablet) {
+      } else {
         gsap.to(cameraRef.current.position, {
-          x: -3.010,
+          x: -3.25,
           y: 0.3,
-          z: 3.441,
+          z: 3.8,
           duration: 4,
           delay: 2.5,
           ease: 'easeIn',
