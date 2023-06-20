@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
 
-export class MonitorScreen {
-  private static instance: MonitorScreen | null = null
+export class GameScreen {
+  private static instance: GameScreen | null = null
 
   private camera: THREE.Camera
   private scene: THREE.Scene
@@ -35,28 +35,28 @@ export class MonitorScreen {
   mountIframe() {
     if (!this.container) {
       this.container = document.createElement('div')
-      this.container.id = 'monitorScreen'
+      this.container.id = 'gameScreen'
       this.container.style.pointerEvents = 'none'
       this.container.style.backgroundColor = 'transparent'
 
-      this.camera.position.set(0, 50, 1950)
+      this.camera.position.set(-32, -173, 2550)
       this.container.appendChild(this.renderer.domElement)
 
       const div = document.createElement('div')
       div.id = 'hola'
-      div.style.width = `${1000}px`
-      div.style.height = `${750}px`
+      div.style.width = `${800}px`
+      div.style.height = `${700}px`
       div.style.border =  '0px'
-      div.style.backgroundColor = '#000000'
+      div.style.backgroundColor = '#8cb342'
 
       const iframe = document.createElement('iframe')
       iframe.style.width = '0px'
       iframe.style.height = '0px'
       iframe.style.border = '0px'
-      iframe.src = 'https://inner-portafolio.vercel.app/'
+      iframe.src = 'https://snake-game-portafolio.vercel.app/'
       iframe.onload = () => {
-        iframe.style.width = '1000px'
-        iframe.style.height = '750px'
+        iframe.style.width = '800px'
+        iframe.style.height = '700px'
       }
       div.appendChild(iframe)
 
@@ -65,12 +65,15 @@ export class MonitorScreen {
 
       this.scene.add(object)
       document.body.appendChild(this.container)
+
+      // Returning the iframe in order to use controls
+      return iframe;
     }
   }
 
   unmountIframe() {
     if (this.container) {
-      document.body.removeChild(document.getElementById('monitorScreen') as HTMLDivElement)
+      document.body.removeChild(document.getElementById('gameScreen') as HTMLDivElement)
       this.container = null
     }
   }
@@ -79,7 +82,7 @@ export class MonitorScreen {
     if (this.instance) {
       return this.instance
     } else {
-      this.instance = new MonitorScreen()
+      this.instance = new GameScreen()
       return this.instance
     }
   }

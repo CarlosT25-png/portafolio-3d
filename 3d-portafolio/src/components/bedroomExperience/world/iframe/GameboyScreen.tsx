@@ -1,50 +1,25 @@
-import { Html } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
 import { RootState, animationsBedroomActions } from '../../../../store'
 import { gsap } from 'gsap'
-import { useControls } from 'leva'
 import GameBoyControls from './GameBoyControls'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
+import { GameScreen } from '../../../shared/html/GameScreen'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
-  const [isUsingControls, setIsUsingControls] = useState(false)
   const [showIframe, setShowIframe] = useState(false)
   const [hovered, setHovered] = useState(false)
   const gameboyRef = useRef<THREE.Mesh>(null!)
-  const htmlRef = useRef<HTMLIFrameElement>(null)
+  const [htmlRef, setHtmlRef] = useState<HTMLIFrameElement>(null!)
   const { camera, size } = useThree()
   const dispatch = useDispatch()
   const isFocusAnObject = useSelector<RootState>(
     (state) => state.animationBedroom.isFocusAnObject
   )
-
-  // Debug
-
-  // const { rotationObj, positionObj } = useControls('cameraPos', {
-  //   rotationObj: {
-  //     value: [-0.31, -0.64, -0.19],
-  //     step: 0.001,
-  //     joystick: 'invertY',
-  //   },
-  //   positionObj: {
-  //     value: [-0.485, -0.5475, -0.105], //value: [-4.24, 0.26, 4.76],
-  //     step: 0.001,
-  //     joystick: 'invertY',
-  //   },
-  // })
-
-  // useEffect(() => {
-  //   gsap.set(camera.position, {
-  //     x: positionObj[0],
-  //     y: positionObj[1],
-  //     z: positionObj[2],
-  //   })
-  //   console.log(camera.position)
-  // }, [positionObj])
+  const monitorScreen = useMemo(() => GameScreen.getInstance(), [GameScreen])
 
   const showIframeHandler = () => {
     setShowIframe(true)
@@ -53,8 +28,8 @@ const GameboyScreen = () => {
   useEffect(() => {
     if (showIframe) {
       setTimeout(() => {
-        if (htmlRef.current) {
-          htmlRef.current.click()
+        if (htmlRef) {
+          htmlRef.click()
         }
       }, 500)
     }
@@ -132,6 +107,19 @@ const GameboyScreen = () => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
 
+  // Show the iframe screen
+
+  useEffect(() => {
+    if(showIframe) {
+      const ref = monitorScreen.mountIframe()
+      if(ref){ 
+        setHtmlRef(ref)
+      }
+    } else {
+      monitorScreen.unmountIframe()
+    }
+  },[showIframe])
+
   return (
     <>
       <group>
@@ -150,7 +138,7 @@ const GameboyScreen = () => {
         </mesh>
         {showIframe && (
           <>
-            {/* Screen */}
+            {/* Screen
             <Html
               transform
               distanceFactor={0.028}
@@ -169,7 +157,7 @@ const GameboyScreen = () => {
                 }}
                 ref={htmlRef}
               />
-            </Html>
+            </Html> */}
             {/* Controls */}
             <GameBoyControls iframe={htmlRef} />
           </>

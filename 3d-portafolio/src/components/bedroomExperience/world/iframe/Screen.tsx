@@ -27,8 +27,7 @@ const Screen = () => {
   const [hovered, setHovered] = useState(false)
   const pcRef = useRef<THREE.Group>(null!)
   const screenRef = useRef<THREE.Mesh>(null!)
-  const htmlRef = useRef<HTMLIFrameElement>(null)
-  const { camera, controls } = useThree()
+  const { camera } = useThree()
   const dispatch = useDispatch()
   const isFocusAnObject = useSelector<RootState>(
     (state) => state.animationBedroom.isFocusAnObject

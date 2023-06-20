@@ -1,10 +1,9 @@
 import { Text } from '@react-three/drei'
-import { useControls } from 'leva'
-import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 interface Props {
-  iframe: RefObject<HTMLIFrameElement>
+  iframe: HTMLIFrameElement
 }
 
 const GameBoyControls = ({ iframe }: Props) => {
@@ -18,7 +17,7 @@ const GameBoyControls = ({ iframe }: Props) => {
   // Handler
 
   const keyPressHandler = (key: string) => {
-    iframe.current?.contentWindow?.postMessage(
+    iframe.contentWindow?.postMessage(
       key,
       'https://snake-game-portafolio.vercel.app/'
     )
