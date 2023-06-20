@@ -1,14 +1,12 @@
 import { Html, useGLTF } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { Glitch, EffectComposer, Select, Selection } from '@react-three/postprocessing'
-import { GlitchMode } from 'postprocessing'
-import { useState, useRef, useLayoutEffect, useEffect } from 'react'
+import { useState, useRef, useLayoutEffect, useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, animationsBedroomActions } from '../../../../store'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
-import { useControls } from 'leva'
+import { MonitorScreen } from '../../../shared/html/MonitorScreen'
 
 interface BedroomInterface {
   nodes: {
@@ -35,6 +33,7 @@ const Screen = () => {
   const isFocusAnObject = useSelector<RootState>(
     (state) => state.animationBedroom.isFocusAnObject
   )
+  const monitorScreen = useMemo(() => MonitorScreen.getInstance(), [MonitorScreen])
 
   const model = useGLTF(
     '/models/bedroomScene/bedroom-draco.glb'
@@ -118,6 +117,17 @@ const Screen = () => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
 
+  // Show Iframe
+
+  useEffect(() => {
+    if(showIframe) {
+      console.log('executing')
+      monitorScreen.mountIframe()
+    } else {
+      monitorScreen.unmountIframe()
+    }
+  },[showIframe])
+
   return (
     <>
       <group
@@ -139,7 +149,7 @@ const Screen = () => {
           <planeGeometry args={[0.118, 0.0915]} />
           <meshBasicMaterial color={'#000000'} /> {/*5c5c5c */}
         </mesh>
-        {showIframe && (
+        {/* {showIframe && (
           <Html
             transform
             distanceFactor={0.106}
@@ -165,7 +175,7 @@ const Screen = () => {
               ref={htmlRef}
             />
           </Html>
-        )}
+        )} */}
       </group>
     </>
   )
