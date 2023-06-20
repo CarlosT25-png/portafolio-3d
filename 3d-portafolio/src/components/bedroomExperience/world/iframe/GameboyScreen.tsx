@@ -36,34 +36,36 @@ const GameboyScreen = () => {
   }, [showIframe])
 
   const mouseEnterAnimation = () => {
-    setIsEnterPlaying(true)
-    dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.GAMEBOY))
+    if (camera.position.x !== -0.476 && camera.position.y !== -0.5462 && camera.position.z !== -0.095) {
+      setIsEnterPlaying(true)
+      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.GAMEBOY))
 
-    if (gameboyRef.current) {
-      camera.lookAt(gameboyRef.current.position)
+      if (gameboyRef.current) {
+        camera.lookAt(gameboyRef.current.position)
+      }
+      gsap.to(camera.position, {
+        x: -0.476, //-0.485
+        y: -0.5462,
+        z: -0.095, //-0.105
+        duration: 1.5,
+        onComplete: () => showIframeHandler(),
+      })
+      gsap.to(camera.rotation, {
+        // -1.60,-0.01,-2.49
+        x: -1.6,
+        y: -0.01,
+        z: -2.49,
+        duration: 1.5,
+      })
+
+      setTimeout(() => {
+        setIsEnterPlaying(false)
+      }, 1500)
     }
-    gsap.to(camera.position, {
-      x: -0.476, //-0.485
-      y: -0.5462,
-      z: -0.095, //-0.105
-      duration: 1.5,
-      onComplete: () => showIframeHandler(),
-    })
-    gsap.to(camera.rotation, {
-      // -1.60,-0.01,-2.49
-      x: -1.6,
-      y: -0.01,
-      z: -2.49,
-      duration: 1.5,
-    })
-
-    setTimeout(() => {
-      setIsEnterPlaying(false)
-    }, 1500)
   }
 
   const mouseLeaveAnimation = () => {
-    // Fix to a weid glitch that this function execute when I'm focus other objects
+    // Fix to a weird glitch that this function execute when I'm focus other objects
     if (isFocusAnObject === ObjectsToFocus.GAMEBOY) {
       dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
       setShowIframe(false)
@@ -79,7 +81,7 @@ const GameboyScreen = () => {
         z: -0.22,
         duration: 1.5,
       })
-  
+
       setTimeout(() => {
         setIsEnterPlaying(false)
       }, 1500)
@@ -110,15 +112,15 @@ const GameboyScreen = () => {
   // Show the iframe screen
 
   useEffect(() => {
-    if(showIframe) {
+    if (showIframe) {
       const ref = monitorScreen.mountIframe()
-      if(ref){ 
+      if (ref) {
         setHtmlRef(ref)
       }
     } else {
       monitorScreen.unmountIframe()
     }
-  },[showIframe])
+  }, [showIframe])
 
   return (
     <>
