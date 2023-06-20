@@ -49,27 +49,33 @@ const Screen = () => {
   }
 
   const mouseEnterAnimation = () => {
-    setIsEnterPlaying(true)
-    dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.DESKTOP))
+    if (
+      camera.position.x !== 0.56 &&
+      camera.position.y !== -0.21 &&
+      camera.position.z !== -0.4125
+    ) {
+      setIsEnterPlaying(true)
+      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.DESKTOP))
 
-    camera.lookAt(model.nodes.monitor001.position)
-    gsap.to(camera.position, {
-      x: 0.56,
-      y: -0.21,
-      z: -0.4125,
-      duration: 1.5,
-      onComplete: () => showIframeHandler(),
-    })
-    gsap.to(camera.rotation, {
-      x: -1.45,
-      y: -1.4,
-      z: -1.45,
-      duration: 1.5,
-    })
+      camera.lookAt(model.nodes.monitor001.position)
+      gsap.to(camera.position, {
+        x: 0.56,
+        y: -0.21,
+        z: -0.4125,
+        duration: 1.5,
+        onComplete: () => showIframeHandler(),
+      })
+      gsap.to(camera.rotation, {
+        x: -1.45,
+        y: -1.4,
+        z: -1.45,
+        duration: 1.5,
+      })
 
-    setTimeout(() => {
-      setIsEnterPlaying(false)
-    }, 1500)
+      setTimeout(() => {
+        setIsEnterPlaying(false)
+      }, 1500)
+    }
   }
 
   const mouseLeaveAnimation = () => {
@@ -120,13 +126,13 @@ const Screen = () => {
   // Show Iframe
 
   useEffect(() => {
-    if(showIframe) {
+    if (showIframe) {
       console.log('executing')
       monitorScreen.mountIframe()
     } else {
       monitorScreen.unmountIframe()
     }
-  },[showIframe])
+  }, [showIframe])
 
   return (
     <>

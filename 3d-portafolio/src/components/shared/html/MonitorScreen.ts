@@ -37,6 +37,7 @@ export class MonitorScreen {
     if (!this.container) {
       this.container = document.createElement('div')
       this.container.id = 'monitorScreen'
+      this.container.style.pointerEvents = 'none'
       this.container.style.backgroundColor = 'transparent'
 
       this.camera.position.set(0, 50, 1950)
