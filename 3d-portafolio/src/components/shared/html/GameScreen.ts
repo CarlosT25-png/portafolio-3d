@@ -37,6 +37,7 @@ export class GameScreen {
       this.container = document.createElement('div')
       this.container.id = 'gameScreen'
       this.container.style.pointerEvents = 'none'
+      this.container.style.touchAction = 'none'
       this.container.style.backgroundColor = 'transparent'
 
       this.camera.position.set(-32, -173, 2550)
