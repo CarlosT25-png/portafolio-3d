@@ -106,7 +106,7 @@ export class MonitorScreen {
         document.body.removeChild(
           document.getElementById('videoTexture') as HTMLVideoElement
         )
-        this.videoTexture
+        this.videoTexture = null
       }
     }
   }
