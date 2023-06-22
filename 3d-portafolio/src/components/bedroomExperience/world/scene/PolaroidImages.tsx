@@ -75,7 +75,7 @@ const PolaroidImages = () => {
 
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
-      if (camera.position.x !== 0.1 && camera.position.y !== 0.158) {
+      if (camera.position.x !== 0.4 && camera.position.y !== 0.125) {
         mouseEnterAnimation()
       }
     }
@@ -83,7 +83,10 @@ const PolaroidImages = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      mouseLeaveAnimation()
+      console.log(camera.position)
+      if(camera.position.x === 0.4 && camera.position.y === 0.125){
+        mouseLeaveAnimation()
+      }
     }
   }
 

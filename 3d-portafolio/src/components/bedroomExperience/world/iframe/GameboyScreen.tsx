@@ -106,8 +106,7 @@ const GameboyScreen = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      console.log(camera.position)
-      if (camera.position.x == -0.476 && camera.position.y == -0.5462) {
+      if (camera.position.x === -0.476 && camera.position.y === -0.5462) {
         mouseLeaveAnimation()
       }
     }
