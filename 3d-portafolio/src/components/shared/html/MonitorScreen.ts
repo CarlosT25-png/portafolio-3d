@@ -68,6 +68,7 @@ export class MonitorScreen {
           this.videoTexture = document.createElement('video')
           this.videoTexture.src = '/videos/video-effect.mp4'
           this.videoTexture.id = 'videoTexture'
+          this.videoTexture.volume = 0
           this.videoTexture.muted = true
           this.videoTexture.autoplay = true
           this.videoTexture.controls = false
