@@ -1,9 +1,9 @@
 import { Text } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 interface Props {
-  iframe: HTMLIFrameElement
+  iframe: HTMLIFrameElement | RefObject<HTMLIFrameElement>
 }
 
 const GameBoyControls = ({ iframe }: Props) => {
@@ -17,10 +17,17 @@ const GameBoyControls = ({ iframe }: Props) => {
   // Handler
 
   const keyPressHandler = (key: string) => {
-    iframe.contentWindow?.postMessage(
-      key,
-      'https://snake-game-portafolio.vercel.app/'
-    )
+    if(iframe instanceof HTMLIFrameElement) {
+      iframe.contentWindow?.postMessage(
+        key,
+        'https://snake-game-portafolio.vercel.app/'
+      )
+    } else {
+      iframe.current!.contentWindow?.postMessage(
+        key,
+        'https://snake-game-portafolio.vercel.app/'
+      )
+    }
     const audio = new Audio('/sounds/bedroomScene/gameboy/button1.mp3')
     audio.volume = 0.02
     audio.play()

@@ -7,6 +7,8 @@ import { gsap } from 'gsap'
 import GameBoyControls from './GameBoyControls'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 import { GameScreen } from '../../../shared/html/GameScreen'
+import { isMobileOrTablet } from '../../../shared/utils/ResponsiveCheck'
+import { Html } from '@react-three/drei'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
@@ -14,6 +16,7 @@ const GameboyScreen = () => {
   const [hovered, setHovered] = useState(false)
   const gameboyRef = useRef<THREE.Mesh>(null!)
   const [htmlRef, setHtmlRef] = useState<HTMLIFrameElement>(null!)
+  const htmlRefWeb = useRef<HTMLIFrameElement>(null!)
   const { camera, size } = useThree()
   const dispatch = useDispatch()
   const isFocusAnObject = useSelector<RootState>(
@@ -36,7 +39,11 @@ const GameboyScreen = () => {
   }, [showIframe])
 
   const mouseEnterAnimation = () => {
-    if (camera.position.x !== -0.476 && camera.position.y !== -0.5462 && camera.position.z !== -0.095) {
+    if (
+      camera.position.x !== -0.476 &&
+      camera.position.y !== -0.5462 &&
+      camera.position.z !== -0.095
+    ) {
       setIsEnterPlaying(true)
       dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.GAMEBOY))
 
@@ -99,7 +106,10 @@ const GameboyScreen = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      mouseLeaveAnimation()
+      console.log(camera.position)
+      if (camera.position.x == -0.476 && camera.position.y == -0.5462) {
+        mouseLeaveAnimation()
+      }
     }
   }
 
@@ -112,13 +122,15 @@ const GameboyScreen = () => {
   // Show the iframe screen
 
   useEffect(() => {
-    if (showIframe) {
-      const ref = monitorScreen.mountIframe()
-      if (ref) {
-        setHtmlRef(ref)
+    if (isMobileOrTablet()) {
+      if (showIframe) {
+        const ref = monitorScreen.mountIframe()
+        if (ref) {
+          setHtmlRef(ref)
+        }
+      } else {
+        monitorScreen.unmountIframe()
       }
-    } else {
-      monitorScreen.unmountIframe()
     }
   }, [showIframe])
 
@@ -140,7 +152,31 @@ const GameboyScreen = () => {
         </mesh>
         {showIframe && (
           <>
-            <GameBoyControls iframe={htmlRef} />
+            {/* This is a fix for a bug that i get on chrome for desktop devices, where my snake game iframe, gets black and white */}
+            {/* so if I use R3F drei, it won't get the bug, but using R3F drei in mobile is offset for mobile browser bar, so is better if I use  */}
+            {/* CSS3DRender */}
+            {!isMobileOrTablet() && (
+              <Html
+                transform
+                distanceFactor={0.028}
+                rotation={[-1.63, 0.02, -2.493]}
+                position={[-0.347, -0.02, 0.767]}
+              >
+                <iframe
+                  src='https://snake-game-portafolio.vercel.app/'
+                  style={{ width: '800px', height: '700px', border: 'none', opacity: 0 }}
+                  onLoad={() => {
+                    // To avoid white flashes while is loading
+                    const element = htmlRefWeb.current
+                    if (element && element.style) {
+                      element.style.opacity = '1'
+                    }
+                  }}
+                  ref={htmlRefWeb}
+                />
+              </Html>
+            )}
+            <GameBoyControls iframe={isMobileOrTablet() ? htmlRef : htmlRefWeb} />
           </>
         )}
       </group>
