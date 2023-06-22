@@ -126,7 +126,6 @@ const Screen = () => {
 
   useEffect(() => {
     if (showIframe) {
-      console.log('executing')
       monitorScreen.mountIframe()
     } else {
       monitorScreen.unmountIframe()
@@ -154,33 +153,6 @@ const Screen = () => {
           <planeGeometry args={[0.118, 0.0915]} />
           <meshBasicMaterial color={'#000000'} /> {/*5c5c5c */}
         </mesh>
-        {/* {showIframe && (
-          <Html
-            transform
-            distanceFactor={0.106}
-            rotation={[-1.56, -1.29, -1.56]}
-            position={[1.17, 0.402, 0.423]}
-          >
-            <iframe
-              src='https://inner-portafolio.vercel.app/'
-              style={{
-                width: '1000px',
-                height: '750px',
-                border: 'none',
-                opacity: 0,
-                backgroundColor: 'black',
-              }}
-              onLoad={() => {
-                // To avoid white flashes while is loading
-                const element = htmlRef.current
-                if (element && element.style) {
-                  element.style.opacity = '1'
-                }
-              }}
-              ref={htmlRef}
-            />
-          </Html>
-        )} */}
       </group>
     </>
   )

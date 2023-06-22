@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
+import { isMobileOrTablet } from '../utils/ResponsiveCheck'
 
 export class MonitorScreen {
   private static instance: MonitorScreen | null = null
@@ -8,6 +9,7 @@ export class MonitorScreen {
   private scene: THREE.Scene
   private renderer: CSS3DRenderer
   private container: HTMLDivElement | null = null
+  private videoTexture: HTMLVideoElement | null = null
 
   private constructor() {
     this.camera = new THREE.PerspectiveCamera(
@@ -47,7 +49,7 @@ export class MonitorScreen {
       div.id = 'hola'
       div.style.width = `${1000}px`
       div.style.height = `${750}px`
-      div.style.border =  '0px'
+      div.style.border = '0px'
       div.style.backgroundColor = '#000000'
 
       const iframe = document.createElement('iframe')
@@ -58,6 +60,30 @@ export class MonitorScreen {
       iframe.onload = () => {
         iframe.style.width = '1000px'
         iframe.style.height = '750px'
+        if (!this.videoTexture) {
+          const { top, left, height, width } = iframe.getBoundingClientRect()
+
+          console.log(top, left, height, width)
+          const offset = 5;
+          this.videoTexture = document.createElement('video')
+          this.videoTexture.src = '/videos/video-effect.mp4'
+          this.videoTexture.id = 'videoTexture'
+          this.videoTexture.muted = true
+          this.videoTexture.autoplay = true
+          this.videoTexture.controls = false
+          this.videoTexture.loop = true
+          this.videoTexture.style.zIndex = '101'
+          this.videoTexture.style.opacity = isMobileOrTablet() ? '0.2' : '0.1'
+          this.videoTexture.style.objectFit = 'cover'
+          this.videoTexture.style.position = 'absolute'
+          this.videoTexture.style.height = `${height+(offset*2)}px`
+          this.videoTexture.style.width = `${width+(offset*2)}px`
+          this.videoTexture.style.left = `${left-offset}px`
+          this.videoTexture.style.top = `${top-offset}px`
+          this.videoTexture.style.pointerEvents = 'none'
+          this.videoTexture.style.touchAction = 'none'
+          document.body.appendChild(this.videoTexture)
+        }
       }
       div.appendChild(iframe)
 
@@ -71,8 +97,16 @@ export class MonitorScreen {
 
   unmountIframe() {
     if (this.container) {
-      document.body.removeChild(document.getElementById('monitorScreen') as HTMLDivElement)
+      document.body.removeChild(
+        document.getElementById('monitorScreen') as HTMLDivElement
+      )
       this.container = null
+      if(this.videoTexture) {
+        document.body.removeChild(
+          document.getElementById('videoTexture') as HTMLVideoElement
+        )
+        this.videoTexture
+      }
     }
   }
 

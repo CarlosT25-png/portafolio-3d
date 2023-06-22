@@ -8,10 +8,6 @@ const BedroomDialog = () => {
   const dispatch = useDispatch()
   const year = useSelector<RootState>(state => state.date.year) as number
 
-  useEffect(() => {
-    console.log(year)
-  }, [])
-
   const sounds = useMemo(() => {
     return BedroomSounds.getInstance()
   }, [])
