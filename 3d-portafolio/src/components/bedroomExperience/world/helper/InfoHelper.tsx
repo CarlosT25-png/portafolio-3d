@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { gsap } from 'gsap'
 import infoLogo from '/images/bedroom/info.png'
 import styles from './InfoHelper.module.css'
-import { helperActions } from '../../../../store'
 
 interface Props {
   children: ReactNode,

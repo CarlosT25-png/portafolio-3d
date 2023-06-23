@@ -86,7 +86,7 @@ const PolaroidImages = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      if (camera.position.x === 0.4 && camera.position.y === 0.125) {
+      if ((camera.position.x === 0.4 && camera.position.y === 0.125 || (camera.position.x === 0.25))) {
         mouseLeaveAnimation()
       }
     }
