@@ -16,7 +16,7 @@ const BedroomDialog = () => {
     <MessageDialog
       title={`Welcome to ${(+year)+2005}! I present to you Carlos's Bedroom`}
       showAnimation={true}
-      message='There is a lot you can do here. However, I believe the PC could be helpful for you. Feel free to explore the bedroom.'
+      message='There is a lot you can do here. However, I believe the PC could be helpful for you. Feel free to explore the bedroom, especially the console on the floor and the pictures on the wall. :)'
       onClick={() => {
         sounds.musicBg.start(0)
         dispatch(globalConfigActions.setDialogIsCompleteBedroom(true))

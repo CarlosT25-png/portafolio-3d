@@ -34,7 +34,7 @@ function useWindowSize() {
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isStarted, setIsStarted] = useState(true) // DEBUG
+  const [isStarted, setIsStarted] = useState(false) // DEBUG
   const [videoTransitionConfirm, setVideoTransitionConfirm] = useState(false)
   const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
   // Dialogs

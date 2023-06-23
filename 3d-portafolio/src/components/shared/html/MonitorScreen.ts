@@ -62,8 +62,6 @@ export class MonitorScreen {
         iframe.style.height = '750px'
         if (!this.videoTexture) {
           const { top, left, height, width } = iframe.getBoundingClientRect()
-
-          console.log(top, left, height, width)
           const offset = 5;
           this.videoTexture = document.createElement('video')
           this.videoTexture.src = '/videos/video-effect.mp4'

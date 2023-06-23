@@ -54,7 +54,7 @@
 @media screen and (max-width: 576px) {
   .message-container {
     width: 65vw;
-    height: 38vh;
+    height: 40vh;
     top: 63%;
     left: 48%;
     padding: 1rem 3rem;
