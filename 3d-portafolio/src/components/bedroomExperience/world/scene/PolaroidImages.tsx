@@ -32,7 +32,7 @@ const PolaroidImages = () => {
       camera.lookAt(picturesRef.current.position)
     }
 
-    const isMobOrTab = isMobileOrTablet()
+    const isMobOrTab = isMobileOrTablet() //isMobileOrTablet()
     gsap.to(camera.position, {
       x: isMobOrTab ? 0.25 : 0.4,
       y: 0.125,
@@ -42,7 +42,7 @@ const PolaroidImages = () => {
         setShowLinks(true)
         if (isMobOrTab && firstRender) {
           setTimeout(() => {
-            camera.position.set(0.25, 0.125, -0.33)
+            gsap.set(camera.position, {x: 0.25, y: 0.125, z: -0.33 })
             setFirstRender(false)
           }, 100)
         }
@@ -127,10 +127,6 @@ const PolaroidImages = () => {
       })
     }
   }, [showLinks])
-
-  useEffect(() => {
-    console.log(camera.position)
-  }, [camera.position, camera])
 
   return (
     <>

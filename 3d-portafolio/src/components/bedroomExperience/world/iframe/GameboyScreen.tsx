@@ -61,7 +61,7 @@ const GameboyScreen = () => {
           showIframeHandler()
           if (isMobOrTab && firstRender) {
             setTimeout(() => {
-              camera.position.set(-0.476, -0.5462, -0.095)
+              gsap.set(camera.position, { x: -0.476, y: -0.5462, z: -0.095 })
               setFirstRender(false)
             }, 100)
           }
