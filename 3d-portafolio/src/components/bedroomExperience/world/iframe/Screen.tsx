@@ -80,6 +80,7 @@ const Screen = () => {
   const mouseLeaveAnimation = () => {
     // Fix to a weid glitch that this function execute when I'm focus other objects
     if (isFocusAnObject === ObjectsToFocus.DESKTOP) {
+      console.log('first')
       dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
       setShowIframe(false)
       gsap.to(camera.position, {

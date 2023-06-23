@@ -15,6 +15,7 @@ const PolaroidImages = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [showLinks, setShowLinks] = useState(false)
+  const [firstRender, setFirstRender] = useState(true) // This a fix for mobile that play mouse leave animation on the first render
   const picturesRef = useRef<THREE.Mesh>(null!)
   const specialThanksTextRef = useRef(null)
   const { camera } = useThree()
@@ -30,17 +31,24 @@ const PolaroidImages = () => {
     if (picturesRef.current) {
       camera.lookAt(picturesRef.current.position)
     }
-    // isMobileOrTablet()
-    const isMobOrTab = window.innerWidth < 768
+
+    const isMobOrTab = isMobileOrTablet()
     gsap.to(camera.position, {
       x: isMobOrTab ? 0.25 : 0.4,
       y: 0.125,
       z: isMobOrTab ? -0.33 : -0.3147,
       duration: 1.5,
-      onComplete: () => setShowLinks(true),
+      onComplete: () => {
+        setShowLinks(true)
+        if (isMobOrTab && firstRender) {
+          setTimeout(() => {
+            camera.position.set(0.25, 0.125, -0.33)
+            setFirstRender(false)
+          }, 100)
+        }
+      },
     })
     gsap.to(camera.rotation, {
-      // -1.60,-0.01,-2.49
       x: -1.3278,
       y: -1.557,
       z: -1.3278,
@@ -86,7 +94,10 @@ const PolaroidImages = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      if ((camera.position.x === 0.4 && camera.position.y === 0.125 || (camera.position.x === 0.25))) {
+      if (
+        (camera.position.x === 0.4 && camera.position.y === 0.125) ||
+        camera.position.x === 0.25
+      ) {
         mouseLeaveAnimation()
       }
     }
@@ -116,6 +127,10 @@ const PolaroidImages = () => {
       })
     }
   }, [showLinks])
+
+  useEffect(() => {
+    console.log(camera.position)
+  }, [camera.position, camera])
 
   return (
     <>

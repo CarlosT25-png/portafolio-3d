@@ -17,6 +17,7 @@ const GameboyScreen = () => {
   const gameboyRef = useRef<THREE.Mesh>(null!)
   const [htmlRef, setHtmlRef] = useState<HTMLIFrameElement>(null!)
   const htmlRefWeb = useRef<HTMLIFrameElement>(null!)
+  const [firstRender, setFirstRender] = useState(true) // This a fix for mobile that play mouse leave animation on the first render
   const { camera, size } = useThree()
   const dispatch = useDispatch()
   const isFocusAnObject = useSelector<RootState>(
@@ -50,12 +51,21 @@ const GameboyScreen = () => {
       if (gameboyRef.current) {
         camera.lookAt(gameboyRef.current.position)
       }
+      const isMobOrTab = isMobileOrTablet()
       gsap.to(camera.position, {
         x: -0.476, //-0.485
         y: -0.5462,
         z: -0.095, //-0.105
         duration: 1.5,
-        onComplete: () => showIframeHandler(),
+        onComplete: () => {
+          showIframeHandler()
+          if (isMobOrTab && firstRender) {
+            setTimeout(() => {
+              camera.position.set(-0.476, -0.5462, -0.095)
+              setFirstRender(false)
+            }, 100)
+          }
+        },
       })
       gsap.to(camera.rotation, {
         // -1.60,-0.01,-2.49
@@ -121,7 +131,7 @@ const GameboyScreen = () => {
   // Show the iframe screen
 
   useEffect(() => {
-    if(showIframe){
+    if (showIframe) {
       dispatch(helperActions.setShowHelperGameConsole(true))
     }
     if (isMobileOrTablet()) {

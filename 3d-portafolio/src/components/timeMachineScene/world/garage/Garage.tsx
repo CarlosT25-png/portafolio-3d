@@ -1,10 +1,7 @@
-import { Environment, useGLTF, useHelper } from "@react-three/drei";
-import { useRef } from "react";
-import * as THREE from 'three'
+import { useGLTF } from "@react-three/drei";
 
 const Garage = () => {
   const model = useGLTF("/models/timeMachineScene/attic-draco.glb");
-  // @ts-ignore
 
   return (
     <>

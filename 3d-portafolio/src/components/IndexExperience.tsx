@@ -1,5 +1,5 @@
 import { ReactNode, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
+import { ACESFilmicToneMapping, SRGBColorSpace } from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Loader, Preload } from '@react-three/drei'
 import { useSelector } from 'react-redux'
@@ -79,7 +79,8 @@ const IndexExperience = () => {
           gl={{
             antialias: true,
             toneMapping: ACESFilmicToneMapping,
-            outputEncoding: sRGBEncoding,
+            // @ts-ignore
+            outputColorSpace: SRGBColorSpace,
             alpha: true,
             toneMappingExposure: 0.9,
           }}
