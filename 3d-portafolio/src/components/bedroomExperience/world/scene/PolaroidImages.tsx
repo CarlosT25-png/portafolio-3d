@@ -15,7 +15,6 @@ const PolaroidImages = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [showLinks, setShowLinks] = useState(false)
-  const [firstRender, setFirstRender] = useState(true) // This a fix for mobile that play mouse leave animation on the first render
   const picturesRef = useRef<THREE.Mesh>(null!)
   const specialThanksTextRef = useRef(null)
   const { camera } = useThree()
@@ -40,12 +39,9 @@ const PolaroidImages = () => {
       duration: 1.5,
       onComplete: () => {
         setShowLinks(true)
-        if (isMobOrTab && firstRender) {
-          setTimeout(() => {
-            gsap.set(camera.position, {x: 0.25, y: 0.125, z: -0.33 })
-            setFirstRender(false)
-          }, 100)
-        }
+        setTimeout(() => {
+          gsap.set(camera.position, {x: 0.25, y: 0.125, z: -0.33 })
+        }, 300)
       },
     })
     gsap.to(camera.rotation, {

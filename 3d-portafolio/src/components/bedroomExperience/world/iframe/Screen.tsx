@@ -153,7 +153,7 @@ const Screen = () => {
           position={[0.89, 0.46, 0.43]}
         >
           <planeGeometry args={[0.118, 0.0915]} />
-          <meshBasicMaterial color={'#000000'} /> {/*5c5c5c */}
+          <meshBasicMaterial color={'#000000'} />
         </mesh>
       </group>
     </>
