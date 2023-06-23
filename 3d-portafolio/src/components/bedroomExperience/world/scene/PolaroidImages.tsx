@@ -40,7 +40,11 @@ const PolaroidImages = () => {
       onComplete: () => {
         setShowLinks(true)
         setTimeout(() => {
-          gsap.set(camera.position, {x: isMobOrTab ?  0.25001 : 0.4001 , y: 0.125, z: isMobOrTab ? -0.33001 : -0.31471 })
+          gsap.set(camera.position, {
+            x: isMobOrTab ? 0.25001 : 0.4001,
+            y: 0.125,
+            z: isMobOrTab ? -0.33001 : -0.31471,
+          })
         }, 300)
       },
     })
@@ -82,7 +86,10 @@ const PolaroidImages = () => {
 
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
-      if (camera.position.x !== 0.4 && camera.position.y !== 0.125) {
+      if (
+        (camera.position.x !== 0.4001 && camera.position.y !== 0.125) ||
+        camera.position.x !== 0.25001
+      ) {
         mouseEnterAnimation()
       }
     }
@@ -91,8 +98,8 @@ const PolaroidImages = () => {
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
       if (
-        (camera.position.x === 0.4 && camera.position.y === 0.125) ||
-        camera.position.x === 0.25
+        (camera.position.x === 0.4001 && camera.position.y === 0.125) ||
+        camera.position.x === 0.25001
       ) {
         mouseLeaveAnimation()
       }
