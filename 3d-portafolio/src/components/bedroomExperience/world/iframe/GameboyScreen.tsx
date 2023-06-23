@@ -59,6 +59,7 @@ const GameboyScreen = () => {
           showIframeHandler()
           setTimeout(() => {
             gsap.set(camera.position, { x: -0.476001, y: -0.5462001, z: -0.095001 })
+            gsap.set(camera.rotation, { x: -1.6, y: -0.01, z: -2.49 })
           }, 300)
         },
       })
@@ -102,7 +103,7 @@ const GameboyScreen = () => {
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       // Checking if the animation is not playing
-      if (camera.position.x !== -0.476001 && camera.position.y !== -0.5465001) {
+      if (camera.position.x !== -0.476001 && camera.position.y !== -0.5462001) {
         mouseEnterAnimation()
       }
     }
@@ -110,7 +111,8 @@ const GameboyScreen = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      if (camera.position.x === -0.476001 && camera.position.y === -0.5462001) {
+      console.log(camera.position)
+      if (camera.position.x === -0.476001 && (camera.position.y === -0.5462001 || camera.position.y === -0.5462)) {
         mouseLeaveAnimation()
       }
     }

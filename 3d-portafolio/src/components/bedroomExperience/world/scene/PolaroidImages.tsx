@@ -45,6 +45,11 @@ const PolaroidImages = () => {
             y: 0.125,
             z: isMobOrTab ? -0.33001 : -0.31471,
           })
+          gsap.set(camera.rotation, {
+            x: -1.3278,
+            y: -1.557,
+            z: -1.3278,
+          })
         }, 300)
       },
     })
