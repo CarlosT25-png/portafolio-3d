@@ -3,7 +3,7 @@ import { useThree } from '@react-three/fiber'
 import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
-import { RootState, animationsBedroomActions } from '../../../../store'
+import { RootState, animationsBedroomActions, helperActions } from '../../../../store'
 import { gsap } from 'gsap'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 
@@ -106,6 +106,7 @@ const PolaroidImages = () => {
   // Effect for special thanks text
   useEffect(() => {
     if (showLinks) {
+      dispatch(helperActions.setShowHelperPolaroids(true))
       gsap.to(specialThanksTextRef.current, {
         fillOpacity: 1,
         duration: 1,

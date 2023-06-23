@@ -4,7 +4,7 @@ import { useState, useRef, useLayoutEffect, useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, animationsBedroomActions } from '../../../../store'
+import { RootState, animationsBedroomActions, helperActions } from '../../../../store'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 import { MonitorScreen } from '../../../shared/html/MonitorScreen'
 
@@ -127,6 +127,7 @@ const Screen = () => {
   useEffect(() => {
     if (showIframe) {
       monitorScreen.mountIframe()
+      dispatch(helperActions.setShowHelperMonitor(true))
     } else {
       monitorScreen.unmountIframe()
     }

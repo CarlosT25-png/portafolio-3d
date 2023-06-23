@@ -2,7 +2,7 @@ import { useThree } from '@react-three/fiber'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
-import { RootState, animationsBedroomActions } from '../../../../store'
+import { RootState, animationsBedroomActions, helperActions } from '../../../../store'
 import { gsap } from 'gsap'
 import GameBoyControls from './GameBoyControls'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
@@ -121,6 +121,9 @@ const GameboyScreen = () => {
   // Show the iframe screen
 
   useEffect(() => {
+    if(showIframe){
+      dispatch(helperActions.setShowHelperGameConsole(true))
+    }
     if (isMobileOrTablet()) {
       if (showIframe) {
         const ref = monitorScreen.mountIframe()
