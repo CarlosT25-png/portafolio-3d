@@ -91,10 +91,7 @@ const PolaroidImages = () => {
 
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
-      if (
-        (camera.position.x !== 0.4001 && camera.position.y !== 0.125) ||
-        camera.position.x !== 0.25001
-      ) {
+      if (isFocusAnObject === ObjectsToFocus.ALL) {
         mouseEnterAnimation()
       }
     }
