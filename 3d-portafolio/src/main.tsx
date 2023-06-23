@@ -25,19 +25,6 @@ function Main() {
   return (
     <Provider store={store}>
       <div style={{ width: widthR, height: heightR, position: 'relative'}}>
-        <Leva
-          collapsed={false}
-          oneLineLabels={false}
-          flat={true}
-          theme={{
-            sizes: {
-              titleBarHeight: '28px',
-            },
-            fontSizes: {
-              root: '10px',
-            },
-          }}
-        />
         <IndexExperience />
       </div>
     </Provider>
