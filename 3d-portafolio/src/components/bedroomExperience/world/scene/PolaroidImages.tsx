@@ -40,7 +40,7 @@ const PolaroidImages = () => {
       onComplete: () => {
         setShowLinks(true)
         setTimeout(() => {
-          gsap.set(camera.position, {x: 0.25, y: 0.125, z: -0.33 })
+          gsap.set(camera.position, {x: isMobOrTab ?  0.25001 : 0.4001 , y: 0.125, z: isMobOrTab ? -0.33001 : -0.31471 })
         }, 300)
       },
     })
