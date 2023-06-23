@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { RootState, animationsBedroomActions, helperActions } from '../../../../store'
 import { gsap } from 'gsap'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
+import { isMobileOrTablet } from '../../../shared/utils/ResponsiveCheck'
 
 const INDIE_FONT_URL = '/fonts/indie-flower-v17-latin-regular.woff'
 const PANGOLIN_FONT_URL = '/fonts/pangolin-v11-latin-regular.woff'
@@ -29,10 +30,12 @@ const PolaroidImages = () => {
     if (picturesRef.current) {
       camera.lookAt(picturesRef.current.position)
     }
+    // isMobileOrTablet()
+    const isMobOrTab = window.innerWidth < 768
     gsap.to(camera.position, {
-      x: 0.4,
+      x: isMobOrTab ? 0.25 : 0.4,
       y: 0.125,
-      z: -0.3147,
+      z: isMobOrTab ? -0.33 : -0.3147,
       duration: 1.5,
       onComplete: () => setShowLinks(true),
     })
@@ -83,7 +86,7 @@ const PolaroidImages = () => {
 
   const onMouseLeave = () => {
     if (!isEnterPlaying) {
-      if(camera.position.x === 0.4 && camera.position.y === 0.125){
+      if (camera.position.x === 0.4 && camera.position.y === 0.125) {
         mouseLeaveAnimation()
       }
     }
@@ -208,7 +211,9 @@ const PolaroidImages = () => {
           position={[1.072, 0.76, 0.5815]}
           scale-y={0.066}
           scale-x={0.076}
-          onClick={() => externalLinkHandler('https://open.spotify.com/artist/7CvWoscqVQJvqb0OcBRQO7')}
+          onClick={() =>
+            externalLinkHandler('https://open.spotify.com/artist/7CvWoscqVQJvqb0OcBRQO7')
+          }
         />
         <Text
           font={INDIE_FONT_URL}
