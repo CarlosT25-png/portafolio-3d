@@ -35,7 +35,7 @@ const ExitView = ({ camera }: ExitViewProps) => {
     gsap.set(containerRef.current, { opacity: 0 })
     gsap.to(containerRef.current, {
       opacity: 0.7,
-      delay: 4,
+      delay: 3,
       duration: 1.5,
     })
   }, [])

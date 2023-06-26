@@ -76,30 +76,6 @@ const GameboyScreen = () => {
     }
   }
 
-  const mouseLeaveAnimation = () => {
-    // Fix to a weird glitch that this function execute when I'm focus other objects
-    if (isFocusAnObject === ObjectsToFocus.GAMEBOY) {
-      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
-      setShowIframe(false)
-      gsap.to(camera.position, {
-        x: -2.43,
-        y: 0.72,
-        z: 2.55,
-        duration: 1.5,
-      })
-      gsap.to(camera.rotation, {
-        x: -0.32,
-        y: -0.74,
-        z: -0.22,
-        duration: 1.5,
-      })
-
-      setTimeout(() => {
-        setIsEnterPlaying(false)
-      }, 1500)
-    }
-  }
-
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       // Checking if the animation is not playing
@@ -109,19 +85,23 @@ const GameboyScreen = () => {
     }
   }
 
-  const onMouseLeave = () => {
-    if (!isEnterPlaying) {
-      if (camera.position.x === -0.476001 && (camera.position.y === -0.5462001 || camera.position.y === -0.5462)) {
-        mouseLeaveAnimation()
-      }
-    }
-  }
-
   // Pointer handler
 
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
+
+  // Check for exit view btn
+
+  useEffect(() => {
+    if(isFocusAnObject === ObjectsToFocus.GAMEBOY){
+      setTimeout(() => {
+        setShowIframe(true) 
+      }, 1500)
+    } else {
+      setShowIframe(false)
+    }
+  }, [isFocusAnObject])
 
   // Show the iframe screen
 
@@ -150,7 +130,6 @@ const GameboyScreen = () => {
           rotation={[0, -0.94, 0]}
           position={[-0.36, 0.05, 0.75]}
           onClick={onMouseEnter}
-          onPointerMissed={onMouseLeave}
           onPointerEnter={() => setHovered(true)}
           onPointerLeave={() => setHovered(false)}
         >
