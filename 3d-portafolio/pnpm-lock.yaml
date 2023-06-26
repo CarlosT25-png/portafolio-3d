@@ -19,6 +19,7 @@ specifiers:
   r3f-perf: ^7.1.2
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-icons: ^4.10.1
   react-player: ^2.12.0
   react-redux: ^8.0.5
   react-spring: ^9.7.1
@@ -44,6 +45,7 @@ dependencies:
   r3f-perf: 7.1.2_qiinicf5th25oex3hnyk6z33ua
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-icons: 4.10.1_react@18.2.0
   react-player: 2.12.0_react@18.2.0
   react-redux: 8.0.5_rzyliz2j3ixzcs72aaxsyibazq
   react-spring: 9.7.1_m5w7gp53gjh66wekkqzqhddyiy
@@ -1755,6 +1757,14 @@ packages:
 
   /react-fast-compare/3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
+    dev: false
+
+  /react-icons/4.10.1_react@18.2.0:
+    resolution: {integrity: sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

@@ -14,6 +14,8 @@ import BedroomDialog from './shared/messageDialogs/BedroomDialog'
 import ConfirmTravel from './shared/html/ConfirmTravel'
 import { isMobileOrTablet } from './shared/utils/ResponsiveCheck'
 import InfoHelper from './bedroomExperience/world/helper/InfoHelper'
+import ExitView from './shared/html/ExitView'
+import { ObjectsToFocus } from '../store/global/helperSlice'
 
 const TEXT_HELPER = 'To exit this view, click outside the '
 
@@ -34,8 +36,9 @@ function useWindowSize() {
 const IndexExperience = () => {
   const [widthR, heightR] = useWindowSize()
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isStarted, setIsStarted] = useState(false) // DEBUG
+  const [isStarted, setIsStarted] = useState(true) // DEBUG
   const [videoTransitionConfirm, setVideoTransitionConfirm] = useState(false)
+  const [camera, setCamera] = useState<THREE.Camera>(null!)
   const scene = useSelector<RootState>((state) => state.globalConfig.scene) as scenes
   // Dialogs
   const isReadyToPlayDialogTimeMachine = useSelector<RootState>(
@@ -66,6 +69,10 @@ const IndexExperience = () => {
   const polaroidsHelperHasShown = useSelector<RootState>(
     (state) => state.helper.polaroidsHelperHasShown
   ) as boolean
+  // Exit view
+  const objectToFocus = useSelector<RootState>(
+    (state) => state.animationBedroom.isFocusAnObject
+  ) as ObjectsToFocus
 
   let content: ReactNode
 
@@ -94,7 +101,7 @@ const IndexExperience = () => {
           shadows
         >
           {scene === scenes.TIMEMACHINE && <TimeMachineExperience />}
-          {scene === scenes.BEDROOM && <BedroomExperience />}
+          {scene === scenes.BEDROOM && <BedroomExperience setCamera={setCamera} />}
           <Preload all />
         </Canvas>
         {scene === scenes.TIMEMACHINE &&
@@ -117,6 +124,8 @@ const IndexExperience = () => {
             {TEXT_HELPER + 'pictures'}
           </InfoHelper>
         )}
+        {/* Exit view button */}
+        {objectToFocus !== ObjectsToFocus.ALL && <ExitView camera={camera} />}
       </>
     )
   } else if (scene === scenes.TRANSITION) {
