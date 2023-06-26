@@ -65,45 +65,11 @@ const PolaroidImages = () => {
     }, 1500)
   }
 
-  const mouseLeaveAnimation = () => {
-    // Fix to a weid glitch that this function execute when I'm focus other objects
-    if (isFocusAnObject === ObjectsToFocus.PICTURES) {
-      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
-      setShowLinks(false)
-      gsap.to(camera.position, {
-        x: -2.43,
-        y: 0.72,
-        z: 2.55,
-        duration: 1.5,
-      })
-      gsap.to(camera.rotation, {
-        x: -0.32,
-        y: -0.74,
-        z: -0.22,
-        duration: 1.5,
-      })
-
-      setTimeout(() => {
-        setIsEnterPlaying(false)
-      }, 1500)
-    }
-  }
 
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       if (isFocusAnObject === ObjectsToFocus.ALL) {
         mouseEnterAnimation()
-      }
-    }
-  }
-
-  const onMouseLeave = () => {
-    if (!isEnterPlaying) {
-      if (
-        (camera.position.x === 0.4001 && camera.position.y === 0.125) ||
-        camera.position.x === 0.25001
-      ) {
-        mouseLeaveAnimation()
       }
     }
   }
@@ -121,6 +87,19 @@ const PolaroidImages = () => {
       onMouseEnter()
     }
   }
+
+  // Check for exit view btn
+
+  useEffect(() => {
+    if(isFocusAnObject === ObjectsToFocus.GAMEBOY){
+      setTimeout(() => {
+        setShowLinks(true) 
+      }, 1500)
+    } else if(isFocusAnObject === ObjectsToFocus.ALL) {
+      setShowLinks(false)
+    }
+  }, [isFocusAnObject])
+
 
   // Effect for special thanks text
   useEffect(() => {
@@ -142,7 +121,6 @@ const PolaroidImages = () => {
           rotation={[0, -Math.PI * 0.5, 0]}
           position={[1.06, 0.82, 0.525]}
           onClick={onMouseEnter}
-          onPointerMissed={onMouseLeave}
           onPointerEnter={() => setHovered(true)}
           onPointerLeave={() => setHovered(false)}
         >

@@ -98,7 +98,7 @@ const GameboyScreen = () => {
       setTimeout(() => {
         setShowIframe(true) 
       }, 1500)
-    } else {
+    } else if (isFocusAnObject === ObjectsToFocus.ALL) {
       setShowIframe(false)
     }
   }, [isFocusAnObject])
