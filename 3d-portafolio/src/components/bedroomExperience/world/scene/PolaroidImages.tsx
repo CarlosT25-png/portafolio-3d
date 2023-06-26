@@ -91,7 +91,7 @@ const PolaroidImages = () => {
   // Check for exit view btn
 
   useEffect(() => {
-    if(isFocusAnObject === ObjectsToFocus.GAMEBOY){
+    if(isFocusAnObject === ObjectsToFocus.PICTURES){
       setTimeout(() => {
         setShowLinks(true) 
       }, 1500)

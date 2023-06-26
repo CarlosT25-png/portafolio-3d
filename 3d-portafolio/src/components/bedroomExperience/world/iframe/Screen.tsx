@@ -77,30 +77,6 @@ const Screen = () => {
     }
   }
 
-  const mouseLeaveAnimation = () => {
-    // Fix to a weid glitch that this function execute when I'm focus other objects
-    if (isFocusAnObject === ObjectsToFocus.DESKTOP) {
-      dispatch(animationsBedroomActions.setIsFocusAnObject(ObjectsToFocus.ALL))
-      setShowIframe(false)
-      gsap.to(camera.position, {
-        x: -2.43,
-        y: 0.72,
-        z: 2.55,
-        duration: 1.5,
-      })
-      gsap.to(camera.rotation, {
-        x: -0.32,
-        y: -0.74,
-        z: -0.22,
-        duration: 1.5,
-      })
-
-      setTimeout(() => {
-        setIsEnterPlaying(false)
-      }, 1500)
-    }
-  }
-
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       // Checking if the animation is not playing
@@ -110,17 +86,23 @@ const Screen = () => {
     }
   }
 
-  const onMouseLeave = () => {
-    if (!isEnterPlaying) {
-      mouseLeaveAnimation()
-    }
-  }
-
   // Pointer handler
 
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto'
   }, [hovered])
+
+  // Check for exit view btn
+
+  useEffect(() => {
+    if (isFocusAnObject === ObjectsToFocus.DESKTOP) {
+      setTimeout(() => {
+        setShowIframe(true)
+      }, 1500)
+    } else if (isFocusAnObject === ObjectsToFocus.ALL) {
+      setShowIframe(false)
+    }
+  }, [isFocusAnObject])
 
   // Show Iframe
 
@@ -138,7 +120,6 @@ const Screen = () => {
       <group
         ref={pcRef}
         onClick={onMouseEnter}
-        onPointerMissed={onMouseLeave}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       >
