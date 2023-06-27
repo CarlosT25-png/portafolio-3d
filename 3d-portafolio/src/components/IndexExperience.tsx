@@ -17,8 +17,6 @@ import InfoHelper from './bedroomExperience/world/helper/InfoHelper'
 import ExitView from './shared/html/ExitView'
 import { ObjectsToFocus } from '../store/global/helperSlice'
 
-const TEXT_HELPER = 'To exit this view, click outside the '
-
 // Hook to handle window resize
 function useWindowSize() {
   const [sizes, setSizes] = useState([0, 0])
@@ -49,25 +47,6 @@ const IndexExperience = () => {
   ) as boolean
   const dialogIsCompleteBedroom = useSelector<RootState>(
     (state) => state.globalConfig.dialogIsCompleteBedroom
-  ) as boolean
-  // Helper info
-  const showHelperMonitor = useSelector<RootState>(
-    (state) => state.helper.showHelperMonitor
-  ) as boolean
-  const monitorHelperHasShown = useSelector<RootState>(
-    (state) => state.helper.monitorHelperHasShown
-  ) as boolean
-  const showHelperGameConsole = useSelector<RootState>(
-    (state) => state.helper.showHelperGameConsole
-  ) as boolean
-  const gameConsoleHelperHasShown = useSelector<RootState>(
-    (state) => state.helper.gameConsoleHelperHasShown
-  ) as boolean
-  const showHelperPolaroids = useSelector<RootState>(
-    (state) => state.helper.showHelperPolaroids
-  ) as boolean
-  const polaroidsHelperHasShown = useSelector<RootState>(
-    (state) => state.helper.polaroidsHelperHasShown
   ) as boolean
   // Exit view
   const objectToFocus = useSelector<RootState>(
@@ -109,19 +88,19 @@ const IndexExperience = () => {
           isReadyToPlayDialogTimeMachine &&
           !dialogIsCompleteTimeMachine && <TimeMachineDialogs />}
         {scene === scenes.BEDROOM && !dialogIsCompleteBedroom && <BedroomDialog />}
-        {scene === scenes.BEDROOM && showHelperMonitor && !monitorHelperHasShown && (
+        {scene === scenes.BEDROOM && objectToFocus === ObjectsToFocus.DESKTOP && (
           <InfoHelper onCompleteUpdate={helperActions.setMonitorHelperHasShown}>
-            {TEXT_HELPER + 'monitor'}
+            {'Use the PC to access my information and contact me :)'}
           </InfoHelper>
         )}
-        {scene === scenes.BEDROOM && showHelperGameConsole && !gameConsoleHelperHasShown && (
+        {scene === scenes.BEDROOM && objectToFocus === ObjectsToFocus.GAMEBOY && (
           <InfoHelper onCompleteUpdate={helperActions.setGameConsoleHelperHasShown}>
-            {TEXT_HELPER + 'game console'}
+            {'To play, use the physical buttons of the game console or the arrow keys on your keyboard.'} 
           </InfoHelper>
         )}
-        {scene === scenes.BEDROOM && showHelperPolaroids && !polaroidsHelperHasShown && (
+        {scene === scenes.BEDROOM && objectToFocus === ObjectsToFocus.PICTURES && (
           <InfoHelper onCompleteUpdate={helperActions.setPolaroidsHelperHasShown}>
-            {TEXT_HELPER + 'pictures'}
+            {'Click on the pictures to visit their websites'}
           </InfoHelper>
         )}
         {/* Exit view button */}

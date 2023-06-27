@@ -125,7 +125,7 @@ const Screen = () => {
           distance={5}
           decay={0.4}
           penumbra={0.9}
-          power={4}
+          power={5}
           position={[-2.94, 1.95, 2.34]}
         />
       )}

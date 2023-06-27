@@ -26,17 +26,17 @@ const InfoHelper = ({ children, onCompleteUpdate }: Props) => {
       gsap.to(containerRef.current, {
         x: '0',
         opacity: 1,
-        delay: 1,
+        delay: 2,
         duration: 1,
       })
       gsap.to(messageRef.current, {
         opacity: 1,
-        delay: 2,
+        delay: 3,
         duration: 1,
       })
       gsap.to(containerRef.current, {
         opacity: 0,
-        delay: 7,
+        delay: 8,
         duration: 1,
         onComplete: () => {
           dispatch(onCompleteUpdate(true))
