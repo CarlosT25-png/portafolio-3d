@@ -1,5 +1,5 @@
 import { useThree } from '@react-three/fiber'
-import { Html, Sparkles, SpotLight } from '@react-three/drei'
+import { Html, Sparkles, SpotLight, useHelper } from '@react-three/drei'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
@@ -24,6 +24,7 @@ const GameboyScreen = () => {
     (state) => state.animationBedroom.isFocusAnObject
   )
   const monitorScreen = useMemo(() => GameScreen.getInstance(), [GameScreen])
+
 
   const { posObj, rotObj } = useControls('spotlight', {
     posObj: {
@@ -138,7 +139,7 @@ const GameboyScreen = () => {
   return (
     <>
       <group>
-        <spotLight angle={Math.PI / 49} color={'#fffcbe'} distance={5} decay={0.4} penumbra={0.9} power={4} position={[-2.94, 1.95, 2.34]} />
+        <spotLight angle={Math.PI / 49} color={'#fffcbe'} distance={5} decay={0.4} penumbra={0.9} power={4} position={[1.50, 2.64, 1.05]} rotation={rotObj} />
         {/* Whis will act as the device box */}
         <mesh
           ref={gameboyRef}
