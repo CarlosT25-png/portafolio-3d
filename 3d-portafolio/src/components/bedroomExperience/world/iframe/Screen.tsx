@@ -38,7 +38,7 @@ const Screen = () => {
     '/models/bedroomScene/bedroom-draco.glb'
   ) as unknown as BedroomInterface
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     camera.position.set(-2.43, 0.72, 2.55)
     camera.rotation.set(-0.32, -0.74, -0.22)
   }, [])
@@ -117,6 +117,16 @@ const Screen = () => {
 
   return (
     <>
+    {/* Spotlight */}
+      <spotLight
+        angle={Math.PI / 49}
+        color={'#fffcbe'}
+        distance={5}
+        decay={0.4}
+        penumbra={0.9}
+        power={4}
+        position={[-2.94, 1.95, 2.34]}
+      />
       <group
         ref={pcRef}
         onClick={onMouseEnter}

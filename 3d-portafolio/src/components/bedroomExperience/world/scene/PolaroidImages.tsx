@@ -65,7 +65,6 @@ const PolaroidImages = () => {
     }, 1500)
   }
 
-
   const onMouseEnter = () => {
     if (!isEnterPlaying) {
       if (isFocusAnObject === ObjectsToFocus.ALL) {
@@ -91,15 +90,14 @@ const PolaroidImages = () => {
   // Check for exit view btn
 
   useEffect(() => {
-    if(isFocusAnObject === ObjectsToFocus.PICTURES){
+    if (isFocusAnObject === ObjectsToFocus.PICTURES) {
       setTimeout(() => {
-        setShowLinks(true) 
+        setShowLinks(true)
       }, 1500)
-    } else if(isFocusAnObject === ObjectsToFocus.ALL) {
+    } else if (isFocusAnObject === ObjectsToFocus.ALL) {
       setShowLinks(false)
     }
   }, [isFocusAnObject])
-
 
   // Effect for special thanks text
   useEffect(() => {
@@ -115,6 +113,16 @@ const PolaroidImages = () => {
   return (
     <>
       <group>
+        {/* Spotlight */}
+        <spotLight
+          angle={Math.PI / 49}
+          color={'#fffcbe'}
+          distance={5}
+          decay={0.2}
+          penumbra={0.9}
+          power={2}
+          position={[-3.14, 0.27, 1.87]}
+        />
         {/* Whis will act as the device box */}
         <mesh
           ref={picturesRef}

@@ -1,4 +1,5 @@
 import { useThree } from '@react-three/fiber'
+import { Html, Sparkles, SpotLight } from '@react-three/drei'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as THREE from 'three'
@@ -8,7 +9,7 @@ import GameBoyControls from './GameBoyControls'
 import { ObjectsToFocus } from '../../../../store/bedroomSlices/animation-slice'
 import { GameScreen } from '../../../shared/html/GameScreen'
 import { isMobileOrTablet } from '../../../shared/utils/ResponsiveCheck'
-import { Html } from '@react-three/drei'
+import { useControls } from 'leva'
 
 const GameboyScreen = () => {
   const [isEnterPlaying, setIsEnterPlaying] = useState(false)
@@ -17,12 +18,25 @@ const GameboyScreen = () => {
   const gameboyRef = useRef<THREE.Mesh>(null!)
   const [htmlRef, setHtmlRef] = useState<HTMLIFrameElement>(null!)
   const htmlRefWeb = useRef<HTMLIFrameElement>(null!)
-  const { camera, size } = useThree()
+  const { camera } = useThree()
   const dispatch = useDispatch()
   const isFocusAnObject = useSelector<RootState>(
     (state) => state.animationBedroom.isFocusAnObject
   )
   const monitorScreen = useMemo(() => GameScreen.getInstance(), [GameScreen])
+
+  const { posObj, rotObj } = useControls('spotlight', {
+    posObj: {
+      value: [0, 0, 0],
+      step: 0.01,
+      joystick: 'invertY',
+    },
+    rotObj: {
+      value: [0, 0, 0],
+      step: 0.01,
+      joystick: 'invertY',
+    },
+  })
 
   const showIframeHandler = () => {
     setShowIframe(true)
@@ -94,9 +108,9 @@ const GameboyScreen = () => {
   // Check for exit view btn
 
   useEffect(() => {
-    if(isFocusAnObject === ObjectsToFocus.GAMEBOY){
+    if (isFocusAnObject === ObjectsToFocus.GAMEBOY) {
       setTimeout(() => {
-        setShowIframe(true) 
+        setShowIframe(true)
       }, 1500)
     } else if (isFocusAnObject === ObjectsToFocus.ALL) {
       setShowIframe(false)
@@ -124,11 +138,13 @@ const GameboyScreen = () => {
   return (
     <>
       <group>
+        <spotLight angle={Math.PI / 49} color={'#fffcbe'} distance={5} decay={0.4} penumbra={0.9} power={4} position={[-2.94, 1.95, 2.34]} />
         {/* Whis will act as the device box */}
         <mesh
           ref={gameboyRef}
           rotation={[0, -0.94, 0]}
           position={[-0.36, 0.05, 0.75]}
+          scale={3}
           onClick={onMouseEnter}
           onPointerEnter={() => setHovered(true)}
           onPointerLeave={() => setHovered(false)}
