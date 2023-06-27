@@ -117,16 +117,19 @@ const Screen = () => {
 
   return (
     <>
-    {/* Spotlight */}
-      <spotLight
-        angle={Math.PI / 49}
-        color={'#fffcbe'}
-        distance={5}
-        decay={0.4}
-        penumbra={0.9}
-        power={4}
-        position={[-2.94, 1.95, 2.34]}
-      />
+      {/* Spotlight */}
+      {isFocusAnObject === ObjectsToFocus.ALL && (
+        <spotLight
+          angle={Math.PI / 49}
+          color={'#fffcbe'}
+          distance={5}
+          decay={0.4}
+          penumbra={0.9}
+          power={4}
+          position={[-2.94, 1.95, 2.34]}
+        />
+      )}
+
       <group
         ref={pcRef}
         onClick={onMouseEnter}

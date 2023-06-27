@@ -114,15 +114,18 @@ const PolaroidImages = () => {
     <>
       <group>
         {/* Spotlight */}
-        <spotLight
-          angle={Math.PI / 49}
-          color={'#fffcbe'}
-          distance={5}
-          decay={0.2}
-          penumbra={0.9}
-          power={2}
-          position={[-3.14, 0.27, 1.87]}
-        />
+        {isFocusAnObject === ObjectsToFocus.ALL && (
+          <spotLight
+            angle={Math.PI / 49}
+            color={'#fffcbe'}
+            distance={5}
+            decay={0.2}
+            penumbra={0.9}
+            power={2}
+            position={[-3.14, 0.27, 1.87]}
+          />
+        )}
+
         {/* Whis will act as the device box */}
         <mesh
           ref={picturesRef}

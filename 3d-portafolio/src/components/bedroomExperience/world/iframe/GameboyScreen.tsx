@@ -26,19 +26,6 @@ const GameboyScreen = () => {
   const monitorScreen = useMemo(() => GameScreen.getInstance(), [GameScreen])
 
 
-  const { posObj, rotObj } = useControls('spotlight', {
-    posObj: {
-      value: [0, 0, 0],
-      step: 0.01,
-      joystick: 'invertY',
-    },
-    rotObj: {
-      value: [0, 0, 0],
-      step: 0.01,
-      joystick: 'invertY',
-    },
-  })
-
   const showIframeHandler = () => {
     setShowIframe(true)
   }
@@ -139,7 +126,17 @@ const GameboyScreen = () => {
   return (
     <>
       <group>
-        <spotLight angle={Math.PI / 49} color={'#fffcbe'} distance={5} decay={0.4} penumbra={0.9} power={4} position={[1.50, 2.64, 1.05]} rotation={rotObj} />
+        {isFocusAnObject === ObjectsToFocus.ALL && (
+          <spotLight
+            angle={Math.PI / 49}
+            color={'#fffcbe'}
+            distance={5}
+            decay={0.4}
+            penumbra={0.9}
+            power={4}
+            position={[1.5, 2.64, 1.05]}
+          />
+        )}
         {/* Whis will act as the device box */}
         <mesh
           ref={gameboyRef}
